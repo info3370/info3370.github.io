@@ -77,18 +77,25 @@
     "text": "TODO\n\n\n\n Back to top"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Studying Social Inequality with Data Science",
+    "objectID": "office_hours.html",
+    "href": "office_hours.html",
+    "title": "Office Hours",
     "section": "",
-    "text": "Together, we will generate new knowledge about social inequality using the tools of data science\nWarning. This page is under construction. It will be more stable on Tuesday when the course begins."
+    "text": "Check the post pinned on Ed Discussion to see any week-specific changes to the schedule.\n\n\n\nPerson\nTime\nLocation\n\n\n\n\nStacy\nM 12–1pm\nRhodes 402\n\n\nJoanne\nM 1–2pm\nRhodes 408\n\n\nChang\nM 3–4pm\nRhodes 408\n\n\nIan\nT 10–11am\nGates 223\n\n\nDaniel\nW 12–1pm\nRhodes 406\n\n\nLiz\nW 12:30–1:30pm\nRhodes 402\n\n\nFede\nW 2–3pm\nRhodes 406\n\n\nOlaf\nW 3–4pm\nRhodes 406\n\n\nJonathan\nTh 11am–12pm\nRhodes 412\n\n\nAkira\nTh 3:30–4:30pm\nZoom\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "index.html#learning-goals",
-    "href": "index.html#learning-goals",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "Learning goals",
-    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language"
+    "objectID": "due_dates.html",
+    "href": "due_dates.html",
+    "title": "Due Dates",
+    "section": "",
+    "text": "Due date\nAssignment\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "assignments/project.html",
+    "href": "assignments/project.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top"
   },
   {
     "objectID": "assignments/pset0.html",
@@ -126,11 +133,18 @@
     "text": "Issues\nIf you run into issues while attempting to render the Problem Set, be sure to open a question on the Ed Discussion!"
   },
   {
-    "objectID": "due_dates.html",
-    "href": "due_dates.html",
-    "title": "Due Dates",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Studying Social Inequality with Data Science",
     "section": "",
-    "text": "Due date\nAssignment\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\n\n\n\n Back to top"
+    "text": "Together, we will generate new knowledge about social inequality using the tools of data science\nWarning. This page is under construction. It will be more stable on Tuesday when the course begins."
+  },
+  {
+    "objectID": "index.html#learning-goals",
+    "href": "index.html#learning-goals",
+    "title": "Studying Social Inequality with Data Science",
+    "section": "Learning goals",
+    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language"
   },
   {
     "objectID": "topics/about.html",
