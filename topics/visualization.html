@@ -366,17 +366,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You will see action in the console. You have added some functionality to R for this session!</p>
-<p>The code below will load the data.</p>
+<p>The <a href="../assets/data/jencks_table1.csv">data</a> can be loaded from the course website with the line below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"../data/jencks_table1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"../assets/data/jencks_table1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When you run this code, the object <code>data</code> will appear in your environment pane.</p>
 </section>
 <section id="explore-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="explore-the-data">Explore the data</h2>
 <p>Type <code>data</code> in your console. You can see the data!</p>
-<p><code>country</code> | country name <code>ratio</code> | ratio of 90th to 10th percentile of household income <code>gdp</code> | Gross Domestic Product Per Capita, expressed as a proportion of U.S. GDP <code>life_expectancy</code> | life expectancy at birth</p>
-<p>You can think of <code>ratio</code> as how many dollars a high-income household receives for each dollar that a low-income household receives.</p>
+<ul>
+<li><code>country</code> country name</li>
+<li><code>ratio</code> ratio of 90th to 10th percentile of household income. You can think of this as how many dollars a high-income household receives for each dollar that a low-income household receives</li>
+<li><code>gdp</code> Gross Domestic Product Per Capita, expressed as a proportion of U.S. GDP</li>
+<li><code>life_expectancy</code> life expectancy at birth</li>
+</ul>
 <p>For details on the data, see Jencks (2002) Table 1.</p>
 </section>
 <section id="produce-a-graph" class="level2">
