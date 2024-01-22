@@ -2,9 +2,7 @@
 title: "Welcome!"
 ---
 
-## Does inequality matter?
-
-[Slides](../assets/slides/2_Jencks.pdf){: .btn }
+[[Slides]](../slides/lec1/lec1.pdf)
 
 America is more unequal by many measures than other industrialized nations. Should we be concerned? In today's reading, Jencks discusses how quantitative empirical evidence on inequality relates to arguments about the amount of inequality that is desirable.
 

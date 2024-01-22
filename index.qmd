@@ -19,9 +19,3 @@ As a result of participating in this course, students will be able to
 - connect theories about inequality to quantitative empirical evidence
 - evaluate the effects of hypothetical interventions to reduce inequality
 - conduct data analysis using the R programming language
-
-## Organization of this site
-
-- [Topics](calendar) tells you what we plan to cover in this course. The pages in this section will contain course materials
-- [Weekly schedule](schedule) tells you when you can come see us at office hours
-- [Who we are](who_we_are.qmd) tells you a bit about the teaching team
