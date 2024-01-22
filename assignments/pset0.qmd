@@ -5,11 +5,9 @@ subtitle: "**Info 3370. Studying Social Inequality with Data Science. Spring 202
 
 **Due: 5pm on Wednesday, January 24.**
 
-Welcome to the first problem set; this will hopefully be a super easy and
-quick one! This exercise will give you pointers to install R, RStudio and
-Quarto, and will ensure that they are set up correctly. This will ensure that
-everybody is ready to dive into the subsequent problem sets with minimal
-technical issues.
+In this exercise, you will install R, RStudio and
+Quarto. The exercise will ensure that they are set up correctly so that
+everybody is ready to dive into coursework.
 
 ## Install Software Requirements
 
@@ -44,7 +42,7 @@ working directory. You will then submit the PDF on Canvas.
 
 ::: {.callout-tip}
 If you're not sure what your working directory is, run `getwd()` in your
-RStudio console. This will print your working directory.
+RStudio console. This will print your working directory. You can set it to the place you've saved this file by clicking the top menu Session -> Set Working Directory -> To Source File Location.
 :::
 
 ## Issues
