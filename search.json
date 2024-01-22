@@ -18,7 +18,7 @@
     "href": "topics/visualization.html#prepare-the-environment",
     "title": "Visualization",
     "section": "Prepare the environment",
-    "text": "Prepare the environment\nOpen a new R Script by clicking the button at the top left of RStudio. Save your R Script in a folder you will use for this exercise.\nPaste the code below into your R Script. Place your cursor within the line and hit CMD + Enter or CTRL + Enter to run the code and load the tidyverse package.\n\nlibrary(tidyverse)\n\nYou will see action in the console. You have added some functionality to R for this session!\nThe code below will load the data.\n\n#data &lt;- read_csv(LINK TO DATA)\ndata &lt;- read_csv(file = \"../data/jencks_table1.csv\")\n\nWhen you run this code, the object data will appear in your environment pane."
+    "text": "Prepare the environment\nOpen a new R Script by clicking the button at the top left of RStudio. Save your R Script in a folder you will use for this exercise.\nPaste the code below into your R Script. Place your cursor within the line and hit CMD + Enter or CTRL + Enter to run the code and load the tidyverse package.\n\nlibrary(tidyverse)\n\nYou will see action in the console. You have added some functionality to R for this session!\nThe code below will load the data.\n\ndata &lt;- read_csv(file = \"../data/jencks_table1.csv\")\n\nWhen you run this code, the object data will appear in your environment pane."
   },
   {
     "objectID": "topics/visualization.html#explore-the-data",
@@ -39,14 +39,14 @@
     "href": "topics/visualization.html#customizing-your-graph",
     "title": "Visualization",
     "section": "Customizing your graph",
-    "text": "Customizing your graph\nIn your group, create additional layers with additional lines connected by +. Be creative! Here are some ideas:\n\nlabel the axes with scale_x_continuous(name = \"your text here\") and scale_y_continuous(name = \"your text here\")\nlabel countries using geom_text or geom_text_repel, with the aesthetic label = country"
+    "text": "Customizing your graph\nIn your group, create additional layers with additional lines connected by +. Be creative! Here are some ideas:\n\nlabel the axes with scale_x_continuous(name = \"your text here\") and scale_y_continuous(name = \"your text here\")\nlabel countries using geom_text or geom_text_repel, with the aesthetic label = country\n\nThere are many possible graphs to make. An example is below."
   },
   {
     "objectID": "topics/visualization.html#interpret-your-graph",
     "href": "topics/visualization.html#interpret-your-graph",
     "title": "Visualization",
     "section": "Interpret your graph",
-    "text": "Interpret your graph"
+    "text": "Interpret your graph\nOnce you are happy with your graph,\n\nwrite a few sentences explaining your graph\ndiscuss what questions you would like to ask next"
   },
   {
     "objectID": "topics/sampling.html",
@@ -89,13 +89,6 @@
     "title": "Studying Social Inequality with Data Science",
     "section": "Learning goals",
     "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language"
-  },
-  {
-    "objectID": "index.html#organization-of-this-site",
-    "href": "index.html#organization-of-this-site",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "Organization of this site",
-    "text": "Organization of this site\n\nTopics tells you what we plan to cover in this course. The pages in this section will contain course materials\nWeekly schedule tells you when you can come see us at office hours\nWho we are tells you a bit about the teaching team"
   },
   {
     "objectID": "assignments/pset0.html",
@@ -172,14 +165,7 @@
     "href": "topics/welcome.html",
     "title": "Welcome!",
     "section": "",
-    "text": "Slides{: .btn }\nAmerica is more unequal by many measures than other industrialized nations. Should we be concerned? In today’s reading, Jencks discusses how quantitative empirical evidence on inequality relates to arguments about the amount of inequality that is desirable.\nAfter our discussion in class, read p. 49–57 of this paper:\n\nJencks, C. (2002). Does inequality matter? Daedalus, 131(1).\n\nThe paper’s engagement with both normative arguments and quantitative evidence is an example we will follow this semester.\n\nwe will use data to summarize inequality\nwe will connect those summaries to moral arguments\n\nUltimately, this class is creative: you will produce new evidence about a question of your choosing. To get there, we first need to learn a bit about population data and how to work with those data."
-  },
-  {
-    "objectID": "topics/welcome.html#does-inequality-matter",
-    "href": "topics/welcome.html#does-inequality-matter",
-    "title": "Welcome!",
-    "section": "",
-    "text": "Slides{: .btn }\nAmerica is more unequal by many measures than other industrialized nations. Should we be concerned? In today’s reading, Jencks discusses how quantitative empirical evidence on inequality relates to arguments about the amount of inequality that is desirable.\nAfter our discussion in class, read p. 49–57 of this paper:\n\nJencks, C. (2002). Does inequality matter? Daedalus, 131(1).\n\nThe paper’s engagement with both normative arguments and quantitative evidence is an example we will follow this semester.\n\nwe will use data to summarize inequality\nwe will connect those summaries to moral arguments\n\nUltimately, this class is creative: you will produce new evidence about a question of your choosing. To get there, we first need to learn a bit about population data and how to work with those data."
+    "text": "[Slides]\nAmerica is more unequal by many measures than other industrialized nations. Should we be concerned? In today’s reading, Jencks discusses how quantitative empirical evidence on inequality relates to arguments about the amount of inequality that is desirable.\nAfter our discussion in class, read p. 49–57 of this paper:\nThe paper’s engagement with both normative arguments and quantitative evidence is an example we will follow this semester.\nUltimately, this class is creative: you will produce new evidence about a question of your choosing. To get there, we first need to learn a bit about population data and how to work with those data."
   },
   {
     "objectID": "topics/welcome.html#summary-video-what-we-covered-today",

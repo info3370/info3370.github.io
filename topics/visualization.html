@@ -317,9 +317,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#explore-the-data" id="toc-explore-the-data" class="nav-link" data-scroll-target="#explore-the-data">Explore the data</a></li>
   <li><a href="#produce-a-graph" id="toc-produce-a-graph" class="nav-link" data-scroll-target="#produce-a-graph">Produce a graph</a></li>
   <li><a href="#customizing-your-graph" id="toc-customizing-your-graph" class="nav-link" data-scroll-target="#customizing-your-graph">Customizing your graph</a></li>
-  </ul></li>
-  <li><a href="#prepare-a-report-in-quarto" id="toc-prepare-a-report-in-quarto" class="nav-link" data-scroll-target="#prepare-a-report-in-quarto">Prepare a report in Quarto</a>
-  <ul class="collapse">
   <li><a href="#interpret-your-graph" id="toc-interpret-your-graph" class="nav-link" data-scroll-target="#interpret-your-graph">Interpret your graph</a></li>
   </ul></li>
   </ul>
@@ -371,8 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You will see action in the console. You have added some functionality to R for this session!</p>
 <p>The code below will load the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data &lt;- read_csv(LINK TO DATA)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"../data/jencks_table1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"../data/jencks_table1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When you run this code, the object <code>data</code> will appear in your environment pane.</p>
 </section>
@@ -411,13 +407,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>label the axes with <code>scale_x_continuous(name = "your text here")</code> and <code>scale_y_continuous(name = "your text here")</code></li>
 <li>label countries using <code>geom_text</code> or <code>geom_text_repel</code>, with the aesthetic <code>label = country</code></li>
 </ul>
+<p>There are many possible graphs to make. An example is below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="visualization_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
-</section>
-<section id="prepare-a-report-in-quarto" class="level1">
-<h1>Prepare a report in Quarto</h1>
-<p>Once you are happy with your graph, make it a report using Quarto.</p>
 <section id="interpret-your-graph" class="level2">
 <h2 class="anchored" data-anchor-id="interpret-your-graph">Interpret your graph</h2>
+<p>Once you are happy with your graph,</p>
+<ul>
+<li>write a few sentences explaining your graph</li>
+<li>discuss what questions you would like to ask next</li>
+</ul>
 
 
 </section>
