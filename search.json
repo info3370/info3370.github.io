@@ -95,7 +95,7 @@
     "href": "assignments/pset0.html",
     "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
     "section": "",
-    "text": "Due: 5pm on Wednesday, January 24.\nWelcome to the first problem set; this will hopefully be a super easy and quick one! This exercise will give you pointers to install R, RStudio and Quarto, and will ensure that they are set up correctly. This will ensure that everybody is ready to dive into the subsequent problem sets with minimal technical issues."
+    "text": "Due: 5pm on Wednesday, January 24.\nIn this exercise, you will install R, RStudio and Quarto. The exercise will ensure that they are set up correctly so that everybody is ready to dive into coursework."
   },
   {
     "objectID": "assignments/pset0.html#install-software-requirements",
@@ -116,7 +116,7 @@
     "href": "assignments/pset0.html#render-the-problem-set",
     "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
     "section": "Render the Problem Set",
-    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the directory that is your working directory. You will then submit the PDF on Canvas.\n\n\n\n\n\n\nTip\n\n\n\nIf you’re not sure what your working directory is, run getwd() in your RStudio console. This will print your working directory."
+    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the directory that is your working directory. You will then submit the PDF on Canvas.\n\n\n\n\n\n\nTip\n\n\n\nIf you’re not sure what your working directory is, run getwd() in your RStudio console. This will print your working directory. You can set it to the place you’ve saved this file by clicking the top menu Session -&gt; Set Working Directory -&gt; To Source File Location."
   },
   {
     "objectID": "assignments/pset0.html#issues",
