@@ -30,10 +30,10 @@ library(tidyverse)
 
 You will see action in the console. You have added some functionality to R for this session!
 
-The code below will load the data.
+The [data](../assets/data/jencks_table1.csv) can be loaded from the course website with the line below.
 
 ```{r, comment = F, message = F}
-data <- read_csv(file = "../data/jencks_table1.csv")
+data <- read_csv(file = "https://info3370.github.io/assets/data/jencks_table1.csv")
 ```
 
 When you run this code, the object `data` will appear in your environment pane.
@@ -42,12 +42,10 @@ When you run this code, the object `data` will appear in your environment pane.
 
 Type `data` in your console. You can see the data!
 
-`country` | country name
-`ratio` | ratio of 90th to 10th percentile of household income
-`gdp` | Gross Domestic Product Per Capita, expressed as a proportion of U.S. GDP
-`life_expectancy` | life expectancy at birth
-
-You can think of `ratio` as how many dollars a high-income household receives for each dollar that a low-income household receives.
+- `country` country name
+- `ratio` ratio of 90th to 10th percentile of household income. You can think of this as how many dollars a high-income household receives for each dollar that a low-income household receives
+- `gdp` Gross Domestic Product Per Capita, expressed as a proportion of U.S. GDP
+- `life_expectancy` life expectancy at birth
 
 For details on the data, see Jencks (2002) Table 1.
 
