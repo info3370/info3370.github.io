@@ -1,0 +1,12 @@
+---
+title: "Final Project"
+---
+
+The culmination of the course is a group research project. You will
+
+- create your own research question
+- download your own data
+- visualize the data
+- interpret your findings
+
+More details on the project will come later in the semester.

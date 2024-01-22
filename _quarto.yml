@@ -17,14 +17,18 @@ website:
         text: " "
       - href: assets/syllabus.pdf
         text: Syllabus
+      - href: who_we_are.qmd
+        text: Team
       - href: due_dates.qmd
         text: Due Dates
+      - href: office_hours.qmd
+        text: Office Hours
       - href: "https://edstem.org/us/courses/54550/"
         text: Ed Discussion
   sidebar:
     style: "docked"
     search: true
-    collapse-level: 1
+    collapse-level: 2
     contents:
       - href: index.qmd
         text: Home
@@ -49,10 +53,13 @@ website:
           - section: "Reducing inequality"
       - section: "Assignments"
         contents:
-          - href: assignments/pset0.qmd
-            text: "Problem Set 0"
-      - href: who_we_are.qmd
-        text: Who We Are
+          - section: "Problem Sets"
+            contents:
+              - href: assignments/pset0.qmd
+                text: "Problem Set 0"
+          - href: assignments/project.qmd
+            text: "Project"
+              
   back-to-top-navigation: true
 
 format:
