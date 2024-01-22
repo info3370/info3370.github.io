@@ -9,6 +9,8 @@ format:
 
 Together, we will generate new knowledge about social inequality using the tools of data science
 
+**Warning.** This page is under construction. It will be more stable on Tuesday when the course begins.
+
 ## Learning goals
 
 As a result of participating in this course, students will be able to
