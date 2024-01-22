@@ -33,7 +33,6 @@ You will see action in the console. You have added some functionality to R for t
 The code below will load the data.
 
 ```{r, comment = F, message = F}
-#data <- read_csv(LINK TO DATA)
 data <- read_csv(file = "../data/jencks_table1.csv")
 ```
 
@@ -78,11 +77,23 @@ In your group, create additional layers with additional lines connected by `+`. 
 - label the axes with `scale_x_continuous(name = "your text here")` and `scale_y_continuous(name = "your text here")`
 - label countries using `geom_text` or `geom_text_repel`, with the aesthetic `label = country`
 
-# Prepare a report in Quarto
+There are many possible graphs to make. An example is below.
 
-Once you are happy with your graph, make it a report using Quarto.
+```{r, echo = F}
+data |>
+  ggplot(aes(x = ratio, y = gdp, label = country)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F, color = "black") +
+  ggrepel::geom_text_repel(size = 3) +
+  scale_y_continuous(labels = scales::label_percent(),
+                     name = "GDP as a Percent of U.S.") +
+  scale_x_continuous(name = "Inequality\n90th percentile / 10th percentile\nof household income") +
+  theme(legend.position = "none")
+```
 
 ## Interpret your graph
 
+Once you are happy with your graph,
 
-
+- write a few sentences explaining your graph
+- discuss what questions you would like to ask next
