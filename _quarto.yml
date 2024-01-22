@@ -17,7 +17,7 @@ website:
         text: " "
       - href: assets/syllabus.pdf
         text: Syllabus
-      - href: index.qmd
+      - href: due_dates.qmd
         text: Due Dates
       - href: "https://edstem.org/us/courses/54550/"
         text: Ed Discussion
