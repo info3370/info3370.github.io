@@ -33,7 +33,7 @@ You will see action in the console. You have added some functionality to R for t
 The [data](../data/jencks_table1.csv) can be loaded from the course website with the line below.
 
 ```{r, comment = F, message = F}
-data <- read_csv(file = "https://info3370.github.io/assets/data/jencks_table1.csv")
+data <- read_csv(file = "https://info3370.github.io/data/jencks_table1.csv")
 ```
 
 When you run this code, the object `data` will appear in your environment pane.
