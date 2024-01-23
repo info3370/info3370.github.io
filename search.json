@@ -49,6 +49,13 @@
     "text": "Interpret your graph\nOnce you are happy with your graph,\n\nwrite a few sentences explaining your graph\ndiscuss what questions you would like to ask next"
   },
   {
+    "objectID": "topics/visualization.html#prepare-a-quarto-report",
+    "href": "topics/visualization.html#prepare-a-quarto-report",
+    "title": "Visualization",
+    "section": "Prepare a Quarto report",
+    "text": "Prepare a Quarto report\nCreate a new Quarto document. Put your R code and interpretation into that document. Upload to Canvas!"
+  },
+  {
     "objectID": "topics/sampling.html",
     "href": "topics/sampling.html",
     "title": "Sampling",
