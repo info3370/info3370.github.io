@@ -8,7 +8,7 @@ This exercise examines how income inequality has changed over time in the U.S. W
 library(tidyverse)
 library(haven)
 ```
-```{r, echo = F, message = F, warning = F}
+```{r, echo = F, message = F, warning = F, fig.height = 3}
 read_dta("../data_raw/cps_00077.dta") |>
   # Subset to cases working full year
   filter(wkswork2 == 6) |>
@@ -29,7 +29,7 @@ read_dta("../data_raw/cps_00077.dta") |>
   ggplot(aes(x = year, y = income, color = quantity)) +
   geom_line() +
   xlab("Year") +
-  scale_y_continuous(name = "Annual Wage and Salary Income\n(2022 dollars)",
+  scale_y_continuous(name = "Annual Wage and Salary Income\n(2023 dollars)",
                      labels = scales::label_dollar()) +
   scale_color_discrete(name = "Percentile of\nDistribution",
                        labels = function(x) paste0(gsub("p","",x),"th")) +
@@ -246,19 +246,12 @@ inflation <- read_csv("../data/inflation.csv")
 inflation |> filter(year >= 1962) |> print(n = 3)
 ```
 
-The `inflation_factor` tells us that \$1 in 1962 could buy about as much as \$9.67 in 2022. To take a 1962 income and report it in 2022 dollars, we should multiple it by 9.67. To do that, we first need to join our data
+The `inflation_factor` tells us that \$1 in 1962 could buy about as much as \$10.10 in 2023. To take a 1962 income and report it in 2023 dollars, we should multiple it by 10.1. We need to join our data
 ```{r, echo = F}
 pivoted |>
   print(n = 3)
 ```
-and merge in the inflation adjustment
-```{r, echo = F}
-inflation |>
-  print(n = 3)
-```
-so that rows are correctly merged by the linking variable `year`.
-
-Use [`left_join()`](https://r4ds.hadley.nz/joins#sec-mutating-joins) to merge `inflation_factor` onto the dataset `pivoted`. Below is a hypothetical example for the structure.
+together with `inflation.csv` by the linking variable `year`. Use [`left_join()`](https://r4ds.hadley.nz/joins#sec-mutating-joins) to merge `inflation_factor` onto the dataset `pivoted`. Below is a hypothetical example for the structure.
 
 ```{r, eval = F}
 # Hypothetical example
@@ -313,7 +306,7 @@ joined |>
   ggplot(aes(x = year, y = income, color = quantity)) +
   geom_line() +
   xlab("Year") +
-  scale_y_continuous(name = "Annual Wage and Salary Income\n(2022 dollars)",
+  scale_y_continuous(name = "Annual Wage and Salary Income\n(2023 dollars)",
                      labels = scales::label_dollar()) +
   scale_color_discrete(name = "Percentile of\nDistribution",
                        labels = function(x) paste0(gsub("p","",x),"th")) +
