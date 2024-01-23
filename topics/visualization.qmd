@@ -99,3 +99,5 @@ Once you are happy with your graph,
 
 - write a few sentences explaining your graph
 - discuss what questions you would like to ask next
+
+{{< video https://www.youtube.com/embed/YWTZ6xxRiP8 >}}

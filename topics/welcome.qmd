@@ -19,4 +19,4 @@ Ultimately, this class is creative: you will produce new evidence about a questi
 
 ## Summary video: What we covered today
 
-{{< video https://www.youtube.com/embed/DFsHRZmAuqM >}}
+{{< video https://www.youtube.com/embed/sN35dvXeNv0 >}}
