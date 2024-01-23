@@ -100,4 +100,8 @@ Once you are happy with your graph,
 - write a few sentences explaining your graph
 - discuss what questions you would like to ask next
 
+## Prepare a Quarto report
+
+Create a new Quarto document. Put your R code and interpretation into that document. Upload to Canvas!
+
 {{< video https://www.youtube.com/embed/YWTZ6xxRiP8 >}}
