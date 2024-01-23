@@ -60,7 +60,7 @@
     "href": "topics/r_basics.html",
     "title": "R and RStudio",
     "section": "",
-    "text": "This course uses R, RStudio, and Quarto\n\nR is statistical software\nRStudio is a user interface\nQuarto is an authoring framework for reproducible documents\n\nAll are free and open source. To set the software up on your computer, follow the steps in the Prerequisites section of R4DS. To learn about RStudio, visit the User Guide.\n\n\n\n Back to top"
+    "text": "This course uses R, RStudio, and Quarto\n\nR is statistical software\nRStudio is a user interface\nQuarto is an authoring framework for reproducible documents\n\nAll are free and open source. To set the software up on your computer, follow the steps in the Prerequisites section of R4DS. To learn about RStudio, visit the User Guide.\n\n\n\n\n Back to top"
   },
   {
     "objectID": "topics/data_transformation.html",
@@ -137,7 +137,7 @@
     "href": "index.html",
     "title": "Studying Social Inequality with Data Science",
     "section": "",
-    "text": "Together, we will generate new knowledge about social inequality using the tools of data science\nWarning. This page is under construction. It will be more stable on Tuesday when the course begins."
+    "text": "Together, we will generate new knowledge about social inequality using the tools of data science"
   },
   {
     "objectID": "index.html#learning-goals",
