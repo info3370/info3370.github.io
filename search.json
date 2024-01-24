@@ -56,116 +56,18 @@
     "text": "Footnotes\n\n\nIf we hypothetically drew many complex survey samples from the population in this way, an interval generated this way would contain the true population mean 95% of the time.↩︎"
   },
   {
-    "objectID": "topics/surveys.html",
-    "href": "topics/surveys.html",
-    "title": "Survey Design",
+    "objectID": "topics/sampling.html",
+    "href": "topics/sampling.html",
+    "title": "Sampling",
     "section": "",
-    "text": "TODO\n\n\n\n Back to top"
+    "text": "[Slides]\nClaims about inequality are often claims about a population, such as all people in the United States. The target population may be so large that full count enumeration—talking to everyone—is prohibitively costly. This lecture introduces probability sampling as a way to learn about a population from a sample of much smaller size.\nWe first discuss the principles of probability sampling using the target population of our class. Then, we discuss how the U.S. Census Bureau carries out the Current Population Survey, a probability sample designed to estimate the unemployment rate in the U.S. and in each state.\nAfter class, you should\n\nread about probability sampling in an online textbook maintained by Statistics Canada. This reading reviews what we covered in lecture and extends it to other ideas in complex survey sampling, such as stratified and cluster sampling\nregister for an account at cps.ipums.org, where we will be accessing data from the Current Population Survey\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "topics/race.html",
-    "href": "topics/race.html",
-    "title": "Race",
+    "objectID": "topics/r_basics.html",
+    "href": "topics/r_basics.html",
+    "title": "R and RStudio",
     "section": "",
-    "text": "TODO\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "topics/gender.html",
-    "href": "topics/gender.html",
-    "title": "Gender",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "topics/class.html",
-    "href": "topics/class.html",
-    "title": "Class",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "topics/about.html",
-    "href": "topics/about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "",
-    "text": "Together, we will generate new knowledge about social inequality using the tools of data science"
-  },
-  {
-    "objectID": "index.html#learning-goals",
-    "href": "index.html#learning-goals",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "Learning goals",
-    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language"
-  },
-  {
-    "objectID": "assignments/pset0.html",
-    "href": "assignments/pset0.html",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "",
-    "text": "Due: 5pm on Wednesday, January 24.\nIn this exercise, you will install R, RStudio and Quarto. The exercise will ensure that they are set up correctly so that everybody is ready to dive into coursework."
-  },
-  {
-    "objectID": "assignments/pset0.html#install-software-requirements",
-    "href": "assignments/pset0.html#install-software-requirements",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Install Software Requirements",
-    "text": "Install Software Requirements\nYou should follow the instructions in R4DS to:\n\nInstall R\nInstall RStudio\n\nOnce R and RStudio are successfully installed, this also means that Quarto is successfully installed because it comes bundled with RStudio.\nFinally, you will need to open RStudio, select the Terminal tab, and execute the following command: quarto install tinytex as demonstrated in the image below."
-  },
-  {
-    "objectID": "assignments/pset0.html#download-problem-set",
-    "href": "assignments/pset0.html#download-problem-set",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Download Problem Set",
-    "text": "Download Problem Set\nNext, download this problem set which is a Quarto Markdown Document."
-  },
-  {
-    "objectID": "assignments/pset0.html#render-the-problem-set",
-    "href": "assignments/pset0.html#render-the-problem-set",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Render the Problem Set",
-    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the same directory that you saved pset0.qmd in. You will then submit the PDF on Canvas."
-  },
-  {
-    "objectID": "assignments/pset0.html#issues",
-    "href": "assignments/pset0.html#issues",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Issues",
-    "text": "Issues\nIf you run into issues while attempting to render the Problem Set, be sure to open a question on the Ed Discussion!"
-  },
-  {
-    "objectID": "assignments/project.html",
-    "href": "assignments/project.html",
-    "title": "Final Project",
-    "section": "",
-    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "due_dates.html",
-    "href": "due_dates.html",
-    "title": "Due Dates",
-    "section": "",
-    "text": "Due date\nAssignment\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "office_hours.html",
-    "href": "office_hours.html",
-    "title": "Office Hours",
-    "section": "",
-    "text": "Check the post pinned on Ed Discussion to see any week-specific changes to the schedule.\n\n\n\nPerson\nTime\nLocation\n\n\n\n\nStacy\nM 12–1pm\nRhodes 402\n\n\nJoanne\nM 1–2pm\nRhodes 408\n\n\nChang\nM 3–4pm\nRhodes 408\n\n\nIan\nT 10–11am\nGates 223\n\n\nLiz\nW 12:30–1:30pm\nRhodes 402\n\n\nDaniel\nW 1–2pm\nRhodes 406\n\n\nFede\nW 2–3pm\nRhodes 406\n\n\nOlaf\nW 3–4pm\nRhodes 406\n\n\nJonathan\nTh 11am–12pm\nRhodes 412\n\n\nAkira\nTh 3:30–4:30pm\nZoom\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "topics/asking_questions.html",
-    "href": "topics/asking_questions.html",
-    "title": "Asking Questions",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top"
+    "text": "This course uses R, RStudio, and Quarto\n\nR is statistical software\nRStudio is a user interface\nQuarto is an authoring framework for reproducible documents\n\nAll are free and open source. To set the software up on your computer, follow the steps in the Prerequisites section of R4DS. To learn about RStudio, visit the User Guide.\n\n\n\n\n Back to top"
   },
   {
     "objectID": "topics/data_transformation.html",
@@ -259,16 +161,107 @@
     "text": "Footnotes\n\n\nThanks to past TA Abby Sachar for designing the base of this exercise.↩︎"
   },
   {
-    "objectID": "topics/r_basics.html",
-    "href": "topics/r_basics.html",
-    "title": "R and RStudio",
+    "objectID": "topics/asking_questions.html",
+    "href": "topics/asking_questions.html",
+    "title": "Asking Questions",
     "section": "",
-    "text": "This course uses R, RStudio, and Quarto\n\nR is statistical software\nRStudio is a user interface\nQuarto is an authoring framework for reproducible documents\n\nAll are free and open source. To set the software up on your computer, follow the steps in the Prerequisites section of R4DS. To learn about RStudio, visit the User Guide.\n\n\n\n\n Back to top"
+    "text": "TODO\n\n\n\n Back to top"
   },
   {
-    "objectID": "topics/sampling.html",
-    "href": "topics/sampling.html",
-    "title": "Sampling",
+    "objectID": "office_hours.html",
+    "href": "office_hours.html",
+    "title": "Office Hours",
+    "section": "",
+    "text": "Check the post pinned on Ed Discussion to see any week-specific changes to the schedule.\n\n\n\nPerson\nTime\nLocation\n\n\n\n\nStacy\nM 12–1pm\nRhodes 402\n\n\nJoanne\nM 1–2pm\nRhodes 408\n\n\nChang\nM 3–4pm\nRhodes 408\n\n\nIan\nT 10–11am\nGates 223\n\n\nLiz\nW 12:30–1:30pm\nRhodes 402\n\n\nDaniel\nW 1–2pm\nRhodes 406\n\n\nFede\nW 2–3pm\nRhodes 406\n\n\nOlaf\nW 3–4pm\nRhodes 406\n\n\nJonathan\nTh 11am–12pm\nRhodes 412\n\n\nAkira\nTh 3:30–4:30pm\nZoom\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "due_dates.html",
+    "href": "due_dates.html",
+    "title": "Due Dates",
+    "section": "",
+    "text": "Due date\nAssignment\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "assignments/project.html",
+    "href": "assignments/project.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "assignments/pset0.html",
+    "href": "assignments/pset0.html",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "",
+    "text": "Due: 5pm on Wednesday, January 24.\nIn this exercise, you will install R, RStudio and Quarto. The exercise will ensure that they are set up correctly so that everybody is ready to dive into coursework."
+  },
+  {
+    "objectID": "assignments/pset0.html#install-software-requirements",
+    "href": "assignments/pset0.html#install-software-requirements",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Install Software Requirements",
+    "text": "Install Software Requirements\nYou should follow the instructions in R4DS to:\n\nInstall R\nInstall RStudio\n\nOnce R and RStudio are successfully installed, this also means that Quarto is successfully installed because it comes bundled with RStudio.\nFinally, you will need to open RStudio, select the Terminal tab, and execute the following command: quarto install tinytex as demonstrated in the image below."
+  },
+  {
+    "objectID": "assignments/pset0.html#download-problem-set",
+    "href": "assignments/pset0.html#download-problem-set",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Download Problem Set",
+    "text": "Download Problem Set\nNext, download this problem set which is a Quarto Markdown Document."
+  },
+  {
+    "objectID": "assignments/pset0.html#render-the-problem-set",
+    "href": "assignments/pset0.html#render-the-problem-set",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Render the Problem Set",
+    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the same directory that you saved pset0.qmd in. You will then submit the PDF on Canvas."
+  },
+  {
+    "objectID": "assignments/pset0.html#issues",
+    "href": "assignments/pset0.html#issues",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Issues",
+    "text": "Issues\nIf you run into issues while attempting to render the Problem Set, be sure to open a question on the Ed Discussion!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Studying Social Inequality with Data Science",
+    "section": "",
+    "text": "Together, we will generate new knowledge about social inequality using the tools of data science"
+  },
+  {
+    "objectID": "index.html#learning-goals",
+    "href": "index.html#learning-goals",
+    "title": "Studying Social Inequality with Data Science",
+    "section": "Learning goals",
+    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language"
+  },
+  {
+    "objectID": "topics/about.html",
+    "href": "topics/about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "topics/class.html",
+    "href": "topics/class.html",
+    "title": "Class",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "topics/gender.html",
+    "href": "topics/gender.html",
+    "title": "Gender",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "topics/race.html",
+    "href": "topics/race.html",
+    "title": "Race",
     "section": "",
     "text": "TODO\n\n\n\n Back to top"
   },
