@@ -25,6 +25,9 @@ website:
         text: Office Hours
       - href: "https://edstem.org/us/courses/54550/"
         text: Ed Discussion
+      - href: forms.qmd
+        text: Forms
+        
   sidebar:
     style: "docked"
     search: true
