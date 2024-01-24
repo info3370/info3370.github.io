@@ -2,4 +2,13 @@
 title: "Sampling"
 ---
 
-TODO
+[[Slides]](../slides/lec2/lec2.pdf)
+
+Claims about inequality are often claims about a population, such as all people in the United States. The target population may be so large that full count enumeration---talking to everyone---is prohibitively costly. This lecture introduces **probability sampling** as a way to learn about a population from a sample of much smaller size.
+
+We first discuss the principles of probability sampling using the target population of our class. Then, we discuss how the U.S. Census Bureau carries out the Current Population Survey, a probability sample designed to estimate the unemployment rate in the U.S. and in each state.
+
+After class, you should
+
+- read about [probability sampling](https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm) in an online textbook maintained by Statistics Canada. This reading reviews what we covered in lecture and extends it to other ideas in complex survey sampling, such as stratified and cluster sampling
+- register for an account at [cps.ipums.org](https://cps.ipums.org/cps/), where we will be accessing data from the Current Population Survey

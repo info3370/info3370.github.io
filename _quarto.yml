@@ -37,7 +37,6 @@ website:
           - topics/welcome.qmd
           - section: "Generating Data"
             contents:
-              - topics/surveys.qmd
               - topics/sampling.qmd
           - section: "Working with Data"
             contents:
