@@ -463,10 +463,10 @@ Example redux: California and Wyoming
 <ul>
 <li>use <code>weight</code> to create a point estimate <span class="math inline">\(\hat\tau\)</span></li>
 <li>use <code>repwt*</code> to generate <span class="math inline">\(k\)</span> replicate estimates <span class="math inline">\(\hat\tau^*_1,\dots,\hat\tau^*_k\)</span></li>
-<li>calculate the standard deviation of the <span class="math inline">\(\hat\tau^*\)</span> replicate estimates. This is the standard error of <span class="math inline">\(\hat\tau\)</span></li>
+<li>calculate the standard error of <span class="math inline">\(\hat\tau\)</span> using the replicate estimates <span class="math inline">\(\hat\tau^*\)</span>. The formula will depend on how the replicate weights were constructed, but it will likely involve the standard deviation of the <span class="math inline">\(\hat\tau^*\)</span> multiplied by some factor</li>
 <li>construct a confidence interval<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> by a normal approximation <span class="math display">\[(\text{point estimate}) \pm 1.96 * (\text{standard error estimate})\]</span></li>
 </ul>
-<p>In our concrete example, the point estimate is 80% employed. The replicate estimates are 0.67, 0.73, 0.70. The standard deviation of those replicate estimates is 0.03. Our 95% confidence interval is (0.74, 0.86).</p>
+<p>In our concrete example, the point estimate is 80% employed. The replicate estimates are 0.67, 0.73, 0.70. Variation across the replicate estimates tells us something about how the estimate would vary across hypothetical repeated samples from the population.</p>
 </section>
 <section id="computational-strategy-for-replicate-weights" class="level2">
 <h2 class="anchored" data-anchor-id="computational-strategy-for-replicate-weights">Computational strategy for replicate weights</h2>
@@ -504,53 +504,44 @@ Example redux: California and Wyoming
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>yielding the three estimates: 0.67, 0.73, 0.70. In real data, you will want to apply this in a loop because there may be dozens of replicate weights.</p>
-<p>The standard error of the estimator is the standard deviation of the replicate weights.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>standard_error <span class="ot">&lt;-</span> <span class="fu">sd</span>(replicate_estimates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>estimated to be 0.03. We can construct a 95% confidence interval by a Normal approximation.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="ot">&lt;-</span> estimate <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>) <span class="sc">*</span> <span class="fl">1.96</span> <span class="sc">*</span> standard_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>which yields the interval: 0.74, 0.86.</p>
-<p>We would then report: we estimate that 0.80 of the population is employed, with a 95% confidence interval from 0.74 to 0.86.</p>
+<p>The standard error of the estimator will be some function of the replicate estimates, likely involving the standard deviation of the replicate estimates. Check with the data distributor for a formula for your case. Once you estimate the standard error, a 95% confidence interval can be constructed with a Normal approximation, as discussed above.</p>
 </section>
 <section id="application-in-the-cps" class="level2">
 <h2 class="anchored" data-anchor-id="application-in-the-cps">Application in the CPS</h2>
 <p>Starting in 2005, the CPS-ASEC samples include 160 replicate weights. If you download replicate weights for many years, the file size will be enormous. We illustrate the use of replicate weights with a question that can be explored with only one year of data: among 25-year olds in 2023, how did the proportion holding four-year college degrees differ across those identifying as male and female?</p>
 <p>We first load some packages, including the <code>foreach</code> package which will be helpful when looping through replicate weights.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreach)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreach)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To answer our research question, we download 2023 CPS-ASEC data including the variables <a href="https://cps.ipums.org/cps-action/variables/SEX"><code>sex</code></a>, <a href="https://cps.ipums.org/cps-action/variables/EDUC"><code>educ</code></a>, <a href="https://cps.ipums.org/cps-action/variables/AGE"><code>age</code></a>, the weight variable <a href="https://cps.ipums.org/cps-action/variables/ASECWT"><code>asecwt</code></a>, and the replicate weights <a href="https://cps.ipums.org/cps-action/variables/REPWTP"><code>repwtp*</code></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cps_data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"../data_raw/cps_00079.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cps_data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"../data_raw/cps_00079.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We then define an estimator to use with these data. It accepts a tibble <code>data</code> and a character <code>weight_name</code> identifying the name of the weight variable, and it returns a tibble with two columns: <code>sex</code> and <code>estimate</code> for the estimated proportion with a four-year degree.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="ot">&lt;-</span> <span class="cf">function</span>(data, weight_name) {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define focal_weight to hold the selected weight</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">focal_weight =</span> data <span class="sc">|&gt;</span> <span class="fu">pull</span>(weight_name)) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Restrict to those age 25+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Restrict to valid reports of education</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(educ <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> educ <span class="sc">&lt;</span> <span class="dv">999</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define a binary outcome: a four-year degree</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">college =</span> educ <span class="sc">&gt;=</span> <span class="dv">110</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Estimate weighted means by sex</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">estimate =</span> <span class="fu">weighted.mean</span>(</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> college,</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">w =</span> focal_weight</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    ))</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="ot">&lt;-</span> <span class="cf">function</span>(data, weight_name) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define focal_weight to hold the selected weight</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">focal_weight =</span> data <span class="sc">|&gt;</span> <span class="fu">pull</span>(weight_name)) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Restrict to those age 25+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Restrict to valid reports of education</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(educ <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> educ <span class="sc">&lt;</span> <span class="dv">999</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define a binary outcome: a four-year degree</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">college =</span> educ <span class="sc">&gt;=</span> <span class="dv">110</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Estimate weighted means by sex</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">estimate =</span> <span class="fu">weighted.mean</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> college,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">w =</span> focal_weight</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We produce a point estimate by applying that estimator with the <code>asecwt</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>estimate <span class="ot">&lt;-</span> <span class="fu">estimator</span>(<span class="at">data =</span> cps_data, <span class="at">weight_name =</span> <span class="st">"asecwt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>estimate <span class="ot">&lt;-</span> <span class="fu">estimator</span>(<span class="at">data =</span> cps_data, <span class="at">weight_name =</span> <span class="st">"asecwt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -563,10 +554,10 @@ Example redux: California and Wyoming
 </div>
 <p>Using the <code>foreach</code> package, we apply the estimator 160 times—once with each replicate weight—and use the argument <code>.combine = "rbind"</code> to stitch results together by rows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreach)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>replicate_estimates <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">r =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">160</span>, <span class="at">.combine =</span> <span class="st">"rbind"</span>) <span class="sc">%do%</span> {</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">estimator</span>(<span class="at">data =</span> cps_data, <span class="at">weight_name =</span> <span class="fu">paste0</span>(<span class="st">"repwtp"</span>,r))</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreach)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>replicate_estimates <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">r =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">160</span>, <span class="at">.combine =</span> <span class="st">"rbind"</span>) <span class="sc">%do%</span> {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">estimator</span>(<span class="at">data =</span> cps_data, <span class="at">weight_name =</span> <span class="fu">paste0</span>(<span class="st">"repwtp"</span>,r))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -586,61 +577,68 @@ Example redux: California and Wyoming
 # ℹ 310 more rows</code></pre>
 </div>
 </div>
-<p>We estimate the standard error of our estimator by the standard deviation of replicate estimates, separately by sex since we produced estimates by sex within each replicate.</p>
+<p>We estimate the standard error of our estimator by a formula <span class="math display">\[\text{StandardError}(\hat\tau) = \sqrt{\frac{4}{160}\sum_{r=1}^{160}\left(\hat\tau^*_r - \hat\tau\right)^2}\]</span> where the formula comes from the <a href="https://cps.ipums.org/cps/repwt.shtml#q40">survey documentation</a>. We carry out this procedure within groups defined by sex, since we are producing estimate for each sex.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>standard_error <span class="ot">&lt;-</span> replicate_estimates <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">standard_error =</span> <span class="fu">sd</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>standard_error <span class="ot">&lt;-</span> replicate_estimates <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Denote replicate estimates as estimate_star</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">estimate_star =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge in the point estimate</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(estimate,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">join_by</span>(sex)) <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Carry out within groups defined by sex</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply the formula from survey documentation</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">standard_error =</span> <span class="fu">sqrt</span>(<span class="dv">4</span> <span class="sc">/</span> <span class="dv">160</span> <span class="sc">*</span> <span class="fu">sum</span>((estimate_star <span class="sc">-</span> estimate) <span class="sc">^</span> <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   sex        standard_error
   &lt;dbl+lbl&gt;           &lt;dbl&gt;
-1 1 [male]          0.00141
-2 2 [female]        0.00146</code></pre>
+1 1 [male]          0.00280
+2 2 [female]        0.00291</code></pre>
 </div>
 </div>
 <p>Finally, we combine everything and construct a 95% confidence interval by a Normal approximation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> estimate <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(standard_error, <span class="at">by =</span> <span class="st">"sex"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ci_min =</span> estimate <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> standard_error,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ci_max =</span> estimate <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> standard_error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> estimate <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(standard_error, <span class="at">by =</span> <span class="st">"sex"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ci_min =</span> estimate <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> standard_error,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ci_max =</span> estimate <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> standard_error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   sex        estimate standard_error ci_min ci_max
   &lt;dbl+lbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 1 [male]      0.369        0.00141  0.367  0.372
-2 2 [female]    0.397        0.00146  0.394  0.400</code></pre>
+1 1 [male]      0.369        0.00280  0.364  0.375
+2 2 [female]    0.397        0.00291  0.391  0.403</code></pre>
 </div>
 </div>
 <p>We use <code>ggplot()</code> to visualize the result.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex)) <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> sex, </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> estimate,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> ci_min, </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> ci_max,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> scales<span class="sc">::</span><span class="fu">percent</span>(estimate)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>() <span class="sc">+</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Sex"</span>, </span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> str_to_title</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Proportion with 4-Year College Degree"</span>) <span class="sc">+</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sex Disparities in College Completion"</span>,</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Estimates from the 2023 CPS-ASEC among those age 25+"</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex)) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> sex, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> estimate,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> ci_min, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> ci_max,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> scales<span class="sc">::</span><span class="fu">percent</span>(estimate)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>() <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Sex"</span>, </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> str_to_title</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Proportion with 4-Year College Degree"</span>) <span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sex Disparities in College Completion"</span>,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Estimates from the 2023 CPS-ASEC among those age 25+"</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="weights_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="weights_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We conclude that those identifying as female are more likely to hold a college degree. Because we can see the confidence intervals generated using the replicate weights, we are reasonably confident in the statistical precision of our point estimates.</p>
