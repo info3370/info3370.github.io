@@ -130,7 +130,7 @@
     "href": "assignments/pset0.html#render-the-problem-set",
     "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
     "section": "Render the Problem Set",
-    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the directory that is your working directory. You will then submit the PDF on Canvas.\n\n\n\n\n\n\nTip\n\n\n\nIf you’re not sure what your working directory is, run getwd() in your RStudio console. This will print your working directory. You can set it to the place you’ve saved this file by clicking the top menu Session -&gt; Set Working Directory -&gt; To Source File Location."
+    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the same directory that you saved pset0.qmd in. You will then submit the PDF on Canvas."
   },
   {
     "objectID": "assignments/pset0.html#issues",
