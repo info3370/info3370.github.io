@@ -173,8 +173,6 @@ Each row in our dataset is a person. We want a dataset where each row is a year.
 That was a new way of calling a package! The [`Hmisc`](https://cran.r-project.org/web/packages/Hmisc/index.html) package has a bunch of miscellaneous functions. To install the package, type `install.packages("Hmisc")`. One of the functions is `wtd.quantile()`, which summarizes data with weighted quantiles (e.g., the 10th percentile estimated in a survey with sampling weights). So why call it with `Hmisc::wtd.quantile()` instead of using `library(Hmisc)`? When you use `library()`, you load all the functions in a package. `Hmisc` is a big package, and some of the functions have the same names as other functions we use in `tidyverse`. Loading the whole package can create conflicts where two function shave the same name! Instead, the way we've written it above tells R to just look in the package for the particular function we're using at that moment.
 :::
 
-If you are unfamiliar with `quantile()` type `?quantile` in your console for help.
-
 ```{r, echo = F}
 summarized <- filtered |>
   group_by(year) |>
