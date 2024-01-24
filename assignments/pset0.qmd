@@ -37,13 +37,13 @@ the "Render" button as shown in the image below.
 
 ![](../assets/pset0/render.png)
 This will run the R code and combine the output with the text in the document
-into a PDF. By default, this PDF will be output in the directory that is your
-working directory. You will then submit the PDF on Canvas.
+into a PDF. By default, this PDF will be output in the same directory that
+you saved `pset0.qmd` in. You will then submit the PDF on Canvas.
 
-::: {.callout-tip}
-If you're not sure what your working directory is, run `getwd()` in your
-RStudio console. This will print your working directory. You can set it to the place you've saved this file by clicking the top menu Session -> Set Working Directory -> To Source File Location.
-:::
+<!-- ::: {.callout-tip} -->
+<!-- If you're not sure what your working directory is, run `getwd()` in your -->
+<!-- RStudio console. This will print your working directory. You can set it to the place you've saved this file by clicking the top menu Session -> Set Working Directory -> To Source File Location. -->
+<!-- ::: -->
 
 ## Issues
 
