@@ -44,6 +44,7 @@ website:
               - topics/r_basics.qmd
               - topics/visualization.qmd
               - topics/data_transformation.qmd
+              - topics/weights.qmd
           - section: "Describing inequality"
             contents:
               - topics/race.qmd
