@@ -89,11 +89,11 @@ The procedure to use replicate weights depends on how they are constructed. Ofte
 
 - use `weight` to create a point estimate $\hat\tau$
 - use `repwt*` to generate $k$ replicate estimates $\hat\tau^*_1,\dots,\hat\tau^*_k$
-- calculate the standard deviation of the $\hat\tau^*$ replicate estimates. This is the standard error of $\hat\tau$
+- calculate the standard error of $\hat\tau$ using the replicate estimates $\hat\tau^*$. The formula will depend on how the replicate weights were constructed, but it will likely involve the standard deviation of the $\hat\tau^*$ multiplied by some factor
 - construct a confidence interval^[If we hypothetically drew many complex survey samples from the population in this way, an interval generated this way would contain the true population mean 95\% of the time.] by a normal approximation
 $$(\text{point estimate}) \pm 1.96 * (\text{standard error estimate})$$
 
-In our concrete example, the point estimate is 80\% employed. The replicate estimates are `r paste0(format(round(replicates,2), nsmall = 2), collapse = ", ")`. The standard deviation of those replicate estimates is `r format(round(sd(replicates),2),nsmall=2)`. Our 95\% confidence interval is (`r format(round(0.80 + c(-1,1) * 1.96 * sd(replicates),2),nsmall=2)`).
+In our concrete example, the point estimate is 80\% employed. The replicate estimates are `r paste0(format(round(replicates,2), nsmall = 2), collapse = ", ")`. Variation across the replicate estimates tells us something about how the estimate would vary across hypothetical repeated samples from the population.
 
 ## Computational strategy for replicate weights
 
@@ -135,17 +135,7 @@ replicate_estimates <- c(
 ```
 yielding the three estimates: `r format(round(replicate_estimates,2),nsmall = 2)`. In real data, you will want to apply this in a loop because there may be dozens of replicate weights.
 
-The standard error of the estimator is the standard deviation of the replicate weights.
-```{r}
-standard_error <- sd(replicate_estimates)
-```
-estimated to be `r format(round(standard_error,2),nsmall = 2)`. We can construct a 95\% confidence interval by a Normal approximation.
-```{r}
-confidence_interval <- estimate + c(-1,1) * 1.96 * standard_error
-```
-which yields the interval: `r format(round(confidence_interval,2),nsmall = 2)`.
-
-We would then report: we estimate that `r format(round(estimate,2),nsmall = 2)` of the population is employed, with a 95\% confidence interval from `r paste(format(round(confidence_interval,2),nsmall = 2),collapse = " to ")`.
+The standard error of the estimator will be some function of the replicate estimates, likely involving the standard deviation of the replicate estimates. Check with the data distributor for a formula for your case. Once you estimate the standard error, a 95\% confidence interval can be constructed with a Normal approximation, as discussed above.
 
 ## Application in the CPS
 
@@ -207,12 +197,21 @@ replicate_estimates <- foreach(r = 1:160, .combine = "rbind") %do% {
 replicate_estimates
 ```
 
-We estimate the standard error of our estimator by the standard deviation of replicate estimates, separately by sex since we produced estimates by sex within each replicate.
+We estimate the standard error of our estimator by a formula
+$$\text{StandardError}(\hat\tau) = \sqrt{\frac{4}{160}\sum_{r=1}^{160}\left(\hat\tau^*_r - \hat\tau\right)^2}$$
+where the formula comes from the [survey documentation](https://cps.ipums.org/cps/repwt.shtml#q40). We carry out this procedure within groups defined by sex, since we are producing estimate for each sex.
 
 ```{r}
 standard_error <- replicate_estimates |>
+  # Denote replicate estimates as estimate_star
+  rename(estimate_star = estimate) |>
+  # Merge in the point estimate
+  left_join(estimate,
+            by = join_by(sex)) |>
+  # Carry out within groups defined by sex
   group_by(sex) |>
-  summarize(standard_error = sd(estimate))
+  # Apply the formula from survey documentation
+  summarize(standard_error = sqrt(4 / 160 * sum((estimate_star - estimate) ^ 2)))
 ```
 ```{r, echo = F}
 standard_error
