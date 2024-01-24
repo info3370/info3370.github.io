@@ -243,6 +243,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Data transformation</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../topics/weights.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weights</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -523,12 +529,24 @@ Note
 <li>Use <code>group_by()</code> function to group by <code>year</code>. The next operations will automatically be carried out within groups</li>
 <li>Use <code>summarize()</code> to aggregate to the 10th, 50th, and 90th percentiles within each year
 <ul>
-<li><code>p10 = quantile(x = incwage, probs = .1)</code></li>
-<li><code>p50 = quantile(x = incwage, probs = .5)</code></li>
-<li><code>p90 = quantile(x = incwage, probs = .9)</code></li>
+<li><code>p10 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.1)</code></li>
+<li><code>p50 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.5)</code></li>
+<li><code>p90 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.9)</code></li>
 </ul></li>
 </ul>
-<p>If you are unfamiliar with <code>quantile()</code> type <code>?quantile</code> in your console for help.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>That was a new way of calling a package! The <a href="https://cran.r-project.org/web/packages/Hmisc/index.html"><code>Hmisc</code></a> package has a bunch of miscellaneous functions. To install the package, type <code>install.packages("Hmisc")</code>. One of the functions is <code>wtd.quantile()</code>, which summarizes data with weighted quantiles (e.g., the 10th percentile estimated in a survey with sampling weights). So why call it with <code>Hmisc::wtd.quantile()</code> instead of using <code>library(Hmisc)</code>? When you use <code>library()</code>, you load all the functions in a package. <code>Hmisc</code> is a big package, and some of the functions have the same names as other functions we use in <code>tidyverse</code>. Loading the whole package can create conflicts where two function shave the same name! Instead, the way we’ve written it above tells R to just look in the package for the particular function we’re using at that moment.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -569,7 +587,7 @@ Warning
 <pre><code># A tibble: 62 × 4
    year   p10   p50   p90
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1  1962  2000  5000  9000
+1  1962  2000  5100  9000
 2  1963  2000  5200  9200
 # ℹ 60 more rows</code></pre>
 </div>
@@ -581,7 +599,7 @@ Warning
    year quantity income
   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
 1  1962 p10        2000
-2  1962 p50        5000
+2  1962 p50        5100
 3  1962 p90        9000
 4  1963 p10        2000
 5  1963 p50        5200
@@ -625,7 +643,7 @@ Warning
    year quantity income
   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
 1  1962 p10        2000
-2  1962 p50        5000
+2  1962 p50        5100
 3  1962 p90        9000
 # ℹ 183 more rows</code></pre>
 </div>
