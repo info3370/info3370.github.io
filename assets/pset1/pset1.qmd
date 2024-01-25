@@ -1,12 +1,13 @@
 ---
 title: "Problem Set 1: Visualization"
+format: pdf
 ---
 
 **Due: 5pm on Wednesday, January 31.**
 
 Student identifer: [type your anonymous identifying number here]
 
-- Use this [.qmd template](../assets/pset1/pset1.qmd) to complete the problem set
+- Use this template to complete the problem set
 - In Canvas, you will upload the PDF produced by your .qmd file
 - Put your identifier above, not your name! We want anonymous grading to be possible
 
