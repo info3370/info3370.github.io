@@ -6,8 +6,8 @@ format:
     toc: false
 ---
 
-Here are some helpful links in case you miss class for excused or non-excused reasons:
+If you are missing class, here is a form where you can tell us!
 
-- [Excused absence form](https://docs.google.com/forms/d/e/1FAIpQLSc0-bu6tZjii3VAzJdL9JiayywoWC14U4xXrWgwjIqwA7Maxg/viewform) if you miss class for excused reasons.
-- [Make-up work form](https://forms.gle/1gh7irUBoDRgmTNW9) if you miss class for non-excused reasons.
-- Lastly, check out the discussion assignments on Canvas, if you miss discussion due to non-excused reasons
+- [Excused absence form](https://docs.google.com/forms/d/e/1FAIpQLSc0-bu6tZjii3VAzJdL9JiayywoWC14U4xXrWgwjIqwA7Maxg/viewform). For requesting an excused absence from lecture or discussion
+- [Lecture make-up form](https://forms.gle/1gh7irUBoDRgmTNW9). For lectures that are missed which we haven't excused
+- For non-excused absences from discussion, you should do the discussion activity on your own and submit in the Canvas assignment associated with that discussion

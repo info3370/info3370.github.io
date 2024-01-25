@@ -41,7 +41,7 @@ population |>
             color = "black", alpha = .5) +
   annotate(geom = "rect", color = "gray", size = 2, alpha = 0,
            xmin = .5, xmax = 10.5, ymin = .5, ymax = 3.5) +
-  annotate(geom = "rect", color = "seagreen", size = 2, alpha = 0,
+  annotate(geom = "rect", color = "black", size = 2, alpha = 0,
            xmin = .5, xmax = 10.5, ymin = 3.5, ymax = 15.5) +
   annotate(geom = "segment", color = "gray", size = 2,
            x = .5, xend = 10.5, y = 3.5, yend = 3.5, linetype = "dashed") +
