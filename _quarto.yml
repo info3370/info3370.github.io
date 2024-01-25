@@ -60,6 +60,8 @@ website:
             contents:
               - href: assignments/pset0.qmd
                 text: "Problem Set 0"
+              - href: assignments/pset1.qmd
+                text: "Problem Set 1"
           - href: assignments/project.qmd
             text: "Project"
               

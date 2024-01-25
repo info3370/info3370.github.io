@@ -1,0 +1,8 @@
+---
+title: "Problem Set 1: Visualization"
+---
+
+**Due: 5pm on Wednesday, January 31.**
+
+This problem set will use [`lifeCourse.csv`](../data/lifeCourse.csv)
+
