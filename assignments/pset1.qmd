@@ -16,10 +16,15 @@ This problem set involves both data analysis and reading.
 
 This problem set uses the data [`lifeCourse.csv`](../data/lifeCourse.csv).
 
-```{r, comment = F, message = F}
+```{r, comment = F, message = F, eval = F}
 library(tidyverse)
 library(scales)
 lifeCourse <- read_csv("https://info3370.github.io/data/lifeCourse.csv")
+```
+```{r, comment = F, message = F, echo = F}
+library(tidyverse)
+library(scales)
+lifeCourse <- read_csv("../data/lifeCourse.csv")
 ```
 
 The data contain life course earnings profiles for four cohorts of American workers: those born in 1940, 1950, 1960, and 1970. Each row contains a summary of the annual earnings distribution for a particular birth cohort at a particular age, among the subgroup with a particular level of education. To prepare these data, we aggregated microdata from the [Current Population Survey](https://cps.ipums.org/cps/), provided through the Integrated Public Use Microdata Series.
