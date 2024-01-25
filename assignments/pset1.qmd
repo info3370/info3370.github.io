@@ -14,7 +14,7 @@ This problem set involves both data analysis and reading.
 
 ### Data analysis
 
-This problem set uses the data [`lifeCourse.csv`](https://info3370.github.io/data/lifeCourse.csv).
+This problem set uses the data [`lifeCourse.csv`](../data/lifeCourse.csv).
 
 ```{r, comment = F, message = F}
 library(tidyverse)
