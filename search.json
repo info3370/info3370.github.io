@@ -319,6 +319,31 @@
     "text": "If you are missing class, here is a form where you can tell us!\n\nExcused absence form. For requesting an excused absence from lecture or discussion\nLecture make-up form. For lectures that are missed which we haven’t excused\nFor non-excused absences from discussion, you should do the discussion activity on your own and submit in the Canvas assignment associated with that discussion\n\n\n\n\n Back to top"
   },
   {
+    "objectID": "assignments/pset1.html",
+    "href": "assignments/pset1.html",
+    "title": "Problem Set 1: Visualization",
+    "section": "",
+    "text": "Due: 5pm on Wednesday, January 31.\nThis problem set will use lifeCourse.csv\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 1"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html",
+    "href": "assignments/project.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
     "objectID": "assignments/pset0.html",
     "href": "assignments/pset0.html",
     "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
@@ -381,18 +406,6 @@
       "Assignments",
       "Problem Sets",
       "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/project.html",
-    "href": "assignments/project.html",
-    "title": "Final Project",
-    "section": "",
-    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Project"
     ]
   },
   {
