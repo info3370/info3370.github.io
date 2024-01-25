@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -309,7 +343,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link active" data-scroll-target="#data-analysis">Data analysis</a></li>
+  <li><a href="#visualize-25-points" id="toc-visualize-25-points" class="nav-link" data-scroll-target="#visualize-25-points">1. Visualize (25 points)</a></li>
+  <li><a href="#interpret-10-points" id="toc-interpret-10-points" class="nav-link" data-scroll-target="#interpret-10-points">2. Interpret (10 points)</a></li>
+  <li><a href="#connect-to-reading-15-points" id="toc-connect-to-reading-15-points" class="nav-link" data-scroll-target="#connect-to-reading-15-points">3. Connect to reading (15 points)</a></li>
+  <li><a href="#grad-question-model-based-estimates" id="toc-grad-question-model-based-estimates" class="nav-link" data-scroll-target="#grad-question-model-based-estimates">Grad question: Model-based estimates</a></li>
+  <li><a href="#computing-environment" id="toc-computing-environment" class="nav-link" data-scroll-target="#computing-environment">Computing environment</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -334,9 +379,164 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>Due: 5pm on Wednesday, January 31.</strong></p>
-<p>This problem set will use <a href="../data/lifeCourse.csv"><code>lifeCourse.csv</code></a></p>
+<p>Student identifer: [type your anonymous identifying number here]</p>
+<ul>
+<li>Use this <a href="../assets/pset1/pset1.qmd">.qmd template</a> to complete the problem set</li>
+<li>In Canvas, you will upload the PDF produced by your .qmd file</li>
+<li>Put your identifier above, not your name! We want anonymous grading to be possible</li>
+</ul>
+<p>This problem set involves both data analysis and reading.</p>
+<section id="data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="data-analysis">Data analysis</h3>
+<p>This problem set uses the data <a href="https://info3370.github.io/data/lifeCourse.csv"><code>lifeCourse.csv</code></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lifeCourse <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://info3370.github.io/data/lifeCourse.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The data contain life course earnings profiles for four cohorts of American workers: those born in 1940, 1950, 1960, and 1970. Each row contains a summary of the annual earnings distribution for a particular birth cohort at a particular age, among the subgroup with a particular level of education. To prepare these data, we aggregated microdata from the <a href="https://cps.ipums.org/cps/">Current Population Survey</a>, provided through the Integrated Public Use Microdata Series.</p>
+<p>The data contain five variables.</p>
+<ol type="1">
+<li><code>quantity</code> is the metric by which the earnings distribution is summarized: 10th, 50th, or 90th percentile</li>
+<li><code>education</code> is the educational subgroup being summarized: College Degree, Less than College</li>
+<li><code>cohort</code> is the cohort (people with a given birth year) to which these data apply: 1940, 1950, 1960, 1970</li>
+<li><code>age</code> is the age at which earnings were measured: 30–45</li>
+<li><code>income</code> is the value for the given earnings percentile in the given subgroup. Income values are provided in 2022 dollars</li>
+</ol>
+</section>
+<section id="visualize-25-points" class="level1">
+<h1>1. Visualize (25 points)</h1>
+<p>Use <code>ggplot</code> to visualize these data. To denote the different trajectories,</p>
+<ul>
+<li>make your plot using <code>geom_point()</code> or <code>geom_line()</code></li>
+<li>use the x-axis for <code>age</code></li>
+<li>use the y-axis for <code>income</code></li>
+<li>use <code>color</code> for <code>quantity</code></li>
+<li>use <code>facet_grid</code> to make a panel of facets where each row is an education value and each column is a cohort value</li>
+</ul>
+<p>You should prepare the graph as though you were going to publish it. Modify the axis titles so that a reader would know what is on the axis. Use appropriate capitalization in all labels. Try using the <code>label_dollar()</code> function from the <code>scales</code> package so that the y-axis uses dollar values.</p>
+<p>Your code should be well-formatted as defined by <a href="https://r4ds.hadley.nz/workflow-style.html">R4DS</a>. In your produced PDF, no lines of code should run off the page.</p>
+<p>Many different graphs can be equally correct. You will be evaluated by</p>
+<ul>
+<li>having publication-ready graph aesthetics</li>
+<li>code that follows style conventions</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code goes here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interpret-10-points" class="level1">
+<h1>2. Interpret (10 points)</h1>
+<p>Write 2-3 sentences summarizing the trends that you see in the data.</p>
+<p><strong>2.1 (3 points).</strong> Focus on those born in 1970. For those with a college degree, how do the top and bottom of the income distribution change over the life course?</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+<p><strong>2.2 (3 points).</strong> Focus on those born in 1970. How does the pattern differ for those without college degres differ from your answer in 2.1?</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+<p><strong>2.3 (4 points).</strong> How do the patterns you identified in 2.1 and 2.2 change from the 1940 to the 1970 cohort?</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+</section>
+<section id="connect-to-reading-15-points" class="level1">
+<h1>3. Connect to reading (15 points)</h1>
+<p>Read p.&nbsp;1–7 of following paper. Stop before the section “Analytic Framework for Decomposing Inequality.”</p>
+<blockquote class="blockquote">
+<p>Cheng, Siwei. 2021. <a href="https://doi.org/10.1093/sf/soab003">The shifting life course patterns of wage inequality.</a>. <em>Social Forces</em> 100(1):1–28.</p>
+</blockquote>
+<p>Our data are not the same as Cheng’s. But our analysis is able to reproduce many of her findings. Answer each question in two sentences or less.</p>
+<p>Cheng discusses period trends, cohort trends, and age trends.</p>
+<p><strong>3.1 (3 points)</strong> Which dimension of your graph shows a cohort trend?</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+<p><strong>3.2 (3 points)</strong> Which dimension of your graph shows an age trend?</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+<p><strong>3.3 (3 points)</strong> Cheng discusses education-based cumulative advantage. Describe how you see this in your graph.</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+<p><strong>3.4 (3 points)</strong> Cheng discusses within-education trajectory heterogeneity. Describe how your graph shows heterogeneity of outcomes within educational categories.</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+<p><strong>3.5 (3 points)</strong> Cheng discusses wage volatility: how wages rise and fall over time for a given person. Why is our data (the Current Population Survey) the wrong dataset to study wage volatility?</p>
+<blockquote class="blockquote">
+<p>Type your answer here.</p>
+</blockquote>
+</section>
+<section id="grad-question-model-based-estimates" class="level1">
+<h1>Grad question: Model-based estimates</h1>
+<p>This question assumes familiarity with Ordinary Least Squares.</p>
+<ul>
+<li>For graduate students, this question is worth 20 points.</li>
+<li>For undergraduate students, this question is optional and worth 0 points.</li>
+</ul>
+<p>The data contain nonparametric estimates that contain some noise: the data points provided partly reflect random variation because they are estimatd in a sample.</p>
+<p>Model-based estimates reduce noise by pooling information across observations, at the cost of introducing assumptions. Fit an OLS model to the data using <code>age</code> as a numeric variable and <code>education</code>, <code>cohort</code>, and <code>quantity</code> as factor variables. Interact all of these predictors with each other.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  income <span class="sc">~</span> age <span class="sc">*</span> <span class="fu">factor</span>(cohort) <span class="sc">*</span> education <span class="sc">*</span> quantity,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> lifeCourse</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Effectively, this estimates a best-fit line through each set of points depicted in your original figure. For each observation, store a prediction from this model (see <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/predict.lm.html"><code>predict()</code></a>).</p>
+<p>Re-create your plot from (1) using</p>
+<ul>
+<li><code>geom_point()</code> for the nonparametric estimates (as above)</li>
+<li><code>geom_line()</code> for your model-based predicted values</li>
+</ul>
+</section>
+<section id="computing-environment" class="level1">
+<h1>Computing environment</h1>
+<p>Leave this at the bottom of your file, and it will record information such as your operating system, R version, and package versions. This is helpful for resolving any differences in results across people.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.2 (2023-10-31)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Ventura 13.6.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] scales_1.2.1    lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0  
+ [5] dplyr_1.1.3     purrr_1.0.2     readr_2.1.4     tidyr_1.3.0    
+ [9] tibble_3.2.1    ggplot2_3.4.3   tidyverse_2.0.0
+
+loaded via a namespace (and not attached):
+ [1] bit_4.0.5         gtable_0.3.3      jsonlite_1.8.7    crayon_1.5.2     
+ [5] compiler_4.3.2    tidyselect_1.2.0  parallel_4.3.2    yaml_2.3.7       
+ [9] fastmap_1.1.1     R6_2.5.1          generics_0.1.3    curl_5.1.0       
+[13] knitr_1.44        htmlwidgets_1.6.2 munsell_0.5.0     pillar_1.9.0     
+[17] tzdb_0.4.0        rlang_1.1.1       utf8_1.2.3        stringi_1.7.12   
+[21] xfun_0.40         bit64_4.0.5       timechange_0.2.0  cli_3.6.1        
+[25] withr_2.5.1       magrittr_2.0.3    digest_0.6.33     grid_4.3.2       
+[29] vroom_1.6.3       rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.3  
+[33] vctrs_0.6.4       evaluate_0.22     glue_1.6.2        fansi_1.0.5      
+[37] colorspace_2.1-0  rmarkdown_2.25    tools_4.3.2       pkgconfig_2.0.3  
+[41] htmltools_0.5.6.1</code></pre>
+</div>
+</div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
