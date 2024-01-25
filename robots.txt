@@ -1,1 +1,1 @@
-Sitemap: https://github.com/info3370/info3370.github.io/sitemap.xml
+Sitemap: https://info3370.github.io/sitemap.xml
