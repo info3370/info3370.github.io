@@ -4,7 +4,12 @@ title: "Problem Set 1: Visualization"
 
 **Due: 5pm on Wednesday, January 31.**
 
-Student identifer: [type your anonymous identifying number here]
+::: {.callout-note}
+## Before you start
+Create an anonymous identifier for yourself [here](https://docs.google.com/forms/d/e/1FAIpQLSfL6cX1YJ4LJDvoy5LRT5wrrqm4KctOBZbJHscooTFXwQaYaA/viewform?usp=sf_link)!
+:::
+
+Student identifer: [type your anonymous identifier here]
 
 - Use this [.qmd template](../assets/pset1/pset1.qmd) to complete the problem set
 - In Canvas, you will upload the PDF produced by your .qmd file

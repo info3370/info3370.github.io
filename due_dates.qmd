@@ -9,3 +9,4 @@ format:
 | Due date | Assignment |
 |---|---|
 | Wed Jan 24 at 5pm | [Problem Set 0](assignments/pset0.qmd) |
+| Wed Jan 31 at 5pm | [Problem Set 1](assignments/pset1.qmd) |
