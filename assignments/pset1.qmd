@@ -7,6 +7,7 @@ title: "Problem Set 1: Visualization"
 ::: {.callout-note}
 ## Before you start
 Create an anonymous identifier for yourself [here](https://docs.google.com/forms/d/e/1FAIpQLSfL6cX1YJ4LJDvoy5LRT5wrrqm4KctOBZbJHscooTFXwQaYaA/viewform?usp=sf_link)!
+Want to see how you'll be evaluated? Check out the [rubric](https://docs.google.com/forms/d/e/1FAIpQLSdR7LMX4pvs7l7qndzgzGL4HeJjc730yhvUgVuMRom_ihplcg/viewform?usp=sf_link)
 :::
 
 Student identifer: [type your anonymous identifier here]
