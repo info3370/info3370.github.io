@@ -198,9 +198,9 @@ Unequal probability sample
 \begin{frame}
 \centering
 \begin{tabular}{ll}
-full count enumeration & talk to everyone \\ & (ideal but costly!) \\ \\
-simple random sample & sampling frame \\ & known, equal probabilities \\ & (good for population average) \\ \\
-unequal probability sample & sampling frame \\ & known, unequal probabilities \\ & (good for subgroups)
+full count enumeration & talk to everyone \\ & \onslide<2->{(ideal but costly!)} \\ \\
+simple random sample & sampling frame \\ & known, equal probabilities \\ & \onslide<3->{(good for population average)} \\ \\
+unequal probability sample & sampling frame \\ & known, unequal probabilities \\ & \onslide<4->{(good for subgroups)}
 \end{tabular}
 \end{frame}
 
@@ -226,13 +226,13 @@ from an unequal probability sample?
 \begin{frame}{Sampling weights: Population mean estimator}
 
 Among those sampled if \texttt{runif} $< .1$,\\
-on average 1 in 10 people sampled.\\
-Each person represents 10 people.\\
-$w_i = \frac{1}{\P(\text{Sampled})} = \frac{1}{.1} = 10$ \vskip .2in
+on average 1 in 10 people sampled.\\ \pause
+Each person represents 10 people.\\ \pause
+$w_i = \frac{1}{\P(\text{Sampled})} = \frac{1}{.1} = 10$ \vskip .2in \pause
 Among those who sampled if \texttt{runif} $< .5$,\\
 on average 1 in 2 people sampled.\\
 Each person represents 2 people. \\
-$w_i = \frac{1}{\P(\text{Sampled})} = \frac{1}{.5} = 2$  \vskip .2in
+$w_i = \frac{1}{\P(\text{Sampled})} = \frac{1}{.5} = 2$  \vskip .2in \pause
 $$
 \begin{aligned}
 & \text{Unweighted estimator} &\qquad& \text{Weighted estimator} \\
