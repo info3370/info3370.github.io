@@ -55,6 +55,8 @@ Store your data in a **working directory**: a folder on your computer that will 
 ::: {.callout-tip}
 Keep a browser tab open with the [IPUMS webpage](https://cps.ipums.org) to easily access full documentation
 :::
+
+{{< video https://www.youtube.com/embed/JTsFJtlLOrY >}}
   
 ## Prepare R environment
 
@@ -84,7 +86,7 @@ Change the file name to the name of the file you downloaded
 If R says the file does not exist in your current working directory, you may need to [set your working directory](https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE) by clicking Session -> Set Working Directory -> To Source File Location on a Mac or Tools -> Change Working Directory on Windows.
 :::
 
-{{< video https://www.youtube.com/embed/DKLpzJa0UVA >}}
+{{< video https://www.youtube.com/embed/LjO15pvVmNg >}}
 
 ## Get familiar with our dataset
 
@@ -96,6 +98,8 @@ Type `micro` in the console. What do you see?
 Some columns such as [`educ`](https://cps.ipums.org/cps-action/variables/educ#codes_section) have a numeric code and a label. The code is how IPUMS has stored the data. The label is what the code means. Getting these labels is a benefit of downloading the file in `.dta` format.
 
 Type `View(micro)` in the console. This will pop up another tab in RStudio which allows you to scroll through the dataset. You can see that each column name has a description. For instance [`asecwt`](https://cps.ipums.org/cps-action/variables/asecwt) is "annual social and economic supplement weight."
+
+{{< video https://www.youtube.com/embed/f9IeokvW8HM >}}
 
 ## filter() to cases of interest
 
@@ -155,7 +159,19 @@ filtered <- micro |>
 Filtering can be a dangerous business! For example, above we dropped people with missing values of income. But what if the lowest-income people refuse to answer the income question? We often have no choice but to filter to those with valid responses, but you should always read the documentation to be sure you understand who you are dropping and why.
 :::
 
-{{< video https://www.youtube.com/embed/aLPzq7q8hik >}}
+::: columns
+::: {.column width="50%"}
+
+#### filter() without the pipe
+{{< video https://www.youtube.com/embed/mbnFNwuQbCM >}}
+:::
+
+::: {.column width="50%"}
+
+#### filter() with the pipe
+{{< video https://www.youtube.com/embed/OtBEsiaTnYQ >}}
+:::
+:::
 
 ## group_by() and summarize() for subpopulation summaries
 
@@ -176,10 +192,12 @@ That was a new way of calling a package! The [`Hmisc`](https://cran.r-project.or
 ```{r, echo = F}
 summarized <- filtered |>
   group_by(year) |>
-  summarize(p10 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.1),
-            p50 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.5),
-            p90 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.9),
-            .groups = "drop")
+  summarize(
+    p10 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.1),
+    p50 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.5),
+    p90 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.9),
+    .groups = "drop"
+  )
 ```
 
 ::: {.callout-note}
@@ -190,7 +208,19 @@ The `summarized` data frame should have `r nrow(summarized)` rows and `r ncol(su
 We are not using the survey weights here. See the next page!
 :::
 
-{{< video https://www.youtube.com/embed/o4RMEKhsjjw >}}
+::: columns
+::: {.column width="50%"}
+
+#### Sample summaries
+{{< video https://www.youtube.com/embed/s7g0bcmtarA >}}
+:::
+
+::: {.column width="50%"}
+
+#### Weighted sample summaries
+{{< video https://www.youtube.com/embed/7cAZjqEmsaY >}}
+:::
+:::
 
 ## pivot_longer() to reshape data
 
@@ -232,7 +262,7 @@ pivoted <- summarized %>%
                values_to = "income")
 ```
 
-{{< video https://www.youtube.com/embed/Rcor1P-q8Rc >}}
+{{< video https://www.youtube.com/embed/v5QJaMjO53o >}}
 
 ## left_join() an inflation adjustment
 
@@ -269,7 +299,7 @@ joined <- pivoted |>
             by = join_by(year))
 ```
 
-{{< video https://www.youtube.com/embed/gzV-F7txkBw >}}
+{{< video https://www.youtube.com/embed/gKnG8nSc-Go >}}
 
 ## mutate() to adjust for inflation
 
@@ -290,7 +320,7 @@ mutated <- joined |>
   mutate(income = income * inflation_factor)
 ```
 
-{{< video https://www.youtube.com/embed/OchVyRJLi7M >}}
+{{< video https://www.youtube.com/embed/1RAMjEcqsT4 >}}
 
 ## ggplot() to visualize
 
@@ -315,18 +345,14 @@ joined |>
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-{{< video https://www.youtube.com/embed/mJlBFfoj-lc >}}
+{{< video https://www.youtube.com/embed/QI6TdgrxyXo >}}
 
 ## Finished early?
 
 If you are finished early, you could
 
 - incorporate the [`educ`](https://cps.ipums.org/cps-action/variables/educ#codes_section) variable in your plot. You might want to group by those who do and do not hold college degrees, perhaps using [`facet_grid()`](https://ggplot2.tidyverse.org/reference/facet_grid.html)
-- explore different quantiles or other distributional summaries
-- try something else, like [`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) for people's incomes in a specific year
+- try [`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) for people's incomes in a specific year
+- explore [IPUMS-CPS](https://cps.ipums.org/) for other variables and begin your own visualization
 
-## What comes next
-
-In the next exercise, we will use the [`asecwt`](https://cps.ipums.org/cps-action/variables/asecwt) to account for the CPS sample design and correctly
-weight the observations for population inference.
 
