@@ -19,8 +19,8 @@ website:
         text: Syllabus
       - href: who_we_are.qmd
         text: Team
-      - href: due_dates.qmd
-        text: Due Dates
+      - href: schedule.qmd
+        text: Schedule
       - href: office_hours.qmd
         text: Office Hours
       - href: "https://edstem.org/us/courses/54550/"
@@ -38,22 +38,21 @@ website:
       - section: "Topics"
         contents:
           - topics/welcome.qmd
-          - section: "Generating Data"
-            contents:
-              - topics/sampling.qmd
+          - topics/sampling.qmd
           - section: "Working with Data"
             contents:
               - topics/r_basics.qmd
               - topics/visualization.qmd
               - topics/data_transformation.qmd
               - topics/weights.qmd
-          - section: "Describing inequality"
+          - section: "Describing Inequality"
             contents:
+              - topics/prediction.qmd
               - topics/race.qmd
               - topics/gender.qmd
               - topics/class.qmd
           - topics/asking_questions.qmd
-          - section: "Reducing inequality"
+          - section: "Reducing Inequality"
       - section: "Assignments"
         contents:
           - section: "Problem Sets"
