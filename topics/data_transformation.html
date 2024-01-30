@@ -357,7 +357,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#mutate-to-adjust-for-inflation" id="toc-mutate-to-adjust-for-inflation" class="nav-link" data-scroll-target="#mutate-to-adjust-for-inflation">mutate() to adjust for inflation</a></li>
   <li><a href="#ggplot-to-visualize" id="toc-ggplot-to-visualize" class="nav-link" data-scroll-target="#ggplot-to-visualize">ggplot() to visualize</a></li>
   <li><a href="#finished-early" id="toc-finished-early" class="nav-link" data-scroll-target="#finished-early">Finished early?</a></li>
-  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What comes next</a></li>
   </ul>
 </nav>
     </div>
@@ -423,6 +422,7 @@ Tip
 <p>Keep a browser tab open with the <a href="https://cps.ipums.org">IPUMS webpage</a> to easily access full documentation</p>
 </div>
 </div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/JTsFJtlLOrY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="prepare-r-environment" class="level2">
 <h2 class="anchored" data-anchor-id="prepare-r-environment">Prepare R environment</h2>
@@ -462,7 +462,7 @@ Tip
 <p>If R says the file does not exist in your current working directory, you may need to <a href="https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE">set your working directory</a> by clicking Session -&gt; Set Working Directory -&gt; To Source File Location on a Mac or Tools -&gt; Change Working Directory on Windows.</p>
 </div>
 </div>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/DKLpzJa0UVA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LjO15pvVmNg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="get-familiar-with-our-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="get-familiar-with-our-dataset">Get familiar with our dataset</h2>
@@ -473,6 +473,7 @@ Tip
 </ul>
 <p>Some columns such as <a href="https://cps.ipums.org/cps-action/variables/educ#codes_section"><code>educ</code></a> have a numeric code and a label. The code is how IPUMS has stored the data. The label is what the code means. Getting these labels is a benefit of downloading the file in <code>.dta</code> format.</p>
 <p>Type <code>View(micro)</code> in the console. This will pop up another tab in RStudio which allows you to scroll through the dataset. You can see that each column name has a description. For instance <a href="https://cps.ipums.org/cps-action/variables/asecwt"><code>asecwt</code></a> is “annual social and economic supplement weight.”</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/f9IeokvW8HM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="filter-to-cases-of-interest" class="level2">
 <h2 class="anchored" data-anchor-id="filter-to-cases-of-interest">filter() to cases of interest</h2>
@@ -534,7 +535,19 @@ Note
 <p>Filtering can be a dangerous business! For example, above we dropped people with missing values of income. But what if the lowest-income people refuse to answer the income question? We often have no choice but to filter to those with valid responses, but you should always read the documentation to be sure you understand who you are dropping and why.</p>
 </div>
 </div>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/aLPzq7q8hik" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="filter-without-the-pipe" class="level4">
+<h4 class="anchored" data-anchor-id="filter-without-the-pipe">filter() without the pipe</h4>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mbnFNwuQbCM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</div><div class="column" style="width:50%;">
+<section id="filter-with-the-pipe" class="level4">
+<h4 class="anchored" data-anchor-id="filter-with-the-pipe">filter() with the pipe</h4>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/OtBEsiaTnYQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</div>
+</div>
 </section>
 <section id="group_by-and-summarize-for-subpopulation-summaries" class="level2">
 <h2 class="anchored" data-anchor-id="group_by-and-summarize-for-subpopulation-summaries">group_by() and summarize() for subpopulation summaries</h2>
@@ -590,7 +603,19 @@ Warning
 <p>We are not using the survey weights here. See the next page!</p>
 </div>
 </div>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/o4RMEKhsjjw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="sample-summaries" class="level4">
+<h4 class="anchored" data-anchor-id="sample-summaries">Sample summaries</h4>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/s7g0bcmtarA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</div><div class="column" style="width:50%;">
+<section id="weighted-sample-summaries" class="level4">
+<h4 class="anchored" data-anchor-id="weighted-sample-summaries">Weighted sample summaries</h4>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/7cAZjqEmsaY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</div>
+</div>
 </section>
 <section id="pivot_longer-to-reshape-data" class="level2">
 <h2 class="anchored" data-anchor-id="pivot_longer-to-reshape-data">pivot_longer() to reshape data</h2>
@@ -631,7 +656,7 @@ Warning
 <li>Use the <code>names_to</code> argument to tell R that the names of those variables will be moved to a column called <code>quantity</code></li>
 <li>Use the <code>values_to</code> argument to tell R that the values of those variables will be moved to a column called <code>income</code></li>
 </ul>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Rcor1P-q8Rc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/v5QJaMjO53o" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="left_join-an-inflation-adjustment" class="level2">
 <h2 class="anchored" data-anchor-id="left_join-an-inflation-adjustment">left_join() an inflation adjustment</h2>
@@ -674,7 +699,7 @@ Warning
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">join_by</span>(key_variable_in_A_and_B)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/gzV-F7txkBw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/gKnG8nSc-Go" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="mutate-to-adjust-for-inflation" class="level2">
 <h2 class="anchored" data-anchor-id="mutate-to-adjust-for-inflation">mutate() to adjust for inflation</h2>
@@ -688,7 +713,7 @@ Warning
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_variable =</span> old_variable_1 <span class="sc">+</span> old_variable_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Use <a href="https://r4ds.hadley.nz/data-transform#sec-mutate"><code>mutate()</code></a> to modify <code>income</code> so that it takes the values <code>income * inflation_factor</code>.</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/OchVyRJLi7M" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1RAMjEcqsT4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="ggplot-to-visualize" class="level2">
 <h2 class="anchored" data-anchor-id="ggplot-to-visualize">ggplot() to visualize</h2>
@@ -699,20 +724,16 @@ Warning
 <li><code>quantity</code> is denoted by color</li>
 </ul>
 <p>Discuss. What do you see in this plot?</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mJlBFfoj-lc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/QI6TdgrxyXo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="finished-early" class="level2">
 <h2 class="anchored" data-anchor-id="finished-early">Finished early?</h2>
 <p>If you are finished early, you could</p>
 <ul>
 <li>incorporate the <a href="https://cps.ipums.org/cps-action/variables/educ#codes_section"><code>educ</code></a> variable in your plot. You might want to group by those who do and do not hold college degrees, perhaps using <a href="https://ggplot2.tidyverse.org/reference/facet_grid.html"><code>facet_grid()</code></a></li>
-<li>explore different quantiles or other distributional summaries</li>
-<li>try something else, like <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html"><code>geom_histogram()</code></a> for people’s incomes in a specific year</li>
+<li>try <a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html"><code>geom_histogram()</code></a> for people’s incomes in a specific year</li>
+<li>explore <a href="https://cps.ipums.org/">IPUMS-CPS</a> for other variables and begin your own visualization</li>
 </ul>
-</section>
-<section id="what-comes-next" class="level2">
-<h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
-<p>In the next exercise, we will use the <a href="https://cps.ipums.org/cps-action/variables/asecwt"><code>asecwt</code></a> to account for the CPS sample design and correctly weight the observations for population inference.</p>
 
 
 </section>
