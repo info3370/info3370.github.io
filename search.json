@@ -100,14 +100,109 @@
   {
     "objectID": "topics/sampling.html",
     "href": "topics/sampling.html",
-    "title": "Sampling",
+    "title": "Population Sampling",
     "section": "",
-    "text": "[Slides]\nClaims about inequality are often claims about a population, such as all people in the United States. The target population may be so large that full count enumeration—talking to everyone—is prohibitively costly. This lecture introduces probability sampling as a way to learn about a population from a sample of much smaller size.\nWe first discuss the principles of probability sampling using the target population of our class. Then, we discuss how the U.S. Census Bureau carries out the Current Population Survey, a probability sample designed to estimate the unemployment rate in the U.S. and in each state.\nAfter class, you should\n\nread about probability sampling in an online textbook maintained by Statistics Canada. This reading reviews what we covered in lecture and extends it to other ideas in complex survey sampling, such as stratified and cluster sampling\nregister for an account at cps.ipums.org, where we will be accessing data from the Current Population Survey\n\n\n\n\n\n\n\n\n Back to top",
+    "text": "[Slides]\nClaims about inequality are often claims about a population. Our data are typically only a sample! This module addresses the link between samples and populations.\nThis page covers two lecture (1/30 and 2/6).",
     "crumbs": [
       " ",
       "Topics",
-      "Generating Data",
-      "Sampling"
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#full-count-enumeration",
+    "href": "topics/sampling.html#full-count-enumeration",
+    "title": "Population Sampling",
+    "section": "Full count enumeration",
+    "text": "Full count enumeration\nWhat proportion of our class prefers to sit in the front of the room?\nWe answered this question in class using full count enumeration: list the entire target population and ask them the question. Full count enumeration is ideal because it removes all statistical sources of error. But in settings with a larger target population, the high cost of full count enumeration may be prohibitive.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#simple-random-sample",
+    "href": "topics/sampling.html#simple-random-sample",
+    "title": "Population Sampling",
+    "section": "Simple random sample",
+    "text": "Simple random sample\nWe carried out a simple random sample1 in class.\n\neveryone generated a random number between 0 and 1\nthose with values less than 0.1 were sampled\nour sample estimate was the proportion of those sampled to prefer the front of the room\n\nIn a simple random sample, each person in the population is sampled with equal probabilities. Because the probabilities are known, a simple random sample is a probability sample.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#unequal-probability-sample",
+    "href": "topics/sampling.html#unequal-probability-sample",
+    "title": "Population Sampling",
+    "section": "Unequal probability sample",
+    "text": "Unequal probability sample\nSuppose we want to make subgroup estimates:\n\nwhat proportion prefer the front, among those sitting in the first 3 rows?\nwhat proportion prefer the front, among those sitting in the back 17 rows?\n\nIn a simple random sample, we might only get a few or even zero people in the first 3 rows! To reduce the chance of this bad sample, we could draw an unequal probability sample:\n\nthose in rows 1–3 are selected with probability 0.5\nthose in rows 4–20 are selected with probability 0.1\n\nOur unequal probability sample will over-represent the first three rows, thus creating a large enough sample in this subgroup to yield precise estimates.\n\nHaving drawn an unequal probability sample, suppose we now want to estimate the class-wide proportion who prefer sitting in the front. We will have a problem: those who prefer the front may be more likely to sit there, and they are also sampled with a higher probability! Sample inclusion is related to the value of our outcome.\nBecause the sampling probabilities are known, we can correct for this by applying sampling weights, which for each person equals the inverse of the known probability of inclusion for that person.\nFor those in rows 1–3,\n\nwe sampled with probability 50%\non average 1 in every 2 people is sampled\neach person in the sample represents 2 people in the population\n\\(w_i = \\frac{1}{\\text{P}(\\text{Sampled}_i)} = \\frac{1}{.5} = 2\\)\n\nFor those in rows 4–20,\n\nwe sampled with probability 10%\non average 1 in every 10 people is sampled\neach person in the sample represents 10 people in the population\n\\(w_i = \\frac{1}{\\text{P}(\\text{Sampled}_i)} = \\frac{1}{.1} = 10\\)\n\nTo estimate the population mean, we can use the weighted sample mean,\n\\[\\frac{\\sum_i y_iw_i}{\\sum_i w_i}\\]",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#stratified-random-sample",
+    "href": "topics/sampling.html#stratified-random-sample",
+    "title": "Population Sampling",
+    "section": "Stratified random sample",
+    "text": "Stratified random sample\nWe could also draw a stratified random sample by first partitioning the population into subgroups (called strata) and then drawing samples within each subgroup. For instance,\n\nsample 10 of the 20 people in rows 1–3\nsample 10 of the 130 people in rows 4–17\n\nIn simple random or unequal probability sampling, it is always possible that by random chance we sample no one in the front of the room. Stratified random sampling rules this out: we know in advance how our sample will be balanced across the two strata.\n\n\n\n\n\n\nNote\n\n\n\nIn our real-data example at the end of this page, the Current Population Survey is stratified by state so that the Bureau of Labor Statistics knows in advance that they will gather a sufficient sample to estimate unemployment in each state.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#sec-cps",
+    "href": "topics/sampling.html#sec-cps",
+    "title": "Population Sampling",
+    "section": "A real case: The Current Population Survey",
+    "text": "A real case: The Current Population Survey\nEvery month, the Bureau of Labor Statistics in collaboration with the U.S. Census Bureau collects data on unemployment in the Current Population Survey (CPS). The CPS is a probability sample designed to estimate the unemployment rate in the U.S. and in each state.\nWe will be using the CPS in discussion. This video introduces the CPS and points you toward where you can access the data via IPUMS-CPS.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#sec-baseball",
+    "href": "topics/sampling.html#sec-baseball",
+    "title": "Population Sampling",
+    "section": "Example: Baseball players",
+    "text": "Example: Baseball players\nAs one example where full-count enumeration is possible, we will examine the salaries of all 944 Major League Baseball Players who were on active rosters, injured lists, and restricted lists on Opening Day 2023. These data were compiled by USA Today and are available in baseball.csv.\n\n\n# A tibble: 944 × 4\n  player            team         position   salary\n  &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;\n1 Scherzer, Max     N.Y. Mets    RHP      43333333\n2 Verlander, Justin N.Y. Mets    RHP      43333333\n3 Judge, Aaron      N.Y. Yankees OF       40000000\n4 Rendon, Anthony   L.A. Angels  3B       38571429\n5 Trout, Mike       L.A. Angels  OF       37116667\n# ℹ 939 more rows\n\n\nSalaries are high, and income inequality is also high among baseball players\n\n4% were paid the league minimum of $720,000\n53% were paid less than $2,000,000\nthe highest-paid players—Max Scherzer and Justin Verlander—each earned $43,333,333\nthe highest-paid half of players take home 92% of the total pay\n\nWhile the of players were paid less than $2,000,000\n\n\n\n\n\n\n\n\n\nSuppose you did not have the whole population, and you wanted to learn the mean salary. A statistician might propose 3 strategies to sample 60 players\n\nSample 60 players out of the 944 with equal probabilities\nSample 2 players in each of the 30 teams\nSample 3 teams. Then sample 20 players on each team\n\nIdentify which of these strategies corresponds to\n\na clustered sample\na simple random sample\na stratified random sample\n\nThen think about which strategy might\n\nbe least expensive?\nhave the best statistical properties?\n\n\n\n\n\n\n\nGood to know\n\n\n\nPay varies widely across teams! \n\n\n\n\n\n\n\n\n\n\n\nIn class, we will explore the properties of samples drawn by strategies A, B, and C. Below is code that implements these strategies.\n\nStrategy A: 60 players\nSample 60 players from the entire league. Each player’s probability of sample inclusion is \\(\\frac{60}{n}\\) where \\(n\\) is the number of players in the league (944).\n\n# Strategy A\ndraw_sample_A &lt;- function(population) {\n  population |&gt;\n    # Define sampling probability and weight\n    mutate(\n      p_sampled = 60 / n(),\n      sampling_weight = 1 / p_sampled\n    ) |&gt;\n    # Sample 60 players\n    sample_n(size = 60)\n}\n\n\n\nStrategy B: 2 players per team\nSample 2 players from each of the 30 teams. Each player’s probability of sample inclusion is \\(\\frac{2}{n}\\) where \\(n\\) is the number on that player’s team (which ranges from 28 to 35).\n\n# Strategy B\ndraw_sample_B &lt;- function(population) {\n  population |&gt;\n    # Draw sample within each team\n    group_by(team) |&gt;\n    # Define sampling probability and weight\n    mutate(\n      p_sampled = 2 / n(),\n      sampling_weight = 1 / p_sampled\n    ) |&gt;\n    # Within each team, sample 2 players\n    sample_n(size = 2)\n}\n\n\n\nStrategy C: 20 players on 3 teams\nSample 3 out of the 30 teams, then sample 20 players in each sampled team. Each player’s probability of sample inclusion is P(Team Chosen) \\(\\times\\) P(Chosen Within Team) = \\(\\frac{3}{30}\\times\\frac{20}{n}\\) where \\(n\\) is the number on that player’s team (which ranges from 28 to 35).\n\n# Strategy C\ndraw_sample_C &lt;- function(population) {\n  \n  # First, sample 3 teams\n  sampled_teams &lt;- population |&gt;\n    # Make one row per team\n    distinct(team) |&gt;\n    # Sample 3 teams\n    sample_n(3) |&gt;\n    # Store those 3 team names in a vector\n    pull()\n  \n  # Load all data\n  population |&gt;\n    # Restrict to the chosen teams\n    filter(team %in% sampled_teams) |&gt;\n    # Define sampling probability and weight\n    group_by(team) |&gt;\n    mutate(\n      p_sampled = (3 / 30) * (20 / n()),\n      sampling_weight = 1 / p_sampled\n    )\n    # Sample 20 players\n    sample_n(20) |&gt;\n    ungroup()\n}\n\n\n\nWeighted mean estimator\nFor any given sample, the estimator below will return a weighted mean estimate.\n\nestimator &lt;- function(sample) {\n  sample |&gt;\n    summarize(estimate = weighted.mean(\n      x = salary, \n      w = sampling_weight\n    )) |&gt;\n    pull(estimate)\n}\n\n\n\nEvaluating performance: One sample\nThe true mean salary in the league is $4,965,481. How close do you come with each strategy?\nHere is how to use the code above to carry out strategy A.\n\nsample_A &lt;- draw_sample_A(population = baseball)\nestimator(sample = sample_A)\n\n[1] 4041599\n\n\n\n\nEvaluating performance: Many samples\nWe might like to know something about performance across many repeated samples. The replicate function will carry out a set of code many times.\n\nsample_estimates_A &lt;- replicate(\n  n = 1000,\n  expr = {\n    sample_A &lt;- draw_sample_A(population = baseball)\n    estimator(sample = sample_A)\n  }\n)\n\nSimulate many samples. Which one is the best? Strategy A, B, or C?",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#the-future-of-sample-surveys",
+    "href": "topics/sampling.html#the-future-of-sample-surveys",
+    "title": "Population Sampling",
+    "section": "The future of sample surveys",
+    "text": "The future of sample surveys\nSample surveys served as a cornerstone of social science research from the 1950s to the present. But there are concerns about their future:\n\nsome sampling frames, such as landline telephones, have become obsolete\nresponse rates have been falling for decades\nsample surveys are slower and more expensive than digital data\n\nWhat is the future for sample surveys? How can they be combined with other data?\nWe will close with a discussion of these questions, which you can also engage with in the Groves 2011 reading that follows this module.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
+    ]
+  },
+  {
+    "objectID": "topics/sampling.html#footnotes",
+    "href": "topics/sampling.html#footnotes",
+    "title": "Population Sampling",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nTechnically, a simple random sample draws units independently with equal probabilities, and with replacement. Our sample is actually drawn without replacement. In an infinite population, the two are equivalent.↩︎",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Population Sampling"
     ]
   },
   {
@@ -121,6 +216,198 @@
       "Topics",
       "Working with Data",
       "R and RStudio"
+    ]
+  },
+  {
+    "objectID": "topics/gender.html",
+    "href": "topics/gender.html",
+    "title": "Gender",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Gender"
+    ]
+  },
+  {
+    "objectID": "topics/class.html",
+    "href": "topics/class.html",
+    "title": "Class",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Class"
+    ]
+  },
+  {
+    "objectID": "topics/about.html",
+    "href": "topics/about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "office_hours.html",
+    "href": "office_hours.html",
+    "title": "Office Hours",
+    "section": "",
+    "text": "Check the post pinned on Ed Discussion to see any week-specific changes to the schedule.\n\n\n\nPerson\nTime\nLocation\n\n\n\n\nStacy\nM 12–1pm\nRhodes 402\n\n\nJoanne\nM 1–2pm\nRhodes 408\n\n\nChang\nM 3–4pm\nRhodes 408\n\n\nIan\nT 10–11am\nGates 223\n\n\nLiz\nW 12:30–1:30pm\nRhodes 402\n\n\nDaniel\nW 1–2pm\nRhodes 406\n\n\nFede\nW 2–3pm\nRhodes 406\n\n\nOlaf\nW 3–4pm\nRhodes 406\n\n\nJonathan\nTh 11am–12pm\nRhodes 412\n\n\nAkira\nTh 3:30–4:30pm\nZoom\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "forms.html",
+    "href": "forms.html",
+    "title": "Forms",
+    "section": "",
+    "text": "If you are missing class, here is a form where you can tell us!\n\nAssignment extension form to request an assignment extension that does not count against flex days under exceptional circumstances\nExcused absence form. To request an excused absence from lecture or discussion\nLecture make-up form. For lectures that are missed which we haven’t excused\nFor non-excused absences from discussion, you should do the discussion activity on your own and submit in the Canvas assignment associated with that discussion\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "assignments/pset0.html",
+    "href": "assignments/pset0.html",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "",
+    "text": "Due: 5pm on Wednesday, January 24.\nIn this exercise, you will install R, RStudio and Quarto. The exercise will ensure that they are set up correctly so that everybody is ready to dive into coursework.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#install-software-requirements",
+    "href": "assignments/pset0.html#install-software-requirements",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Install Software Requirements",
+    "text": "Install Software Requirements\nYou should follow the instructions in R4DS to:\n\nInstall R\nInstall RStudio\n\nOnce R and RStudio are successfully installed, this also means that Quarto is successfully installed because it comes bundled with RStudio.\nFinally, you will need to open RStudio, select the Terminal tab, and execute the following command: quarto install tinytex as demonstrated in the image below.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#download-problem-set",
+    "href": "assignments/pset0.html#download-problem-set",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Download Problem Set",
+    "text": "Download Problem Set\nNext, download this problem set which is a Quarto Markdown Document.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#render-the-problem-set",
+    "href": "assignments/pset0.html#render-the-problem-set",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Render the Problem Set",
+    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the same directory that you saved pset0.qmd in. You will then submit the PDF on Canvas.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#issues",
+    "href": "assignments/pset0.html#issues",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Issues",
+    "text": "Issues\nIf you run into issues while attempting to render the Problem Set, be sure to open a question on the Ed Discussion!",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html",
+    "href": "assignments/project.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/pset1.html",
+    "href": "assignments/pset1.html",
+    "title": "Problem Set 1: Visualization",
+    "section": "",
+    "text": "Due: 5pm on Wednesday, January 31.\n\n\n\n\n\n\nBefore you start\n\n\n\nCreate an anonymous identifier for yourself here! Want to see how you’ll be evaluated? Check out the rubric\n\n\nStudent identifer: [type your anonymous identifier here]\n\nUse this .qmd template to complete the problem set\nIn Canvas, you will upload the PDF produced by your .qmd file\nPut your identifier above, not your name! We want anonymous grading to be possible\n\nThis problem set involves both data analysis and reading.\n\nData analysis\nThis problem set uses the data lifeCourse.csv.\n\nlibrary(tidyverse)\nlibrary(scales)\nlifeCourse &lt;- read_csv(\"https://info3370.github.io/data/lifeCourse.csv\")\n\nThe data contain life course earnings profiles for four cohorts of American workers: those born in 1940, 1950, 1960, and 1970. Each row contains a summary of the annual earnings distribution for a particular birth cohort at a particular age, among the subgroup with a particular level of education. To prepare these data, we aggregated microdata from the Current Population Survey, provided through the Integrated Public Use Microdata Series.\nThe data contain five variables.\n\nquantity is the metric by which the earnings distribution is summarized: 10th, 50th, or 90th percentile\neducation is the educational subgroup being summarized: College Degree, Less than College\ncohort is the cohort (people with a given birth year) to which these data apply: 1940, 1950, 1960, 1970\nage is the age at which earnings were measured: 30–45\nincome is the value for the given earnings percentile in the given subgroup. Income values are provided in 2022 dollars\n\n\n\n1. Visualize (25 points)\nUse ggplot to visualize these data. To denote the different trajectories,\n\nmake your plot using geom_point() or geom_line()\nuse the x-axis for age\nuse the y-axis for income\nuse color for quantity\nuse facet_grid to make a panel of facets where each row is an education value and each column is a cohort value\n\nYou should prepare the graph as though you were going to publish it. Modify the axis titles so that a reader would know what is on the axis. Use appropriate capitalization in all labels. Try using the label_dollar() function from the scales package so that the y-axis uses dollar values.\nYour code should be well-formatted as defined by R4DS. In your produced PDF, no lines of code should run off the page.\nMany different graphs can be equally correct. You will be evaluated by\n\nhaving publication-ready graph aesthetics\ncode that follows style conventions\n\n\n# your code goes here\n\n\n\n2. Interpret (10 points)\nWrite 2-3 sentences summarizing the trends that you see in the data.\n2.1 (3 points). Focus on those born in 1970. For those with a college degree, how do the top and bottom of the income distribution change over the life course?\n\nType your answer here.\n\n2.2 (3 points). Focus on those born in 1970. How does the pattern differ for those without college degres differ from your answer in 2.1?\n\nType your answer here.\n\n2.3 (4 points). How do the patterns you identified in 2.1 and 2.2 change from the 1940 to the 1970 cohort?\n\nType your answer here.\n\n\n\n3. Connect to reading (15 points)\nRead p. 1–7 of following paper. Stop before the section “Analytic Framework for Decomposing Inequality.”\n\nCheng, Siwei. 2021. The shifting life course patterns of wage inequality.. Social Forces 100(1):1–28.\n\nOur data are not the same as Cheng’s. But our analysis is able to reproduce many of her findings. Answer each question in two sentences or less.\nCheng discusses period trends, cohort trends, and age trends.\n3.1 (3 points) Which dimension of your graph shows a cohort trend?\n\nType your answer here.\n\n3.2 (3 points) Which dimension of your graph shows an age trend?\n\nType your answer here.\n\n3.3 (3 points) Cheng discusses education-based cumulative advantage. Describe how you see this in your graph.\n\nType your answer here.\n\n3.4 (3 points) Cheng discusses within-education trajectory heterogeneity. Describe how your graph shows heterogeneity of outcomes within educational categories.\n\nType your answer here.\n\n3.5 (3 points) Cheng discusses wage volatility: how wages rise and fall over time for a given person. Why is our data (the Current Population Survey) the wrong dataset to study wage volatility?\n\nType your answer here.\n\n\n\nGrad question: Model-based estimates\nThis question assumes familiarity with Ordinary Least Squares.\n\nFor graduate students, this question is worth 20 points.\nFor undergraduate students, this question is optional and worth 0 points.\n\nThe data contain nonparametric estimates that contain some noise: the data points provided partly reflect random variation because they are estimatd in a sample.\nModel-based estimates reduce noise by pooling information across observations, at the cost of introducing assumptions. Fit an OLS model to the data using age as a numeric variable and education, cohort, and quantity as factor variables. Interact all of these predictors with each other.\n\nfit &lt;- lm(\n  income ~ age * factor(cohort) * education * quantity,\n  data = lifeCourse\n)\n\nEffectively, this estimates a best-fit line through each set of points depicted in your original figure. For each observation, store a prediction from this model (see predict()).\nRe-create your plot from (1) using\n\ngeom_point() for the nonparametric estimates (as above)\ngeom_line() for your model-based predicted values\n\n\n\nComputing environment\nLeave this at the bottom of your file, and it will record information such as your operating system, R version, and package versions. This is helpful for resolving any differences in results across people.\n\nsessionInfo()\n\nR version 4.3.2 (2023-10-31)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Sonoma 14.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/New_York\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n [1] scales_1.2.1    lubridate_1.9.3 forcats_1.0.0   stringr_1.5.0  \n [5] dplyr_1.1.3     purrr_1.0.2     readr_2.1.4     tidyr_1.3.0    \n [9] tibble_3.2.1    ggplot2_3.4.4   tidyverse_2.0.0\n\nloaded via a namespace (and not attached):\n [1] bit_4.0.5         gtable_0.3.4      jsonlite_1.8.7    crayon_1.5.2     \n [5] compiler_4.3.2    tidyselect_1.2.0  parallel_4.3.2    yaml_2.3.7       \n [9] fastmap_1.1.1     R6_2.5.1          generics_0.1.3    knitr_1.44       \n[13] htmlwidgets_1.6.2 munsell_0.5.0     pillar_1.9.0      tzdb_0.4.0       \n[17] rlang_1.1.1       utf8_1.2.3        stringi_1.7.12    xfun_0.40        \n[21] bit64_4.0.5       timechange_0.2.0  cli_3.6.1         withr_2.5.1      \n[25] magrittr_2.0.3    digest_0.6.33     grid_4.3.2        vroom_1.6.4      \n[29] rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.3   vctrs_0.6.4      \n[33] evaluate_0.22     glue_1.6.2        fansi_1.0.5       colorspace_2.1-0 \n[37] rmarkdown_2.25    tools_4.3.2       pkgconfig_2.0.3   htmltools_0.5.6.1\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 1"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Studying Social Inequality with Data Science",
+    "section": "",
+    "text": "Together, we will generate new knowledge about social inequality using the tools of data science",
+    "crumbs": [
+      " ",
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#learning-goals",
+    "href": "index.html#learning-goals",
+    "title": "Studying Social Inequality with Data Science",
+    "section": "Learning goals",
+    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language",
+    "crumbs": [
+      " ",
+      "Home"
+    ]
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Some assignments have associated readings, which are listed in the reading column. Due dates are tentative for assignments that are not yet released.\n\n\n\nDue date\nAssignment\nReading\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\nWed Jan 31 at 5pm\nProblem Set 1\nCheng 2021\n\n\nWed Feb 7 at 5pm\nPeer Review 1\n\n\n\nWed Feb 14 at 5pm\nProblem Set 2\nEngland et al. 2020\n\n\nWed Feb 21 at 5pm\nPeer Review 2\n\n\n\nFebruary break\n\n\n\n\nWed Mar 6 at 5pm\nProblem Set 3\n\n\n\nWed Mar 13 at 5pm\nPeer Review 3\n\n\n\nWed Mar 20 at 5pm\nProblem Set 4\n\n\n\nWed Mar 27 at 5pm\nPeer Review 4\n\n\n\nSpring break\n\n\n\n\nWed Apr 17 at 5pm\nProblem Set 5\n\n\n\nWed Apr 24 at 5pm\nProject writeup + presentation slides due\n\n\n\nTh Apr 25 8:40–9:55am\nProject presentations in discussion\n\n\n\nWed May 1 at 5pm\nPeer Review 5\n\n\n\nTh May 2 8:40–9:55am\nProject presentations in discussion"
+  },
+  {
+    "objectID": "schedule.html#assignments",
+    "href": "schedule.html#assignments",
+    "title": "Schedule",
+    "section": "",
+    "text": "Some assignments have associated readings, which are listed in the reading column. Due dates are tentative for assignments that are not yet released.\n\n\n\nDue date\nAssignment\nReading\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\nWed Jan 31 at 5pm\nProblem Set 1\nCheng 2021\n\n\nWed Feb 7 at 5pm\nPeer Review 1\n\n\n\nWed Feb 14 at 5pm\nProblem Set 2\nEngland et al. 2020\n\n\nWed Feb 21 at 5pm\nPeer Review 2\n\n\n\nFebruary break\n\n\n\n\nWed Mar 6 at 5pm\nProblem Set 3\n\n\n\nWed Mar 13 at 5pm\nPeer Review 3\n\n\n\nWed Mar 20 at 5pm\nProblem Set 4\n\n\n\nWed Mar 27 at 5pm\nPeer Review 4\n\n\n\nSpring break\n\n\n\n\nWed Apr 17 at 5pm\nProblem Set 5\n\n\n\nWed Apr 24 at 5pm\nProject writeup + presentation slides due\n\n\n\nTh Apr 25 8:40–9:55am\nProject presentations in discussion\n\n\n\nWed May 1 at 5pm\nPeer Review 5\n\n\n\nTh May 2 8:40–9:55am\nProject presentations in discussion"
+  },
+  {
+    "objectID": "schedule.html#meetings",
+    "href": "schedule.html#meetings",
+    "title": "Schedule",
+    "section": "Meetings",
+    "text": "Meetings\nReadings are to be read after class, unless otherwise specified. Readings from R for Data Science (R4DS, Wickham et al. 2023) are intended as references that do not need to be read line-by-line but are a useful reference to support ideas.\n\n\n\nDate\nType\nTopic\nReading\n\n\n\n\nJan 23\nLecture\nWelcome\nJencks 2002 p. 49–53\n\n\nJan 25\nDiscussion\nVisualization\nR4DS Ch 1\n\n\nJan 30\nLecture\nSampling: Simple random and unequal probability\nProbability sampling\n\n\nFeb 1\nDiscussion\nData transformation (day 1 / 2)\nR4DS Ch 3\n\n\nFeb 6\nLecture\nSampling: Stratified, clustered, and the future\nGroves 2011\n\n\nFeb 8\nDiscussion\nData transformation (day 2 / 2)\nR4DS Ch 3\n\n\nFeb 13\nLecture\nStatistical learning\nBerk 2020 Ch 1 p. 1–5, stopping at paragraph ending “…is nonlinear.” Then p. 14–17 “Model misspecification…” through “…will always be in play.”\n\n\nFeb 15\nDiscussion\nStatistical learning activity\n\n\n\nFeb 20\nLecture\nPredicting life outcomes\nOptional: Salganik et al. 2020\n\n\nFeb 22\nDiscussion\nPSID Income Prediction Challenge (day 1 / 2)\n\n\n\nFebruary break\n\n\n\n\n\nFeb 29\nDiscussion\nPSID Income Prediction Challenge (day 2 / 2)\n\n\n\nMar 5\nLecture\nPSID Income Prediction: Awards and takeaways\nOptional: Lundberg et al. 2024\n\n\nMar 7\nDiscussion\nRacial wealth gap\n\n\n\nMar 12\nLecture\nPolitical origins of racial inequality\n\n\n\nMar 14\nDiscussion\nClass inequality exercise\n\n\n\nMar 19\nLecture\nClass + gender inequality\n\n\n\nMar 21\nDiscussion\nProject work\n\n\n\nMar 26\nLecture\nAsking research questions\n\n\n\nMar 28\nDiscussion\nProject work\n\n\n\nSpring break\n\n\n\n\n\nApr 9\nLecture\nMoral arguments\nBefore class, watch intro to Rawls and 3:49–5:05 on Nozick\n\n\nApr 11\nDiscussion\nProject work\n\n\n\nApr 16\nLecture\nReducing inequality: Educational expansion\nBrand 2023 Ch 1\n\n\nApr 18\nDiscussion\nProject work\n\n\n\nApr 23\nLecture\nReducing inequality: Reparations\nBefore class, watch Ta-Nehisi Coates\n\n\nApr 25\nDiscussion\nProject presentations\n\n\n\nApr 30\nLecture\nReducing inequality: Sentencing reform\nBefore class, explore A Matter of Time\n\n\nMay 2\nDiscussion\nProject presentations\n\n\n\nMay 7\nCourse summary"
+  },
+  {
+    "objectID": "topics/asking_questions.html",
+    "href": "topics/asking_questions.html",
+    "title": "Asking Questions",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Asking Questions"
     ]
   },
   {
@@ -280,181 +567,16 @@
     ]
   },
   {
-    "objectID": "topics/asking_questions.html",
-    "href": "topics/asking_questions.html",
-    "title": "Asking Questions",
+    "objectID": "topics/prediction.html",
+    "href": "topics/prediction.html",
+    "title": "Predicting life outcomes",
     "section": "",
     "text": "TODO\n\n\n\n Back to top",
     "crumbs": [
       " ",
       "Topics",
-      "Asking Questions"
-    ]
-  },
-  {
-    "objectID": "office_hours.html",
-    "href": "office_hours.html",
-    "title": "Office Hours",
-    "section": "",
-    "text": "Check the post pinned on Ed Discussion to see any week-specific changes to the schedule.\n\n\n\nPerson\nTime\nLocation\n\n\n\n\nStacy\nM 12–1pm\nRhodes 402\n\n\nJoanne\nM 1–2pm\nRhodes 408\n\n\nChang\nM 3–4pm\nRhodes 408\n\n\nIan\nT 10–11am\nGates 223\n\n\nLiz\nW 12:30–1:30pm\nRhodes 402\n\n\nDaniel\nW 1–2pm\nRhodes 406\n\n\nFede\nW 2–3pm\nRhodes 406\n\n\nOlaf\nW 3–4pm\nRhodes 406\n\n\nJonathan\nTh 11am–12pm\nRhodes 412\n\n\nAkira\nTh 3:30–4:30pm\nZoom\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "forms.html",
-    "href": "forms.html",
-    "title": "Forms",
-    "section": "",
-    "text": "If you are missing class, here is a form where you can tell us!\n\nAssignment extension form to request an assignment extension that does not count against flex days under exceptional circumstances\nExcused absence form. To request an excused absence from lecture or discussion\nLecture make-up form. For lectures that are missed which we haven’t excused\nFor non-excused absences from discussion, you should do the discussion activity on your own and submit in the Canvas assignment associated with that discussion\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "assignments/pset1.html",
-    "href": "assignments/pset1.html",
-    "title": "Problem Set 1: Visualization",
-    "section": "",
-    "text": "Due: 5pm on Wednesday, January 31.\n\n\n\n\n\n\nBefore you start\n\n\n\nCreate an anonymous identifier for yourself here! Want to see how you’ll be evaluated? Check out the rubric\n\n\nStudent identifer: [type your anonymous identifier here]\n\nUse this .qmd template to complete the problem set\nIn Canvas, you will upload the PDF produced by your .qmd file\nPut your identifier above, not your name! We want anonymous grading to be possible\n\nThis problem set involves both data analysis and reading.\n\nData analysis\nThis problem set uses the data lifeCourse.csv.\n\nlibrary(tidyverse)\nlibrary(scales)\nlifeCourse &lt;- read_csv(\"https://info3370.github.io/data/lifeCourse.csv\")\n\nThe data contain life course earnings profiles for four cohorts of American workers: those born in 1940, 1950, 1960, and 1970. Each row contains a summary of the annual earnings distribution for a particular birth cohort at a particular age, among the subgroup with a particular level of education. To prepare these data, we aggregated microdata from the Current Population Survey, provided through the Integrated Public Use Microdata Series.\nThe data contain five variables.\n\nquantity is the metric by which the earnings distribution is summarized: 10th, 50th, or 90th percentile\neducation is the educational subgroup being summarized: College Degree, Less than College\ncohort is the cohort (people with a given birth year) to which these data apply: 1940, 1950, 1960, 1970\nage is the age at which earnings were measured: 30–45\nincome is the value for the given earnings percentile in the given subgroup. Income values are provided in 2022 dollars\n\n\n\n1. Visualize (25 points)\nUse ggplot to visualize these data. To denote the different trajectories,\n\nmake your plot using geom_point() or geom_line()\nuse the x-axis for age\nuse the y-axis for income\nuse color for quantity\nuse facet_grid to make a panel of facets where each row is an education value and each column is a cohort value\n\nYou should prepare the graph as though you were going to publish it. Modify the axis titles so that a reader would know what is on the axis. Use appropriate capitalization in all labels. Try using the label_dollar() function from the scales package so that the y-axis uses dollar values.\nYour code should be well-formatted as defined by R4DS. In your produced PDF, no lines of code should run off the page.\nMany different graphs can be equally correct. You will be evaluated by\n\nhaving publication-ready graph aesthetics\ncode that follows style conventions\n\n\n# your code goes here\n\n\n\n2. Interpret (10 points)\nWrite 2-3 sentences summarizing the trends that you see in the data.\n2.1 (3 points). Focus on those born in 1970. For those with a college degree, how do the top and bottom of the income distribution change over the life course?\n\nType your answer here.\n\n2.2 (3 points). Focus on those born in 1970. How does the pattern differ for those without college degres differ from your answer in 2.1?\n\nType your answer here.\n\n2.3 (4 points). How do the patterns you identified in 2.1 and 2.2 change from the 1940 to the 1970 cohort?\n\nType your answer here.\n\n\n\n3. Connect to reading (15 points)\nRead p. 1–7 of following paper. Stop before the section “Analytic Framework for Decomposing Inequality.”\n\nCheng, Siwei. 2021. The shifting life course patterns of wage inequality.. Social Forces 100(1):1–28.\n\nOur data are not the same as Cheng’s. But our analysis is able to reproduce many of her findings. Answer each question in two sentences or less.\nCheng discusses period trends, cohort trends, and age trends.\n3.1 (3 points) Which dimension of your graph shows a cohort trend?\n\nType your answer here.\n\n3.2 (3 points) Which dimension of your graph shows an age trend?\n\nType your answer here.\n\n3.3 (3 points) Cheng discusses education-based cumulative advantage. Describe how you see this in your graph.\n\nType your answer here.\n\n3.4 (3 points) Cheng discusses within-education trajectory heterogeneity. Describe how your graph shows heterogeneity of outcomes within educational categories.\n\nType your answer here.\n\n3.5 (3 points) Cheng discusses wage volatility: how wages rise and fall over time for a given person. Why is our data (the Current Population Survey) the wrong dataset to study wage volatility?\n\nType your answer here.\n\n\n\nGrad question: Model-based estimates\nThis question assumes familiarity with Ordinary Least Squares.\n\nFor graduate students, this question is worth 20 points.\nFor undergraduate students, this question is optional and worth 0 points.\n\nThe data contain nonparametric estimates that contain some noise: the data points provided partly reflect random variation because they are estimatd in a sample.\nModel-based estimates reduce noise by pooling information across observations, at the cost of introducing assumptions. Fit an OLS model to the data using age as a numeric variable and education, cohort, and quantity as factor variables. Interact all of these predictors with each other.\n\nfit &lt;- lm(\n  income ~ age * factor(cohort) * education * quantity,\n  data = lifeCourse\n)\n\nEffectively, this estimates a best-fit line through each set of points depicted in your original figure. For each observation, store a prediction from this model (see predict()).\nRe-create your plot from (1) using\n\ngeom_point() for the nonparametric estimates (as above)\ngeom_line() for your model-based predicted values\n\n\n\nComputing environment\nLeave this at the bottom of your file, and it will record information such as your operating system, R version, and package versions. This is helpful for resolving any differences in results across people.\n\nsessionInfo()\n\nR version 4.3.1 (2023-06-16)\nPlatform: x86_64-pc-linux-gnu (64-bit)\nRunning under: Ubuntu 22.04.3 LTS\n\nMatrix products: default\nBLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 \nLAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0\n\nlocale:\n [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       \n [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   \n [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          \n[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   \n\ntime zone: UTC\ntzcode source: system (glibc)\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n [1] scales_1.2.1    lubridate_1.9.2 forcats_1.0.0   stringr_1.5.0  \n [5] dplyr_1.1.3     purrr_1.0.1     readr_2.1.4     tidyr_1.3.0    \n [9] tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0\n\nloaded via a namespace (and not attached):\n [1] bit_4.0.5         gtable_0.3.3      jsonlite_1.8.4    crayon_1.5.2     \n [5] compiler_4.3.1    renv_1.0.3        tidyselect_1.2.0  parallel_4.3.1   \n [9] yaml_2.3.7        fastmap_1.1.1     R6_2.5.1          generics_0.1.3   \n[13] knitr_1.43        htmlwidgets_1.6.4 munsell_0.5.0     pillar_1.9.0     \n[17] tzdb_0.4.0        rlang_1.1.1       utf8_1.2.3        stringi_1.7.12   \n[21] xfun_0.40         bit64_4.0.5       timechange_0.2.0  cli_3.6.1        \n[25] withr_2.5.0       magrittr_2.0.3    digest_0.6.33     grid_4.3.1       \n[29] vroom_1.6.3       rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.3  \n[33] vctrs_0.6.3       evaluate_0.21     glue_1.6.2        fansi_1.0.4      \n[37] colorspace_2.1-0  rmarkdown_2.25    tools_4.3.1       pkgconfig_2.0.3  \n[41] htmltools_0.5.7  \n\n\n\n\n\n\n Back to top",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 1"
-    ]
-  },
-  {
-    "objectID": "assignments/project.html",
-    "href": "assignments/project.html",
-    "title": "Final Project",
-    "section": "",
-    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Project"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html",
-    "href": "assignments/pset0.html",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "",
-    "text": "Due: 5pm on Wednesday, January 24.\nIn this exercise, you will install R, RStudio and Quarto. The exercise will ensure that they are set up correctly so that everybody is ready to dive into coursework.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#install-software-requirements",
-    "href": "assignments/pset0.html#install-software-requirements",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Install Software Requirements",
-    "text": "Install Software Requirements\nYou should follow the instructions in R4DS to:\n\nInstall R\nInstall RStudio\n\nOnce R and RStudio are successfully installed, this also means that Quarto is successfully installed because it comes bundled with RStudio.\nFinally, you will need to open RStudio, select the Terminal tab, and execute the following command: quarto install tinytex as demonstrated in the image below.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#download-problem-set",
-    "href": "assignments/pset0.html#download-problem-set",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Download Problem Set",
-    "text": "Download Problem Set\nNext, download this problem set which is a Quarto Markdown Document.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#render-the-problem-set",
-    "href": "assignments/pset0.html#render-the-problem-set",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Render the Problem Set",
-    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the same directory that you saved pset0.qmd in. You will then submit the PDF on Canvas.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#issues",
-    "href": "assignments/pset0.html#issues",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Issues",
-    "text": "Issues\nIf you run into issues while attempting to render the Problem Set, be sure to open a question on the Ed Discussion!",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "due_dates.html",
-    "href": "due_dates.html",
-    "title": "Due Dates",
-    "section": "",
-    "text": "Due date\nAssignment\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\nWed Jan 31 at 5pm\nProblem Set 1\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "",
-    "text": "Together, we will generate new knowledge about social inequality using the tools of data science",
-    "crumbs": [
-      " ",
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#learning-goals",
-    "href": "index.html#learning-goals",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "Learning goals",
-    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language",
-    "crumbs": [
-      " ",
-      "Home"
-    ]
-  },
-  {
-    "objectID": "topics/about.html",
-    "href": "topics/about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "topics/class.html",
-    "href": "topics/class.html",
-    "title": "Class",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top",
-    "crumbs": [
-      " ",
-      "Topics",
-      "Describing inequality",
-      "Class"
-    ]
-  },
-  {
-    "objectID": "topics/gender.html",
-    "href": "topics/gender.html",
-    "title": "Gender",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top",
-    "crumbs": [
-      " ",
-      "Topics",
-      "Describing inequality",
-      "Gender"
+      "Describing Inequality",
+      "Predicting life outcomes"
     ]
   },
   {
@@ -466,7 +588,7 @@
     "crumbs": [
       " ",
       "Topics",
-      "Describing inequality",
+      "Describing Inequality",
       "Race"
     ]
   },

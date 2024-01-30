@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Studying Social Inequality with Data Science - Sampling</title>
+<title>Studying Social Inequality with Data Science - Population Sampling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -68,6 +102,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -102,8 +165,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Team</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../due_dates.html"> 
-<span class="menu-text">Due Dates</span></a>
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../office_hours.html"> 
@@ -129,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/sampling.html">Generating Data</a></li><li class="breadcrumb-item"><a href="../topics/sampling.html">Sampling</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/sampling.html">Population Sampling</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -170,32 +233,21 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Generating Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../topics/sampling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Sampling</span></a>
+ <span class="menu-text">Population Sampling</span></a>
   </div>
 </li>
-      </ul>
-  </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
  <span class="menu-text">Working with Data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../topics/r_basics.html" class="sidebar-item-text sidebar-link">
@@ -224,13 +276,19 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
- <span class="menu-text">Describing inequality</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Describing Inequality</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../topics/prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predicting life outcomes</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../topics/race.html" class="sidebar-item-text sidebar-link">
@@ -259,28 +317,28 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Reducing inequality</span></span>
+ <span class="menu-text">Reducing Inequality</span></span>
   </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignments/pset0.html" class="sidebar-item-text sidebar-link">
@@ -309,14 +367,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#full-count-enumeration" id="toc-full-count-enumeration" class="nav-link active" data-scroll-target="#full-count-enumeration">Full count enumeration</a></li>
+  <li><a href="#simple-random-sample" id="toc-simple-random-sample" class="nav-link" data-scroll-target="#simple-random-sample">Simple random sample</a></li>
+  <li><a href="#unequal-probability-sample" id="toc-unequal-probability-sample" class="nav-link" data-scroll-target="#unequal-probability-sample">Unequal probability sample</a></li>
+  <li><a href="#stratified-random-sample" id="toc-stratified-random-sample" class="nav-link" data-scroll-target="#stratified-random-sample">Stratified random sample</a></li>
+  <li><a href="#sec-cps" id="toc-sec-cps" class="nav-link" data-scroll-target="#sec-cps">A real case: The Current Population Survey</a></li>
+  <li><a href="#sec-baseball" id="toc-sec-baseball" class="nav-link" data-scroll-target="#sec-baseball">Example: Baseball players</a>
+  <ul class="collapse">
+  <li><a href="#strategy-a-60-players" id="toc-strategy-a-60-players" class="nav-link" data-scroll-target="#strategy-a-60-players">Strategy A: 60 players</a></li>
+  <li><a href="#strategy-b-2-players-per-team" id="toc-strategy-b-2-players-per-team" class="nav-link" data-scroll-target="#strategy-b-2-players-per-team">Strategy B: 2 players per team</a></li>
+  <li><a href="#strategy-c-20-players-on-3-teams" id="toc-strategy-c-20-players-on-3-teams" class="nav-link" data-scroll-target="#strategy-c-20-players-on-3-teams">Strategy C: 20 players on 3 teams</a></li>
+  <li><a href="#weighted-mean-estimator" id="toc-weighted-mean-estimator" class="nav-link" data-scroll-target="#weighted-mean-estimator">Weighted mean estimator</a></li>
+  <li><a href="#evaluating-performance-one-sample" id="toc-evaluating-performance-one-sample" class="nav-link" data-scroll-target="#evaluating-performance-one-sample">Evaluating performance: One sample</a></li>
+  <li><a href="#evaluating-performance-many-samples" id="toc-evaluating-performance-many-samples" class="nav-link" data-scroll-target="#evaluating-performance-many-samples">Evaluating performance: Many samples</a></li>
+  </ul></li>
+  <li><a href="#the-future-of-sample-surveys" id="toc-the-future-of-sample-surveys" class="nav-link" data-scroll-target="#the-future-of-sample-surveys">The future of sample surveys</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/sampling.html">Generating Data</a></li><li class="breadcrumb-item"><a href="../topics/sampling.html">Sampling</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/sampling.html">Population Sampling</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Sampling</h1>
+<h1 class="title">Population Sampling</h1>
 </div>
 
 
@@ -334,21 +412,306 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><a href="../slides/lec2/lec2.pdf">[Slides]</a></p>
-<p>Claims about inequality are often claims about a population, such as all people in the United States. The target population may be so large that full count enumeration—talking to everyone—is prohibitively costly. This lecture introduces <strong>probability sampling</strong> as a way to learn about a population from a sample of much smaller size.</p>
-<p>We first discuss the principles of probability sampling using the target population of our class. Then, we discuss how the U.S. Census Bureau carries out the Current Population Survey, a probability sample designed to estimate the unemployment rate in the U.S. and in each state.</p>
-<p>After class, you should</p>
+<p>Claims about inequality are often claims about a population. Our data are typically only a sample! This module addresses the link between samples and populations.</p>
+<p>This page covers two lecture (1/30 and 2/6).</p>
 <ul>
-<li>read about <a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm">probability sampling</a> in an online textbook maintained by Statistics Canada. This reading reviews what we covered in lecture and extends it to other ideas in complex survey sampling, such as stratified and cluster sampling</li>
-<li>register for an account at <a href="https://cps.ipums.org/cps/">cps.ipums.org</a>, where we will be accessing data from the Current Population Survey</li>
+<li>Lecture on 1/30 covers <a href="#full-count-enumeration">full count enumeration</a> through the <a href="#sec-cps">Current Population Survey</a>. After lecture, you should read about <a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm">probability sampling</a> and register for an account at <a href="https://cps.ipums.org/cps/">cps.ipums.org</a>.</li>
+<li>Lecture on 2/6 uses salaries of <a href="#sec-baseball">Major League Baseball players</a> to carry out three sampling strategies and explore their performance. After class, you should read <a href="https://academic.oup.com/poq/article/75/5/861/1831518">Groves 2011</a> on the past and future of sampling</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Heads-up!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You will want your computer in lecture on 2/6.</p>
+</div>
+</div>
+<section id="full-count-enumeration" class="level2">
+<h2 class="anchored" data-anchor-id="full-count-enumeration">Full count enumeration</h2>
+<p>What proportion of our class prefers to sit in the front of the room?</p>
+<p>We answered this question in class using <strong>full count enumeration</strong>: list the entire target population and ask them the question. Full count enumeration is ideal because it removes all statistical sources of error. But in settings with a larger target population, the high cost of full count enumeration may be prohibitive.</p>
+</section>
+<section id="simple-random-sample" class="level2">
+<h2 class="anchored" data-anchor-id="simple-random-sample">Simple random sample</h2>
+<p>We carried out a <strong>simple random sample</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in class.</p>
+<ul>
+<li>everyone generated a random number between 0 and 1</li>
+<li>those with values less than 0.1 were sampled</li>
+<li>our sample estimate was the proportion of those sampled to prefer the front of the room</li>
+</ul>
+<p>In a simple random sample, each person in the population is sampled with equal probabilities. Because the probabilities are known, a simple random sample is a <strong>probability sample</strong>.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/IDGKgpiM218" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="unequal-probability-sample" class="level2">
+<h2 class="anchored" data-anchor-id="unequal-probability-sample">Unequal probability sample</h2>
+<p>Suppose we want to make subgroup estimates:</p>
+<ul>
+<li>what proportion prefer the front, among those sitting in the first 3 rows?</li>
+<li>what proportion prefer the front, among those sitting in the back 17 rows?</li>
+</ul>
+<p>In a simple random sample, we might only get a few or even zero people in the first 3 rows! To reduce the chance of this bad sample, we could draw an unequal probability sample:</p>
+<ul>
+<li>those in rows 1–3 are selected with probability 0.5</li>
+<li>those in rows 4–20 are selected with probability 0.1</li>
+</ul>
+<p>Our unequal probability sample will over-represent the first three rows, thus creating a large enough sample in this subgroup to yield precise estimates.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/4r_85uHrNY0" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Having drawn an unequal probability sample, suppose we now want to estimate the class-wide proportion who prefer sitting in the front. We will have a problem: those who prefer the front may be more likely to sit there, and they are also sampled with a higher probability! Sample inclusion is related to the value of our outcome.</p>
+<p>Because the sampling probabilities are known, we can correct for this by applying <strong>sampling weights</strong>, which for each person equals the inverse of the known probability of inclusion for that person.</p>
+<p>For those in rows 1–3,</p>
+<ul>
+<li>we sampled with probability 50%</li>
+<li>on average 1 in every 2 people is sampled</li>
+<li>each person in the sample represents 2 people in the population</li>
+<li><span class="math inline">\(w_i = \frac{1}{\text{P}(\text{Sampled}_i)} = \frac{1}{.5} = 2\)</span></li>
+</ul>
+<p>For those in rows 4–20,</p>
+<ul>
+<li>we sampled with probability 10%</li>
+<li>on average 1 in every 10 people is sampled</li>
+<li>each person in the sample represents 10 people in the population</li>
+<li><span class="math inline">\(w_i = \frac{1}{\text{P}(\text{Sampled}_i)} = \frac{1}{.1} = 10\)</span></li>
+</ul>
+<p>To estimate the population mean, we can use the weighted sample mean,</p>
+<p><span class="math display">\[\frac{\sum_i y_iw_i}{\sum_i w_i}\]</span></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/nczwdCiTmMk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="stratified-random-sample" class="level2">
+<h2 class="anchored" data-anchor-id="stratified-random-sample">Stratified random sample</h2>
+<p>We could also draw a <strong>stratified random sample</strong> by first partitioning the population into subgroups (called <strong>strata</strong>) and then drawing samples within each subgroup. For instance,</p>
+<ul>
+<li>sample 10 of the 20 people in rows 1–3</li>
+<li>sample 10 of the 130 people in rows 4–17</li>
+</ul>
+<p>In simple random or unequal probability sampling, it is always possible that by random chance we sample no one in the front of the room. Stratified random sampling rules this out: we know in advance how our sample will be balanced across the two strata.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In our real-data example at the end of this page, the Current Population Survey is stratified by state so that the Bureau of Labor Statistics knows in advance that they will gather a sufficient sample to estimate unemployment in each state.</p>
+</div>
+</div>
+</section>
+<section id="sec-cps" class="level2">
+<h2 class="anchored" data-anchor-id="sec-cps">A real case: The Current Population Survey</h2>
+<p>Every month, the Bureau of Labor Statistics in collaboration with the U.S. Census Bureau collects data on unemployment in the Current Population Survey (CPS). The CPS is a probability sample designed to estimate the unemployment rate in the U.S. and in each state.</p>
+<p>We will be using the CPS in discussion. This video introduces the CPS and points you toward where you can access the data via <a href="https://cps.ipums.org/cps/">IPUMS-CPS</a>.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1VxcmPOWwG0" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="sec-baseball" class="level2">
+<h2 class="anchored" data-anchor-id="sec-baseball">Example: Baseball players</h2>
+<p>As one example where full-count enumeration is possible, we will examine the salaries of all 944 Major League Baseball Players who were on active rosters, injured lists, and restricted lists on Opening Day 2023. These data were compiled by <a href="https://databases.usatoday.com/major-league-baseball-salaries-2023/">USA Today</a> and are available in <a href="../data/baseball.csv">baseball.csv</a>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 944 × 4
+  player            team         position   salary
+  &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;
+1 Scherzer, Max     N.Y. Mets    RHP      43333333
+2 Verlander, Justin N.Y. Mets    RHP      43333333
+3 Judge, Aaron      N.Y. Yankees OF       40000000
+4 Rendon, Anthony   L.A. Angels  3B       38571429
+5 Trout, Mike       L.A. Angels  OF       37116667
+# ℹ 939 more rows</code></pre>
+</div>
+</div>
+<p>Salaries are high, and income inequality is also high among baseball players</p>
+<ul>
+<li>4% were paid the league minimum of $720,000</li>
+<li>53% were paid less than $2,000,000</li>
+<li>the highest-paid players—Max Scherzer and Justin Verlander—each earned $43,333,333</li>
+<li>the highest-paid half of players take home 92% of the total pay</li>
+</ul>
+<p>While the of players were paid less than $2,000,000</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sampling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Suppose you did not have the whole population, and you wanted to learn the mean salary. A statistician might propose 3 strategies to sample 60 players</p>
+<ol type="A">
+<li>Sample 60 players out of the 944 with equal probabilities</li>
+<li>Sample 2 players in each of the 30 teams</li>
+<li>Sample 3 teams. Then sample 20 players on each team</li>
+</ol>
+<p>Identify which of these strategies corresponds to</p>
+<ul>
+<li>a clustered sample</li>
+<li>a simple random sample</li>
+<li>a stratified random sample</li>
+</ul>
+<p>Then think about which strategy might</p>
+<ul>
+<li>be least expensive?</li>
+<li>have the best statistical properties?</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Good to know
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pay varies widely across teams! <!--The Oakland Athletics had both the lowest average salary ($1,835,323) and the lowest standard deviation of salaries ($1,813,831). The N.Y. Mets had both the highest average salary ($9,769,902) and the highest standard deviation of salaries ($11,690,343).--></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sampling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In class, we will explore the properties of samples drawn by strategies A, B, and C. Below is code that implements these strategies.</p>
+<section id="strategy-a-60-players" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-a-60-players">Strategy A: 60 players</h3>
+<p>Sample 60 players from the entire league. Each player’s probability of sample inclusion is <span class="math inline">\(\frac{60}{n}\)</span> where <span class="math inline">\(n\)</span> is the number of players in the league (944).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strategy A</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>draw_sample_A <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> <span class="dv">60</span> <span class="sc">/</span> <span class="fu">n</span>(),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 60 players</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">60</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="strategy-b-2-players-per-team" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-b-2-players-per-team">Strategy B: 2 players per team</h3>
+<p>Sample 2 players from each of the 30 teams. Each player’s probability of sample inclusion is <span class="math inline">\(\frac{2}{n}\)</span> where <span class="math inline">\(n\)</span> is the number on that player’s team (which ranges from 28 to 35).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strategy B</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>draw_sample_B <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw sample within each team</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> <span class="dv">2</span> <span class="sc">/</span> <span class="fu">n</span>(),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Within each team, sample 2 players</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">2</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="strategy-c-20-players-on-3-teams" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-c-20-players-on-3-teams">Strategy C: 20 players on 3 teams</h3>
+<p>Sample 3 out of the 30 teams, then sample 20 players in each sampled team. Each player’s probability of sample inclusion is P(Team Chosen) <span class="math inline">\(\times\)</span> P(Chosen Within Team) = <span class="math inline">\(\frac{3}{30}\times\frac{20}{n}\)</span> where <span class="math inline">\(n\)</span> is the number on that player’s team (which ranges from 28 to 35).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strategy C</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>draw_sample_C <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, sample 3 teams</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  sampled_teams <span class="ot">&lt;-</span> population <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make one row per team</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(team) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 3 teams</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store those 3 team names in a vector</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>()</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load all data</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Restrict to the chosen teams</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(team <span class="sc">%in%</span> sampled_teams) <span class="sc">|&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> (<span class="dv">3</span> <span class="sc">/</span> <span class="dv">30</span>) <span class="sc">*</span> (<span class="dv">20</span> <span class="sc">/</span> <span class="fu">n</span>()),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 20 players</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="weighted-mean-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="weighted-mean-estimator">Weighted mean estimator</h3>
+<p>For any given sample, the estimator below will return a weighted mean estimate.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="ot">&lt;-</span> <span class="cf">function</span>(sample) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  sample <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">estimate =</span> <span class="fu">weighted.mean</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> salary, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">w =</span> sampling_weight</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(estimate)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="evaluating-performance-one-sample" class="level3">
+<h3 class="anchored" data-anchor-id="evaluating-performance-one-sample">Evaluating performance: One sample</h3>
+<p>The true mean salary in the league is $4,965,481. How close do you come with each strategy?</p>
+<p>Here is how to use the code above to carry out strategy A.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_A <span class="ot">&lt;-</span> <span class="fu">draw_sample_A</span>(<span class="at">population =</span> baseball)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">estimator</span>(<span class="at">sample =</span> sample_A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4041599</code></pre>
+</div>
+</div>
+</section>
+<section id="evaluating-performance-many-samples" class="level3">
+<h3 class="anchored" data-anchor-id="evaluating-performance-many-samples">Evaluating performance: Many samples</h3>
+<p>We might like to know something about performance across many repeated samples. The <code>replicate</code> function will carry out a set of code many times.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sample_estimates_A <span class="ot">&lt;-</span> <span class="fu">replicate</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">1000</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    sample_A <span class="ot">&lt;-</span> <span class="fu">draw_sample_A</span>(<span class="at">population =</span> baseball)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">estimator</span>(<span class="at">sample =</span> sample_A)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Simulate many samples. Which one is the best? Strategy A, B, or C?</p>
+</section>
+</section>
+<section id="the-future-of-sample-surveys" class="level2">
+<h2 class="anchored" data-anchor-id="the-future-of-sample-surveys">The future of sample surveys</h2>
+<p>Sample surveys served as a cornerstone of social science research from the 1950s to the present. But there are concerns about their future:</p>
+<ul>
+<li>some sampling frames, such as landline telephones, have become obsolete</li>
+<li>response rates have been falling for decades</li>
+<li>sample surveys are slower and more expensive than digital data</li>
+</ul>
+<p>What is the future for sample surveys? How can they be combined with other data?</p>
+<p>We will close with a discussion of these questions, which you can also engage with in the <a href="https://academic.oup.com/poq/article/75/5/861/1831518">Groves 2011</a> reading that follows this module.</p>
 
 
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Technically, a simple random sample draws units independently with equal probabilities, and with replacement. Our sample is actually drawn without replacement. In an infinite population, the two are equivalent.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
