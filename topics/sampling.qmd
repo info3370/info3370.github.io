@@ -12,3 +12,11 @@ After class, you should
 
 - read about [probability sampling](https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm) in an online textbook maintained by Statistics Canada. This reading reviews what we covered in lecture and extends it to other ideas in complex survey sampling, such as stratified and cluster sampling
 - register for an account at [cps.ipums.org](https://cps.ipums.org/cps/), where we will be accessing data from the Current Population Survey
+
+{{< video https://www.youtube.com/embed/IDGKgpiM218 >}}
+
+{{< video https://www.youtube.com/embed/4r_85uHrNY0 >}}
+
+{{< video https://www.youtube.com/embed/nczwdCiTmMk >}}
+
+{{< video https://www.youtube.com/embed/1VxcmPOWwG0 >}}
