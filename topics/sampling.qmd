@@ -104,6 +104,10 @@ We will be using the CPS in discussion. This video introduces the CPS and points
 
 As one example where full-count enumeration is possible, we will examine the salaries of all 944 Major League Baseball Players who were on active rosters, injured lists, and restricted lists on Opening Day 2023. These data were compiled by [USA Today](https://databases.usatoday.com/major-league-baseball-salaries-2023/) and are available in [baseball.csv](../data/baseball.csv).
 
+```{r, eval = F}
+baseball <- read_csv("https://info3370.github.io/data/baseball.csv")
+```
+
 ```{r, echo = F, message = F, warning = F}
 baseball <- read_csv("../data/baseball.csv") |>
   arrange(-salary) |>
@@ -136,8 +140,6 @@ Salaries are high, and income inequality is also high among baseball players
 - the highest-paid players---`r paste(baseball_highest$player, collapse = " and ")`---each earned `r label_dollar()(baseball_highest$salary[1])`
 - the highest-paid half of players take home `r top_50pct_pay_portion` of the total pay
 
-While the  of players were paid less than \$2,000,000
-
 ```{r, echo = F, fig.height = 2}
 baseball |>
   ggplot(aes(x = salary)) +
@@ -150,64 +152,51 @@ baseball |>
   ggtitle(paste("Salary of all ",nrow(baseball),"MLB players on Opening Day 2023"))
 ```
 
-Suppose you did not have the whole population, and you wanted to learn the mean salary. A statistician might propose 3 strategies to sample 60 players
+Pay also varies widely across teams!
 
-A) Sample 60 players out of the 944 with equal probabilities
-B) Sample 2 players in each of the 30 teams
-C) Sample 3 teams. Then sample 20 players on each team
-
-Identify which of these strategies corresponds to
-
-- a clustered sample
-- a simple random sample
-- a stratified random sample
-
-Then think about which strategy might
-
-- be least expensive?
-- have the best statistical properties?
-
-```{r, echo = F}
-pay_by_team_all <- baseball |>
+```{r, echo = F, fig.height = 3, warning = F}
+baseball |>
   group_by(team) |>
-  summarize(salary_sd = sd(salary),
-            salary_mean = mean(salary))
-pay_by_team <- pay_by_team_all |>
-  filter(
-    salary_sd %in% range(salary_sd) |
-      salary_mean %in% range(salary_mean)
-  ) |>
-  arrange(salary_mean) |>
-  mutate_if(is.numeric, label_dollar())
-```
-
-::: {.callout-tip}
-### Good to know
-Pay varies widely across teams! <!--The `r pay_by_team$team[1]` Athletics had both the lowest average salary (`r pay_by_team$salary_mean[1]`) and the lowest standard deviation of salaries (`r pay_by_team$salary_sd[1]`). The `r pay_by_team$team[2]` had both the highest average salary (`r pay_by_team$salary_mean[2]`) and the highest standard deviation of salaries (`r pay_by_team$salary_sd[2]`).-->
-
-```{r, echo = F, fig.height = 3, fig.width = 5}
-pay_by_team_all |>
+  summarize(salary_mean = mean(salary), salary_sd = sd(salary)) |>
   ggplot(aes(x = salary_mean, y = salary_sd)) +
   geom_point() +
-  ggrepel::geom_text_repel(
-    data = pay_by_team_all |> filter(salary_mean %in% range(salary_mean)),
-    aes(label = team)
-  ) +
+  geom_text(aes(
+    label = case_when(salary_mean %in% range(salary_mean) ~ team), 
+    hjust = case_when(
+      team == "Oakland" ~ -.2,
+      team == "N.Y. Mets" ~ 1.2
+    )
+  )) +
   scale_x_continuous(name = "Average Salary", labels = label_dollar()) +
   scale_y_continuous(name = "Standard Deviation of Salary", labels = label_dollar()) +
   theme(plot.margin = unit(c(5.5,20,5.5,5.5),"pt"))
 ```
-:::
 
-In class, we will explore the properties of samples drawn by strategies A, B, and C. Below is code that implements these strategies.
+### Conceptualize the sampling strategy
 
-### Strategy A: 60 players
+Suppose you did not have the whole population. You still want to learn the population mean salary! How could you learn that in a sample of 60 out of the 944 players?
 
-Sample 60 players from the entire league. Each player's probability of sample inclusion is $\frac{60}{n}$ where $n$ is the number of players in the league (`r nrow(baseball)`).
+Before reading on, think through three questions:
+
+1) What would it mean to use each of these strategies?
+
+- a simple random sample of 60 players
+- a sample stratified by the 30 MLB teams
+- a sample clustered by the 30 MLB teams
+
+2) Which strategies have advantages in terms of
+
+- being least expensive?
+- having the best statistical properties?
+
+3) Given that you already have the population, how would you write some R code to carry out the sampling strategies? You might use `sample_n()` and possibly `group_by()`.
+
+### Sampling strategies in code
+
+In a **simple random sample**, we draw 60 players from the entire league. Each player's probability of sample inclusion is $\frac{60}{n}$ where $n$ is the number of players in the league (`r nrow(baseball)`).
 
 ```{r}
-# Strategy A
-draw_sample_A <- function(population) {
+simple_sample <- function(population) {
   population |>
     # Define sampling probability and weight
     mutate(
@@ -219,13 +208,18 @@ draw_sample_A <- function(population) {
 }
 ```
 
-### Strategy B: 2 players per team
-
-Sample 2 players from each of the 30 teams. Each player's probability of sample inclusion is $\frac{2}{n}$ where $n$ is the number on that player's team (which ranges from `r baseball |> group_by(team) |> count() |> pull(n) |> range() |> paste(collapse = " to ")`).
+To use this function, we give it the `baseball` data as the population and it returns a tibble containing a sample of 60 players.
 
 ```{r}
-# Strategy B
-draw_sample_B <- function(population) {
+simple_sample(population = baseball)
+```
+
+In a **stratified random sample** by team, we sample 2 players on each of 30 teams.
+
+Each player's probability of sample inclusion is $\frac{2}{n}$ where $n$ is the number on that player's team (which ranges from `r baseball |> group_by(team) |> count() |> pull(n) |> range() |> paste(collapse = " to ")`).
+
+```{r}
+stratified_sample <- function(population) {
   population |>
     # Draw sample within each team
     group_by(team) |>
@@ -239,13 +233,13 @@ draw_sample_B <- function(population) {
 }
 ```
 
-### Strategy C: 20 players on 3 teams
+In a sample **clustered by team**, we might first sample 3 teams and then sample 20 players on each sampled team. A clustered sample is often less costly, for example because you would only need to call up the front office of 3 teams instead of 30 teams.
 
-Sample 3 out of the 30 teams, then sample 20 players in each sampled team. Each player's probability of sample inclusion is P(Team Chosen) $\times$ P(Chosen Within Team) = $\frac{3}{30}\times\frac{20}{n}$ where $n$ is the number on that player's team (which ranges from `r baseball |> group_by(team) |> count() |> pull(n) |> range() |> paste(collapse = " to ")`).
+Each player's probability of sample inclusion is P(Team Chosen) $\times$ P(Chosen Within Team) = $\frac{3}{30}\times\frac{20}{n}$ where $n$ is the number on that player's team (which ranges from `r baseball |> group_by(team) |> count() |> pull(n) |> range() |> paste(collapse = " to ")`).
 
 ```{r}
 # Strategy C
-draw_sample_C <- function(population) {
+clustered_sample <- function(population) {
   
   # First, sample 3 teams
   sampled_teams <- population |>
@@ -256,9 +250,8 @@ draw_sample_C <- function(population) {
     # Store those 3 team names in a vector
     pull()
   
-  # Load all data
+  # Then load data on those teams and sample 20 per team
   population |>
-    # Restrict to the chosen teams
     filter(team %in% sampled_teams) |>
     # Define sampling probability and weight
     group_by(team) |>
@@ -274,7 +267,10 @@ draw_sample_C <- function(population) {
 
 ### Weighted mean estimator
 
-For any given sample, the estimator below will return a weighted mean estimate.
+Given a sample, how do we estimate the population mean? The weighted mean estimator can also be placed in a function
+
+- we hand our sample to the function
+- we get a numeric estimate back
 
 ```{r}
 estimator <- function(sample) {
@@ -287,32 +283,168 @@ estimator <- function(sample) {
 }
 ```
 
-### Evaluating performance: One sample
-
-The true mean salary in the league is `r label_dollar()(mean(baseball$salary))`. How close do you come with each strategy?
-
-Here is how to use the code above to carry out strategy A.
+Here is what it looks like to use the estimator.
 
 ```{r}
-sample_A <- draw_sample_A(population = baseball)
-estimator(sample = sample_A)
+sample_example <- simple_sample(population = baseball)
+estimator(sample = sample_example)
 ```
+
+Try it for yourself! The true mean salary in the league is `r label_dollar()(mean(baseball$salary))`. How close do you come when you apply the estimator to a sample drawn by each strategy?
 
 ### Evaluating performance: Many samples
 
 We might like to know something about performance across many repeated samples. The `replicate` function will carry out a set of code many times.
 
 ```{r}
-sample_estimates_A <- replicate(
+sample_estimates <- replicate(
   n = 1000,
   expr = {
-    sample_A <- draw_sample_A(population = baseball)
-    estimator(sample = sample_A)
+    a_sample <- simple_sample(population = baseball)
+    estimator(sample = a_sample)
   }
 )
 ```
 
 Simulate many samples. Which one is the best? Strategy A, B, or C?
+
+### The danger of one sample
+
+In actual science, we typically have only one sample. Any estimate we produce from that sample involves some signal about the population quantities, and also some noise. Herein is the danger: researchers are very good at telling stories about why their sample evidence tells something about the population, even when it may be random noise. We illustrate this with an example.
+
+Does salary differ between left- and right-handed pitchers? To address this question, I create a tibble with only the pitchers(those for whom the `position` variable takes the value `LHP` or `RHP`).
+
+```{r}
+pitchers <- baseball |>
+  filter(position == "LHP" | position == "RHP")
+```
+
+To illustrate what can happen with a sample, we now draw a sample. Let's first set our computer's random number seed so we get the same sample each time.
+
+```{r}
+set.seed(1599)
+```
+
+Then draw a sample of 40 pitchers 
+
+```{r}
+pitchers_sample <- pitchers |>
+  sample_n(size = 40)
+```
+
+and examine the mean difference in salary.
+
+```{r}
+pitchers_sample |>
+  group_by(position) |>
+  summarize(salary_mean = mean(salary))
+```
+
+The left-handed pitchers make millions of dollars more per year! You can probably tell many stories why this might be the case. Maybe left-handed pitchers are needed by all teams, and there just aren't many available because so few people are left-handed!
+
+What happens if we repeat this process many times? The figure below shows many repeated samples of size 40 from the population of pitchers.
+
+```{r, echo = F, message = F, warning = F}
+library(foreach)
+test_difference <- function(data) {
+  if (data |> nrow() <= 2) {
+    stop("Error: Expects a data frame with more than 2 rows. There should be one row per player")
+  }
+  if (!any(data |> colnames() == "salary")) {
+    stop("Error: Expects salary to be a column of the data")
+  }
+  if (!any(data |> colnames() == "position")) {
+    stop("Error: Expects salary to be a column of the data")
+  }
+  if (data |> distinct(position) |> nrow() != 2) {
+    stop("Error: Expects a data frame with 2 distinct positions")
+  }
+  
+  # Produce estimate in each subgroup
+  subgroup_estimates <- data |>
+    group_by(position) |>
+    summarize(estimate = mean(salary)) |>
+    pivot_wider(names_from = "position", values_from = "estimate")
+  
+  # Produce difference estimate with significance test
+  test_of_difference <- data |>
+    arrange(position) |>
+    group_by(position) |>
+    summarize(estimate = mean(salary),
+              estimate_var = var(salary) / n()) |>
+    summarize(difference = -diff(estimate),
+              standard_error = sqrt(sum(estimate_var))) |>
+    mutate(
+      ci_min = difference - qnorm(.975) * standard_error,
+      ci_max = difference + qnorm(.975) * standard_error,
+      p_value = 2 * pnorm(abs(difference) / standard_error, lower.tail = F),
+      significant = p_value < .05
+    )
+  
+  # Return a combined data frame
+  return(
+    subgroup_estimates |>
+      bind_cols(test_of_difference)
+  )
+}
+
+many_sample_estimates <- foreach(
+  rep = 1:1000,
+  .combine = "rbind"
+) %do% {
+  pitchers |>
+    sample_n(40) |>
+    test_difference()
+}
+
+pct_significant <- many_sample_estimates |>
+  summarize(significant = mean(significant)) |>
+  mutate(significant = paste0(round(100*significant),"%")) |>
+  pull(significant)
+
+truth <- pitchers |>
+  group_by(position) |>
+  summarize(estimate = mean(salary)) |>
+  pivot_wider(names_from = "position", 
+              values_from = "estimate") |>
+  mutate(difference = LHP - RHP)
+
+many_sample_estimates |>
+  arrange(significant) |>
+  ggplot(aes(x = 1, y = difference, color = significant, alpha = significant)) +
+  geom_jitter(width = .2, height = 0) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_color_manual(
+    name = "Statistically\nSignificant",
+    values = c("gray","seagreen4")
+  ) +
+  scale_alpha_manual(
+    name = "Statistically\nSignificant",
+    values = c(.5,1)
+  ) +
+  scale_y_continuous(
+    name = "Mean Salary Difference\nLeft - Right Handed Pitchers",
+    labels = label_dollar(),
+    breaks = seq(-5e6,5e6,2.5e6)
+  ) +
+  scale_x_continuous(
+    limits = c(.7,1.3),
+    name = element_blank(),
+    breaks = NULL
+  ) +
+  theme(panel.grid = element_blank(),
+        panel.background = element_blank()) +
+  ggtitle(
+    "Distribution of Sample Estimates",
+    subtitle = paste(pct_significant,"of sample estimates are\nstatistically significant")
+  )
+```
+
+Our original result was really random noise: we happened by chance to draw a sample with some highly-paid left-handed pitchers!
+
+This exercise illustrates what is known as the **replication crisis**: findings that are surprising in one sample may not hold in other repeated samples from the same population, or in the population as a whole. The replication crisis has many sources. One principal source is the one we illustrated above: sample-based estimates involve some randomness, and well-meaning researchers are (unfortunately) very good at telling interesting stories.
+
+One solution to the replication crisis is to pay close attention to the statistical uncertainty in our estimates, such as that from random sampling. Another solution is to re-evaluate findings that are of interest on new samples. In any case, both the roots of the problem and the solutions are closely tied to sources of randomness in estimates, such as those generated using samples from a population.
 
 ## The future of sample surveys
 
