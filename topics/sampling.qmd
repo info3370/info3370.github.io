@@ -227,7 +227,8 @@ stratified_sample <- function(population) {
       sampling_weight = 1 / p_sampled
     ) |>
     # Within each team, sample 2 players
-    sample_n(size = 2)
+    sample_n(size = 2) |>
+    ungroup()
 }
 ```
 
@@ -236,7 +237,6 @@ In a sample **clustered by team**, we might first sample 3 teams and then sample
 Each player's probability of sample inclusion is P(Team Chosen) $\times$ P(Chosen Within Team) = $\frac{3}{30}\times\frac{20}{n}$ where $n$ is the number on that player's team (which ranges from `r baseball |> group_by(team) |> count() |> pull(n) |> range() |> paste(collapse = " to ")`).
 
 ```{r}
-# Strategy C
 clustered_sample <- function(population) {
   
   # First, sample 3 teams
@@ -256,7 +256,7 @@ clustered_sample <- function(population) {
     mutate(
       p_sampled = (3 / 30) * (20 / n()),
       sampling_weight = 1 / p_sampled
-    )
+    ) |>
     # Sample 20 players
     sample_n(20) |>
     ungroup()
