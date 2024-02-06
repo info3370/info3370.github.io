@@ -306,6 +306,8 @@ sample_estimates <- replicate(
 
 Simulate many samples. Which one is the best? Strategy A, B, or C?
 
+{{< video https://www.youtube.com/embed/K38fqGB60no >}}
+
 ### The danger of one sample
 
 In actual science, we typically have only one sample. Any estimate we produce from that sample involves some signal about the population quantities, and also some noise. Herein is the danger: researchers are very good at telling stories about why their sample evidence tells something about the population, even when it may be random noise. We illustrate this with an example.
@@ -444,6 +446,8 @@ This exercise illustrates what is known as the **replication crisis**: findings 
 
 One solution to the replication crisis is to pay close attention to the statistical uncertainty in our estimates, such as that from random sampling. Another solution is to re-evaluate findings that are of interest on new samples. In any case, both the roots of the problem and the solutions are closely tied to sources of randomness in estimates, such as those generated using samples from a population.
 
+{{< video https://www.youtube.com/embed/VN8-54WcJfM >}}
+
 ## The future of sample surveys
 
 Sample surveys served as a cornerstone of social science research from the 1950s to the present. But there are concerns about their future:
@@ -455,3 +459,5 @@ Sample surveys served as a cornerstone of social science research from the 1950s
 What is the future for sample surveys? How can they be combined with other data?
 
 We will close with a discussion of these questions, which you can also engage with in the [Groves 2011](https://academic.oup.com/poq/article/75/5/861/1831518) reading that follows this module.
+
+{{< video https://www.youtube.com/embed/k4o0RA78kxA >}}
