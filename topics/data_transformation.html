@@ -495,19 +495,7 @@ Tip
 <li>people working 50+ weeks per year (check documentation for <a href="https://cps.ipums.org/cps-action/variables/WKSWORK2#codes_section"><code>wkswork2</code></a>)</li>
 <li>valid report of <a href="https://cps.ipums.org/cps-action/variables/INCWAGE"><code>incwage</code></a> greater than 0 and less than 99999998</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>filtered</code> should have 1,350,542 rows and 15 columns.</p>
-</div>
-</div>
+<p>If you get stuck, see how we did it at the <a href="#all-together">end of this page</a>. <code>filtered</code> should have 1,350,542 rows and 15 columns.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -550,6 +538,7 @@ Note
 <li><code>p90 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.9)</code></li>
 </ul></li>
 </ul>
+<p>If you get stuck, see how we did it at the <a href="#all-together">end of this page</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -629,6 +618,7 @@ Note
 <li>Use the <code>names_to</code> argument to tell R that the names of those variables will be moved to a column called <code>quantity</code></li>
 <li>Use the <code>values_to</code> argument to tell R that the values of those variables will be moved to a column called <code>income</code></li>
 </ul>
+<p>If you get stuck, see how we did it at the <a href="#all-together">end of this page</a>.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/v5QJaMjO53o" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="left_join-an-inflation-adjustment" class="level2">
@@ -672,7 +662,7 @@ Note
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">join_by</span>(key_variable_in_A_and_B)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Tried it yourself? Click below to see how we did this in our example.</p>
+<p>If you get stuck, see how we did it at the <a href="#all-together">end of this page</a>.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/gKnG8nSc-Go" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="mutate-to-adjust-for-inflation" class="level2">
@@ -686,7 +676,7 @@ Note
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>old_data <span class="sc">|&gt;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_variable =</span> old_variable_1 <span class="sc">+</span> old_variable_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Use <a href="https://r4ds.hadley.nz/data-transform#sec-mutate"><code>mutate()</code></a> to modify <code>income</code> so that it takes the values <code>income * inflation_factor</code>.</p>
+<p>Use <a href="https://r4ds.hadley.nz/data-transform#sec-mutate"><code>mutate()</code></a> to modify <code>income</code> so that it takes the values <code>income * inflation_factor</code>. If you get stuck, see how we did it at the <a href="#all-together">end of this page</a>.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1RAMjEcqsT4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="ggplot-to-visualize" class="level2">

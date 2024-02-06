@@ -595,18 +595,18 @@ Note
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simple_sample</span>(<span class="at">population =</span> baseball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 60 × 6
-   player          team         position   salary p_sampled sampling_weight
-   &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
- 1 Assad, Javier   Chicago Cubs RHP        721500    0.0636            15.7
- 2 Garcia, Jose    Cincinnati   SS         730000    0.0636            15.7
- 3 Gore, MacKenzie Washington   LHP        723300    0.0636            15.7
- 4 Rucker, Michael Chicago Cubs RHP        737000    0.0636            15.7
- 5 Wong, Kolten    Seattle      2B       10000000    0.0636            15.7
- 6 Kelly, Merrill  Arizona      RHP       8500000    0.0636            15.7
- 7 Renfroe, Hunter L.A. Angels  OF       11900000    0.0636            15.7
- 8 Urias, Luis     Milwaukee    2B        4700000    0.0636            15.7
- 9 Alvarado, Jose  Philadelphia LHP       3450000    0.0636            15.7
-10 Law, Derek      Cincinnati   RHP       1000000    0.0636            15.7
+   player           team         position   salary p_sampled sampling_weight
+   &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
+ 1 Adrianza, Ehire  Atlanta      3B        1000000    0.0636            15.7
+ 2 Guthrie, Dalton  Philadelphia OF         722500    0.0636            15.7
+ 3 Urena, Jose      Colorado     RHP       3000000    0.0636            15.7
+ 4 Ruiz, Keibert    Washington   C         1375000    0.0636            15.7
+ 5 Abreu, Jose      Houston      1B       19500000    0.0636            15.7
+ 6 Blackburn, Paul* Oakland      RHP       1900000    0.0636            15.7
+ 7 Donovan, Brendan St. Louis    3B         728600    0.0636            15.7
+ 8 Coleman, Dylan   Kansas City  RHP        731750    0.0636            15.7
+ 9 Marquez, German  Colorado     RHP      15300000    0.0636            15.7
+10 Varsho, Daulton  Toronto      OF        3050000    0.0636            15.7
 # ℹ 50 more rows</code></pre>
 </div>
 </div>
@@ -678,7 +678,7 @@ Note
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_example <span class="ot">&lt;-</span> <span class="fu">simple_sample</span>(<span class="at">population =</span> baseball)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">estimator</span>(<span class="at">sample =</span> sample_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6152742</code></pre>
+<pre><code>[1] 4331742</code></pre>
 </div>
 </div>
 <p>Try it for yourself! The true mean salary in the league is $4,965,481. How close do you come when you apply the estimator to a sample drawn by each strategy?</p>
@@ -696,6 +696,7 @@ Note
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Simulate many samples. Which one is the best? Strategy A, B, or C?</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/K38fqGB60no" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="the-danger-of-one-sample" class="level3">
 <h3 class="anchored" data-anchor-id="the-danger-of-one-sample">The danger of one sample</h3>
@@ -741,6 +742,7 @@ Note
 <p>Our original result was really random noise: we happened by chance to draw a sample with some highly-paid left-handed pitchers!</p>
 <p>This exercise illustrates what is known as the <strong>replication crisis</strong>: findings that are surprising in one sample may not hold in other repeated samples from the same population, or in the population as a whole. The replication crisis has many sources. One principal source is the one we illustrated above: sample-based estimates involve some randomness, and well-meaning researchers are (unfortunately) very good at telling interesting stories.</p>
 <p>One solution to the replication crisis is to pay close attention to the statistical uncertainty in our estimates, such as that from random sampling. Another solution is to re-evaluate findings that are of interest on new samples. In any case, both the roots of the problem and the solutions are closely tied to sources of randomness in estimates, such as those generated using samples from a population.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/VN8-54WcJfM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
 <section id="the-future-of-sample-surveys" class="level2">
@@ -753,6 +755,7 @@ Note
 </ul>
 <p>What is the future for sample surveys? How can they be combined with other data?</p>
 <p>We will close with a discussion of these questions, which you can also engage with in the <a href="https://academic.oup.com/poq/article/75/5/861/1831518">Groves 2011</a> reading that follows this module.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/k4o0RA78kxA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
 </section>
