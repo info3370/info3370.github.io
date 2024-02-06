@@ -378,12 +378,11 @@ window.Quarto = {
   <li><a href="#sec-cps" id="toc-sec-cps" class="nav-link" data-scroll-target="#sec-cps">A real case: The Current Population Survey</a></li>
   <li><a href="#sec-baseball" id="toc-sec-baseball" class="nav-link" data-scroll-target="#sec-baseball">Example: Baseball players</a>
   <ul class="collapse">
-  <li><a href="#strategy-a-60-players" id="toc-strategy-a-60-players" class="nav-link" data-scroll-target="#strategy-a-60-players">Strategy A: 60 players</a></li>
-  <li><a href="#strategy-b-2-players-per-team" id="toc-strategy-b-2-players-per-team" class="nav-link" data-scroll-target="#strategy-b-2-players-per-team">Strategy B: 2 players per team</a></li>
-  <li><a href="#strategy-c-20-players-on-3-teams" id="toc-strategy-c-20-players-on-3-teams" class="nav-link" data-scroll-target="#strategy-c-20-players-on-3-teams">Strategy C: 20 players on 3 teams</a></li>
+  <li><a href="#conceptualize-the-sampling-strategy" id="toc-conceptualize-the-sampling-strategy" class="nav-link" data-scroll-target="#conceptualize-the-sampling-strategy">Conceptualize the sampling strategy</a></li>
+  <li><a href="#sampling-strategies-in-code" id="toc-sampling-strategies-in-code" class="nav-link" data-scroll-target="#sampling-strategies-in-code">Sampling strategies in code</a></li>
   <li><a href="#weighted-mean-estimator" id="toc-weighted-mean-estimator" class="nav-link" data-scroll-target="#weighted-mean-estimator">Weighted mean estimator</a></li>
-  <li><a href="#evaluating-performance-one-sample" id="toc-evaluating-performance-one-sample" class="nav-link" data-scroll-target="#evaluating-performance-one-sample">Evaluating performance: One sample</a></li>
   <li><a href="#evaluating-performance-many-samples" id="toc-evaluating-performance-many-samples" class="nav-link" data-scroll-target="#evaluating-performance-many-samples">Evaluating performance: Many samples</a></li>
+  <li><a href="#the-danger-of-one-sample" id="toc-the-danger-of-one-sample" class="nav-link" data-scroll-target="#the-danger-of-one-sample">The danger of one sample</a></li>
   </ul></li>
   <li><a href="#the-future-of-sample-surveys" id="toc-the-future-of-sample-surveys" class="nav-link" data-scroll-target="#the-future-of-sample-surveys">The future of sample surveys</a></li>
   </ul>
@@ -513,6 +512,9 @@ Note
 <h2 class="anchored" data-anchor-id="sec-baseball">Example: Baseball players</h2>
 <p>As one example where full-count enumeration is possible, we will examine the salaries of all 944 Major League Baseball Players who were on active rosters, injured lists, and restricted lists on Opening Day 2023. These data were compiled by <a href="https://databases.usatoday.com/major-league-baseball-salaries-2023/">USA Today</a> and are available in <a href="../data/baseball.csv">baseball.csv</a>.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>baseball <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://info3370.github.io/data/baseball.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 944 × 4
   player            team         position   salary
@@ -532,163 +534,214 @@ Note
 <li>the highest-paid players—Max Scherzer and Justin Verlander—each earned $43,333,333</li>
 <li>the highest-paid half of players take home 92% of the total pay</li>
 </ul>
-<p>While the of players were paid less than $2,000,000</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="sampling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="sampling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Suppose you did not have the whole population, and you wanted to learn the mean salary. A statistician might propose 3 strategies to sample 60 players</p>
-<ol type="A">
-<li>Sample 60 players out of the 944 with equal probabilities</li>
-<li>Sample 2 players in each of the 30 teams</li>
-<li>Sample 3 teams. Then sample 20 players on each team</li>
+<p>Pay also varies widely across teams!</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sampling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="conceptualize-the-sampling-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="conceptualize-the-sampling-strategy">Conceptualize the sampling strategy</h3>
+<p>Suppose you did not have the whole population. You still want to learn the population mean salary! How could you learn that in a sample of 60 out of the 944 players?</p>
+<p>Before reading on, think through three questions:</p>
+<ol type="1">
+<li>What would it mean to use each of these strategies?</li>
 </ol>
-<p>Identify which of these strategies corresponds to</p>
 <ul>
-<li>a clustered sample</li>
-<li>a simple random sample</li>
-<li>a stratified random sample</li>
+<li>a simple random sample of 60 players</li>
+<li>a sample stratified by the 30 MLB teams</li>
+<li>a sample clustered by the 30 MLB teams</li>
 </ul>
-<p>Then think about which strategy might</p>
+<ol start="2" type="1">
+<li>Which strategies have advantages in terms of</li>
+</ol>
 <ul>
-<li>be least expensive?</li>
-<li>have the best statistical properties?</li>
+<li>being least expensive?</li>
+<li>having the best statistical properties?</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Good to know
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Pay varies widely across teams! <!--The Oakland Athletics had both the lowest average salary ($1,835,323) and the lowest standard deviation of salaries ($1,813,831). The N.Y. Mets had both the highest average salary ($9,769,902) and the highest standard deviation of salaries ($11,690,343).--></p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="sampling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>In class, we will explore the properties of samples drawn by strategies A, B, and C. Below is code that implements these strategies.</p>
-<section id="strategy-a-60-players" class="level3">
-<h3 class="anchored" data-anchor-id="strategy-a-60-players">Strategy A: 60 players</h3>
-<p>Sample 60 players from the entire league. Each player’s probability of sample inclusion is <span class="math inline">\(\frac{60}{n}\)</span> where <span class="math inline">\(n\)</span> is the number of players in the league (944).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strategy A</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>draw_sample_A <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> <span class="dv">60</span> <span class="sc">/</span> <span class="fu">n</span>(),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 60 players</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">60</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<ol start="3" type="1">
+<li>Given that you already have the population, how would you write some R code to carry out the sampling strategies? You might use <code>sample_n()</code> and possibly <code>group_by()</code>.</li>
+</ol>
 </section>
-<section id="strategy-b-2-players-per-team" class="level3">
-<h3 class="anchored" data-anchor-id="strategy-b-2-players-per-team">Strategy B: 2 players per team</h3>
-<p>Sample 2 players from each of the 30 teams. Each player’s probability of sample inclusion is <span class="math inline">\(\frac{2}{n}\)</span> where <span class="math inline">\(n\)</span> is the number on that player’s team (which ranges from 28 to 35).</p>
+<section id="sampling-strategies-in-code" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-strategies-in-code">Sampling strategies in code</h3>
+<p>In a <strong>simple random sample</strong>, we draw 60 players from the entire league. Each player’s probability of sample inclusion is <span class="math inline">\(\frac{60}{n}\)</span> where <span class="math inline">\(n\)</span> is the number of players in the league (944).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strategy B</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>draw_sample_B <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw sample within each team</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> <span class="dv">2</span> <span class="sc">/</span> <span class="fu">n</span>(),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Within each team, sample 2 players</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">2</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>simple_sample <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> <span class="dv">60</span> <span class="sc">/</span> <span class="fu">n</span>(),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 60 players</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">60</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="strategy-c-20-players-on-3-teams" class="level3">
-<h3 class="anchored" data-anchor-id="strategy-c-20-players-on-3-teams">Strategy C: 20 players on 3 teams</h3>
-<p>Sample 3 out of the 30 teams, then sample 20 players in each sampled team. Each player’s probability of sample inclusion is P(Team Chosen) <span class="math inline">\(\times\)</span> P(Chosen Within Team) = <span class="math inline">\(\frac{3}{30}\times\frac{20}{n}\)</span> where <span class="math inline">\(n\)</span> is the number on that player’s team (which ranges from 28 to 35).</p>
+<p>To use this function, we give it the <code>baseball</code> data as the population and it returns a tibble containing a sample of 60 players.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strategy C</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>draw_sample_C <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, sample 3 teams</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  sampled_teams <span class="ot">&lt;-</span> population <span class="sc">|&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make one row per team</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(team) <span class="sc">|&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 3 teams</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store those 3 team names in a vector</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>()</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load all data</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Restrict to the chosen teams</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(team <span class="sc">%in%</span> sampled_teams) <span class="sc">|&gt;</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> (<span class="dv">3</span> <span class="sc">/</span> <span class="dv">30</span>) <span class="sc">*</span> (<span class="dv">20</span> <span class="sc">/</span> <span class="fu">n</span>()),</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 20 players</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">20</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simple_sample</span>(<span class="at">population =</span> baseball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 60 × 6
+   player            team         position   salary p_sampled sampling_weight
+   &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
+ 1 Floro, Dylan      Miami        RHP       3900000    0.0636            15.7
+ 2 Urias, Julio      L.A. Dodgers LHP      14250000    0.0636            15.7
+ 3 Santana, Dennis   N.Y. Mets    RHP       1000000    0.0636            15.7
+ 4 Friedl, Jr, Terry Cincinnati   OF         722500    0.0636            15.7
+ 5 Maton, Nick       Detroit      OF         726600    0.0636            15.7
+ 6 Riley, Austin     Atlanta      3B       15000000    0.0636            15.7
+ 7 Kershaw, Clayton  L.A. Dodgers LHP      20000000    0.0636            15.7
+ 8 Montero, Elehuris Colorado     3B         722000    0.0636            15.7
+ 9 Cabrera, Oswaldo  N.Y. Yankees OF         742100    0.0636            15.7
+10 Daniel, Davis*    L.A. Angels  RHP        730000    0.0636            15.7
+# ℹ 50 more rows</code></pre>
+</div>
+</div>
+<p>In a <strong>stratified random sample</strong> by team, we sample 2 players on each of 30 teams.</p>
+<p>Each player’s probability of sample inclusion is <span class="math inline">\(\frac{2}{n}\)</span> where <span class="math inline">\(n\)</span> is the number on that player’s team (which ranges from 28 to 35).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>stratified_sample <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw sample within each team</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> <span class="dv">2</span> <span class="sc">/</span> <span class="fu">n</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Within each team, sample 2 players</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">2</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In a sample <strong>clustered by team</strong>, we might first sample 3 teams and then sample 20 players on each sampled team. A clustered sample is often less costly, for example because you would only need to call up the front office of 3 teams instead of 30 teams.</p>
+<p>Each player’s probability of sample inclusion is P(Team Chosen) <span class="math inline">\(\times\)</span> P(Chosen Within Team) = <span class="math inline">\(\frac{3}{30}\times\frac{20}{n}\)</span> where <span class="math inline">\(n\)</span> is the number on that player’s team (which ranges from 28 to 35).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strategy C</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>clustered_sample <span class="ot">&lt;-</span> <span class="cf">function</span>(population) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, sample 3 teams</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  sampled_teams <span class="ot">&lt;-</span> population <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make one row per team</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(team) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 3 teams</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store those 3 team names in a vector</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Then load data on those teams and sample 20 per team</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  population <span class="sc">|&gt;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(team <span class="sc">%in%</span> sampled_teams) <span class="sc">|&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define sampling probability and weight</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_sampled =</span> (<span class="dv">3</span> <span class="sc">/</span> <span class="dv">30</span>) <span class="sc">*</span> (<span class="dv">20</span> <span class="sc">/</span> <span class="fu">n</span>()),</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">sampling_weight =</span> <span class="dv">1</span> <span class="sc">/</span> p_sampled</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample 20 players</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="weighted-mean-estimator" class="level3">
 <h3 class="anchored" data-anchor-id="weighted-mean-estimator">Weighted mean estimator</h3>
-<p>For any given sample, the estimator below will return a weighted mean estimate.</p>
+<p>Given a sample, how do we estimate the population mean? The weighted mean estimator can also be placed in a function</p>
+<ul>
+<li>we hand our sample to the function</li>
+<li>we get a numeric estimate back</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="ot">&lt;-</span> <span class="cf">function</span>(sample) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  sample <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">estimate =</span> <span class="fu">weighted.mean</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> salary, </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">w =</span> sampling_weight</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">|&gt;</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(estimate)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="ot">&lt;-</span> <span class="cf">function</span>(sample) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  sample <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">estimate =</span> <span class="fu">weighted.mean</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> salary, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">w =</span> sampling_weight</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(estimate)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="evaluating-performance-one-sample" class="level3">
-<h3 class="anchored" data-anchor-id="evaluating-performance-one-sample">Evaluating performance: One sample</h3>
-<p>The true mean salary in the league is $4,965,481. How close do you come with each strategy?</p>
-<p>Here is how to use the code above to carry out strategy A.</p>
+<p>Here is what it looks like to use the estimator.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_A <span class="ot">&lt;-</span> <span class="fu">draw_sample_A</span>(<span class="at">population =</span> baseball)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">estimator</span>(<span class="at">sample =</span> sample_A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_example <span class="ot">&lt;-</span> <span class="fu">simple_sample</span>(<span class="at">population =</span> baseball)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">estimator</span>(<span class="at">sample =</span> sample_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4041599</code></pre>
+<pre><code>[1] 4467319</code></pre>
 </div>
 </div>
+<p>Try it for yourself! The true mean salary in the league is $4,965,481. How close do you come when you apply the estimator to a sample drawn by each strategy?</p>
 </section>
 <section id="evaluating-performance-many-samples" class="level3">
 <h3 class="anchored" data-anchor-id="evaluating-performance-many-samples">Evaluating performance: Many samples</h3>
 <p>We might like to know something about performance across many repeated samples. The <code>replicate</code> function will carry out a set of code many times.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sample_estimates_A <span class="ot">&lt;-</span> <span class="fu">replicate</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">1000</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> {</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    sample_A <span class="ot">&lt;-</span> <span class="fu">draw_sample_A</span>(<span class="at">population =</span> baseball)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">estimator</span>(<span class="at">sample =</span> sample_A)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sample_estimates <span class="ot">&lt;-</span> <span class="fu">replicate</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">1000</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    a_sample <span class="ot">&lt;-</span> <span class="fu">simple_sample</span>(<span class="at">population =</span> baseball)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">estimator</span>(<span class="at">sample =</span> a_sample)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Simulate many samples. Which one is the best? Strategy A, B, or C?</p>
+</section>
+<section id="the-danger-of-one-sample" class="level3">
+<h3 class="anchored" data-anchor-id="the-danger-of-one-sample">The danger of one sample</h3>
+<p>In actual science, we typically have only one sample. Any estimate we produce from that sample involves some signal about the population quantities, and also some noise. Herein is the danger: researchers are very good at telling stories about why their sample evidence tells something about the population, even when it may be random noise. We illustrate this with an example.</p>
+<p>Does salary differ between left- and right-handed pitchers? To address this question, I create a tibble with only the pitchers(those for whom the <code>position</code> variable takes the value <code>LHP</code> or <code>RHP</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pitchers <span class="ot">&lt;-</span> baseball <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(position <span class="sc">==</span> <span class="st">"LHP"</span> <span class="sc">|</span> position <span class="sc">==</span> <span class="st">"RHP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To illustrate what can happen with a sample, we now draw a sample. Let’s first set our computer’s random number seed so we get the same sample each time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1599</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then draw a sample of 40 pitchers</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pitchers_sample <span class="ot">&lt;-</span> pitchers <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and examine the mean difference in salary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pitchers_sample <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(position) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">salary_mean =</span> <span class="fu">mean</span>(salary))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  position salary_mean
+  &lt;chr&gt;          &lt;dbl&gt;
+1 LHP         9677309.
+2 RHP         3182428.</code></pre>
+</div>
+</div>
+<p>The left-handed pitchers make millions of dollars more per year! You can probably tell many stories why this might be the case. Maybe left-handed pitchers are needed by all teams, and there just aren’t many available because so few people are left-handed!</p>
+<p>What happens if we repeat this process many times? The figure below shows many repeated samples of size 40 from the population of pitchers.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sampling_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Our original result was really random noise: we happened by chance to draw a sample with some highly-paid left-handed pitchers!</p>
+<p>This exercise illustrates what is known as the <strong>replication crisis</strong>: findings that are surprising in one sample may not hold in other repeated samples from the same population, or in the population as a whole. The replication crisis has many sources. One principal source is the one we illustrated above: sample-based estimates involve some randomness, and well-meaning researchers are (unfortunately) very good at telling interesting stories.</p>
+<p>One solution to the replication crisis is to pay close attention to the statistical uncertainty in our estimates, such as that from random sampling. Another solution is to re-evaluate findings that are of interest on new samples. In any case, both the roots of the problem and the solutions are closely tied to sources of randomness in estimates, such as those generated using samples from a population.</p>
 </section>
 </section>
 <section id="the-future-of-sample-surveys" class="level2">
