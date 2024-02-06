@@ -595,18 +595,18 @@ Note
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simple_sample</span>(<span class="at">population =</span> baseball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 60 × 6
-   player           team         position   salary p_sampled sampling_weight
-   &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
- 1 Gallo, Joey      Minnesota    OF       11000000    0.0636            15.7
- 2 Mahle, Tyler     Minnesota    RHP       7500000    0.0636            15.7
- 3 Daza, Yonathan   Colorado     C          730000    0.0636            15.7
- 4 Nola, Austin     San Diego    C         2350000    0.0636            15.7
- 5 Hughes, Brandon* Chicago Cubs LHP        728000    0.0636            15.7
- 6 Tepera, Ryan     L.A. Angels  RHP       7000000    0.0636            15.7
- 7 Schoop, Jonathan Detroit      2B        7500000    0.0636            15.7
- 8 Mize, Casey*     Detroit      RHP        734200    0.0636            15.7
- 9 Ginkel, Kevin    Arizona      RHP        746600    0.0636            15.7
-10 Perdomo, Geraldo Arizona      SS         738600    0.0636            15.7
+   player          team         position   salary p_sampled sampling_weight
+   &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
+ 1 Assad, Javier   Chicago Cubs RHP        721500    0.0636            15.7
+ 2 Garcia, Jose    Cincinnati   SS         730000    0.0636            15.7
+ 3 Gore, MacKenzie Washington   LHP        723300    0.0636            15.7
+ 4 Rucker, Michael Chicago Cubs RHP        737000    0.0636            15.7
+ 5 Wong, Kolten    Seattle      2B       10000000    0.0636            15.7
+ 6 Kelly, Merrill  Arizona      RHP       8500000    0.0636            15.7
+ 7 Renfroe, Hunter L.A. Angels  OF       11900000    0.0636            15.7
+ 8 Urias, Luis     Milwaukee    2B        4700000    0.0636            15.7
+ 9 Alvarado, Jose  Philadelphia LHP       3450000    0.0636            15.7
+10 Law, Derek      Cincinnati   RHP       1000000    0.0636            15.7
 # ℹ 50 more rows</code></pre>
 </div>
 </div>
@@ -678,7 +678,7 @@ Note
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_example <span class="ot">&lt;-</span> <span class="fu">simple_sample</span>(<span class="at">population =</span> baseball)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">estimator</span>(<span class="at">sample =</span> sample_example)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5698722</code></pre>
+<pre><code>[1] 6152742</code></pre>
 </div>
 </div>
 <p>Try it for yourself! The true mean salary in the league is $4,965,481. How close do you come when you apply the estimator to a sample drawn by each strategy?</p>
