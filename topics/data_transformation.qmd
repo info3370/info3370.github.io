@@ -75,7 +75,7 @@ The [`haven`](https://haven.tidyverse.org/) package allows us to load data in th
 micro <- read_dta("cps_00077.dta")
 ```
 ```{r, echo = F}
-micro <- read_dta("../data_raw/cps_00077.dta")
+micro <- read_dta("../data_raw/cps_00077.dta") |> select(-uhrsworkly)
 ```
 
 ::: {.callout-tip}
@@ -143,7 +143,9 @@ micro |>
 - people working 50+ weeks per year (check documentation for [`wkswork2`](https://cps.ipums.org/cps-action/variables/WKSWORK2#codes_section)) 
 - valid report of [`incwage`](https://cps.ipums.org/cps-action/variables/INCWAGE) greater than 0 and less than 99999998
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 filtered <- micro |>
   # Subset to cases working full year
   filter(wkswork2 == 6) |>
@@ -189,7 +191,9 @@ Each row in our dataset is a person. We want a dataset where each row is a year.
 That was a new way of calling a package! The [`Hmisc`](https://cran.r-project.org/web/packages/Hmisc/index.html) package has a bunch of miscellaneous functions. To install the package, type `install.packages("Hmisc")`. One of the functions is `wtd.quantile()`, which summarizes data with weighted quantiles (e.g., the 10th percentile estimated in a survey with sampling weights). So why call it with `Hmisc::wtd.quantile()` instead of using `library(Hmisc)`? When you use `library()`, you load all the functions in a package. `Hmisc` is a big package, and some of the functions have the same names as other functions we use in `tidyverse`. Loading the whole package can create conflicts where two function shave the same name! Instead, the way we've written it above tells R to just look in the package for the particular function we're using at that moment.
 :::
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 summarized <- filtered |>
   group_by(year) |>
   summarize(
@@ -255,11 +259,15 @@ Use [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) 
 - Use the `values_to` argument to tell R that the values of those
   variables will be moved to a column called `income`
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 pivoted <- summarized %>%
-  pivot_longer(cols = c("p10","p50","p90"),
-               names_to = "quantity",
-               values_to = "income")
+  pivot_longer(
+    cols = c("p10","p50","p90"),
+    names_to = "quantity",
+    values_to = "income"
+  )
 ```
 
 {{< video https://www.youtube.com/embed/v5QJaMjO53o >}}
@@ -293,10 +301,16 @@ joined <- data_A |>
     by = join_by(key_variable_in_A_and_B)
   )
 ```
-```{r, echo = F}
+
+Tried it yourself? Click below to see how we did this in our example.
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 joined <- pivoted |>
-  left_join(inflation,
-            by = join_by(year))
+  left_join(
+    inflation,
+    by = join_by(year)
+  )
 ```
 
 {{< video https://www.youtube.com/embed/gKnG8nSc-Go >}}
@@ -315,7 +329,9 @@ old_data |>
 
 Use [`mutate()`](https://r4ds.hadley.nz/data-transform#sec-mutate) to modify `income` so that it takes the values `income * inflation_factor`.
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 mutated <- joined |>
   mutate(income = income * inflation_factor)
 ```
@@ -346,6 +362,48 @@ joined |>
 ```
 
 {{< video https://www.youtube.com/embed/QI6TdgrxyXo >}}
+
+## All together
+
+Putting it all together, we have a pipeline that goes from data to the plot.
+
+```{r, eval = F}
+read_dta("cps_00077.dta") |>
+  # Subset to cases working full year
+  filter(wkswork2 == 6) |>
+  # Subset to cases with valid income
+  filter(incwage > 0 & incwage < 99999998) |>
+  # Produce summaries
+  group_by(year) |>
+  summarize(
+    p10 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.1),
+    p50 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.5),
+    p90 = Hmisc::wtd.quantile(x = incwage, weights = asecwt, probs = 0.9
+    ),
+    .groups = "drop"
+  ) |>
+  pivot_longer(
+    cols = c("p10","p50","p90"),
+    names_to = "quantity",
+    values_to = "income"
+  ) |>
+  # Join data for inflation adjustment
+  left_join(
+    read_csv("inflation.csv"),
+    by = join_by(year)
+  ) |>
+  # Apply the inflation adjustment
+  mutate(income = income * inflation_factor) |>
+  # Produce a ggplot
+  ggplot(aes(x = year, y = income, color = quantity)) +
+  geom_line() +
+  xlab("Year") +
+  scale_y_continuous(name = "Annual Wage and Salary Income\n(2023 dollars)",
+                     labels = scales::label_dollar()) +
+  scale_color_discrete(name = "Percentile of\nDistribution",
+                       labels = function(x) paste0(gsub("p","",x),"th")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
 ## Finished early?
 
