@@ -79,11 +79,8 @@ micro <- read_dta("../data_raw/cps_00077.dta") |> select(-uhrsworkly)
 ```
 
 ::: {.callout-tip}
-Change the file name to the name of the file you downloaded
-:::
-
-::: {.callout-tip}
-If R says the file does not exist in your current working directory, you may need to [set your working directory](https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE) by clicking Session -> Set Working Directory -> To Source File Location on a Mac or Tools -> Change Working Directory on Windows.
+- Change the file name to the name of the file you downloaded
+- If R says the file does not exist in your current working directory, you may need to [set your working directory](https://support.posit.co/hc/en-us/articles/200711843-Working-Directories-and-Workspaces-in-the-RStudio-IDE) by clicking Session -> Set Working Directory -> To Source File Location on a Mac or Tools -> Change Working Directory on Windows.
 :::
 
 {{< video https://www.youtube.com/embed/LjO15pvVmNg >}}
@@ -206,10 +203,6 @@ summarized <- filtered |>
 
 ::: {.callout-note}
 The `summarized` data frame should have `r nrow(summarized)` rows and `r ncol(summarized)` columns (year, education categories, p10, p50, and p90).
-:::
-
-::: {.callout-warning}
-We are not using the survey weights here. See the next page!
 :::
 
 ::: columns
