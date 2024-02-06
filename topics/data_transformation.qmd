@@ -140,7 +140,9 @@ micro |>
 - people working 50+ weeks per year (check documentation for [`wkswork2`](https://cps.ipums.org/cps-action/variables/WKSWORK2#codes_section)) 
 - valid report of [`incwage`](https://cps.ipums.org/cps-action/variables/INCWAGE) greater than 0 and less than 99999998
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 filtered <- micro |>
   # Subset to cases working full year
   filter(wkswork2 == 6) |>
@@ -186,7 +188,9 @@ Each row in our dataset is a person. We want a dataset where each row is a year.
 That was a new way of calling a package! The [`Hmisc`](https://cran.r-project.org/web/packages/Hmisc/index.html) package has a bunch of miscellaneous functions. To install the package, type `install.packages("Hmisc")`. One of the functions is `wtd.quantile()`, which summarizes data with weighted quantiles (e.g., the 10th percentile estimated in a survey with sampling weights). So why call it with `Hmisc::wtd.quantile()` instead of using `library(Hmisc)`? When you use `library()`, you load all the functions in a package. `Hmisc` is a big package, and some of the functions have the same names as other functions we use in `tidyverse`. Loading the whole package can create conflicts where two function shave the same name! Instead, the way we've written it above tells R to just look in the package for the particular function we're using at that moment.
 :::
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 summarized <- filtered |>
   group_by(year) |>
   summarize(
@@ -248,7 +252,9 @@ Use [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) 
 - Use the `values_to` argument to tell R that the values of those
   variables will be moved to a column called `income`
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 pivoted <- summarized %>%
   pivot_longer(
     cols = c("p10","p50","p90"),
@@ -290,7 +296,9 @@ joined <- data_A |>
 ```
 
 Tried it yourself? Click below to see how we did this in our example.
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 joined <- pivoted |>
   left_join(
     inflation,
@@ -314,7 +322,9 @@ old_data |>
 
 Use [`mutate()`](https://r4ds.hadley.nz/data-transform#sec-mutate) to modify `income` so that it takes the values `income * inflation_factor`.
 
-```{r, echo = F}
+```{r}
+#| code-fold: true
+#| code-summary: "**Click here to see our answer!**"
 mutated <- joined |>
   mutate(income = income * inflation_factor)
 ```
