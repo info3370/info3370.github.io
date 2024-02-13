@@ -45,6 +45,7 @@ website:
               - topics/visualization.qmd
               - topics/data_transformation.qmd
               - topics/weights.qmd
+              - topics/statistical_learning.qmd
           - section: "Describing Inequality"
             contents:
               - topics/prediction.qmd
