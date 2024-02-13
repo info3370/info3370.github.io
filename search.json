@@ -102,49 +102,91 @@
     "href": "topics/statistical_learning.html",
     "title": "Statistical Learning",
     "section": "",
-    "text": "Slides\nStatistical learning is a term that captures a broad set of ideas in statistics and machine learning. This page focuses on one sense of statistical learning: using data on a sample to learn a subgroup mean in the population.\nAs an example, we continue to use the data on baseball salaries, with a small twist. The file baseball_with_record.csv contains the following variables\npopulation &lt;- read_csv(\"https://info3370.github.io/data/baseball_with_record.csv\")\nOur goal: using a sample, estimate the mean salary of all Dodger players in 2023. Because we have the population, we know the true mean is $6.23m.\nA sparse sample will hinder our ability to accomplish the goal. We will work with samples containing many MLB players, but only a few Dodgers. We will use statistical learning strategies to pool information from those other teams’ players to help us make a better estimate of the Dodger mean salary.\nOur predictor will be the record from the previous year. We assume that teams with similar win percentages in 2022 might have similar salaries in 2023."
+    "text": "Slides\nStatistical learning is a term that captures a broad set of ideas in statistics and machine learning. This page focuses on one sense of statistical learning: using data on a sample to learn a subgroup mean in the population.\nAs an example, we continue to use the data on baseball salaries, with a small twist. The file baseball_with_record.csv contains the following variables\npopulation &lt;- read_csv(\"https://info3370.github.io/data/baseball_with_record.csv\")\nOur goal: using a sample, estimate the mean salary of all Dodger players in 2023. Because we have the population, we know the true mean is $6.23m.\nA sparse sample will hinder our ability to accomplish the goal. We will work with samples containing many MLB players, but only a few Dodgers. We will use statistical learning strategies to pool information from those other teams’ players to help us make a better estimate of the Dodger mean salary.\nOur predictor will be the record from the previous year. We assume that teams with similar win percentages in 2022 might have similar salaries in 2023.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Statistical Learning"
+    ]
   },
   {
     "objectID": "topics/statistical_learning.html#prepare-our-data-environment",
     "href": "topics/statistical_learning.html#prepare-our-data-environment",
     "title": "Statistical Learning",
     "section": "Prepare our data environment",
-    "text": "Prepare our data environment\nFor illustration, draw a sample of 5 players per team\n\nsample &lt;- population |&gt;\n  group_by(team) |&gt;\n  sample_n(5) |&gt;\n  ungroup()\n\nConstruct a tibble with the observation to be predicted: the Dodgers.\n\nto_predict &lt;- population |&gt;\n  filter(target_subgroup) |&gt;\n  distinct(team, record)"
+    "text": "Prepare our data environment\nFor illustration, draw a sample of 5 players per team\n\nsample &lt;- population |&gt;\n  group_by(team) |&gt;\n  sample_n(5) |&gt;\n  ungroup()\n\nConstruct a tibble with the observation to be predicted: the Dodgers.\n\nto_predict &lt;- population |&gt;\n  filter(target_subgroup) |&gt;\n  distinct(team, record)",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Statistical Learning"
+    ]
   },
   {
     "objectID": "topics/statistical_learning.html#ordinary-least-squares",
     "href": "topics/statistical_learning.html#ordinary-least-squares",
     "title": "Statistical Learning",
     "section": "Ordinary least squares",
-    "text": "Ordinary least squares\nWe could model salary next year as a linear function of team record by Ordinary Least Squares. In math, OLS produces a prediction \\[\\hat{Y}_i = \\hat\\alpha + \\hat\\beta X_i\\] with \\(\\hat\\alpha\\) and \\(\\hat\\beta\\) chosen to minimize the sum of squared errors, \\(\\sum_{i=1}^n \\left(Y_i - \\hat{Y}_i\\right)^2\\). Visually, it minimizes all the line segments below.\n\n\n\n\n\n\n\n\n\nHere is how to estimate an OLS model using R.\n\nmodel &lt;- lm(salary ~ record, data = sample)\n\nThen we could predict the mean salary for the Dodgers.\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;\n1 L.A. Dodgers  0.685  6668053.\n\n\nOur model-based estimate compares to the true population mean of $6.23m."
+    "text": "Ordinary least squares\nWe could model salary next year as a linear function of team record by Ordinary Least Squares. In math, OLS produces a prediction \\[\\hat{Y}_i = \\hat\\alpha + \\hat\\beta X_i\\] with \\(\\hat\\alpha\\) and \\(\\hat\\beta\\) chosen to minimize the sum of squared errors, \\(\\sum_{i=1}^n \\left(Y_i - \\hat{Y}_i\\right)^2\\). Visually, it minimizes all the line segments below.\n\n\n\n\n\n\n\n\n\nHere is how to estimate an OLS model using R.\n\nmodel &lt;- lm(salary ~ record, data = sample)\n\nThen we could predict the mean salary for the Dodgers.\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;\n1 L.A. Dodgers  0.685  6668053.\n\n\nOur model-based estimate compares to the true population mean of $6.23m.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Statistical Learning"
+    ]
   },
   {
     "objectID": "topics/statistical_learning.html#penalized-regression",
     "href": "topics/statistical_learning.html#penalized-regression",
     "title": "Statistical Learning",
     "section": "Penalized regression",
-    "text": "Penalized regression\nPenalized regression is just like OLS, except that it prefers coefficient estimates that are closer to 0. This can reduce sampling variability. One penalized regression is ridge regression, which penalizes the sum of squared coefficients. In our example, it estimates the parameters to minimize\n\\[\\underbrace{\\sum_{i=1}^n \\left(Y_i - \\hat{Y}_i\\right)^2}_\\text{Squared Error} + \\underbrace{\\lambda\\beta^2}_\\text{Penalty}\\]\nwhere the positive scalar penalty \\(\\lambda\\) encodes our preference for coefficients to be near zero. Otherwise, penalized regression is just like OLS!\nThe gam() function in the mgcv package will allow you to fit a ridge regression as follows.\n\nlibrary(mgcv)\n\n\nmodel &lt;- gam(\n  salary ~ s(record, bs = \"re\"),\n  data = sample\n)\n\nPredict the Dodger mean salary just as before,\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt; &lt;dbl[1d]&gt;\n1 L.A. Dodgers  0.685  6252449."
+    "text": "Penalized regression\nPenalized regression is just like OLS, except that it prefers coefficient estimates that are closer to 0. This can reduce sampling variability. One penalized regression is ridge regression, which penalizes the sum of squared coefficients. In our example, it estimates the parameters to minimize\n\\[\\underbrace{\\sum_{i=1}^n \\left(Y_i - \\hat{Y}_i\\right)^2}_\\text{Squared Error} + \\underbrace{\\lambda\\beta^2}_\\text{Penalty}\\]\nwhere the positive scalar penalty \\(\\lambda\\) encodes our preference for coefficients to be near zero. Otherwise, penalized regression is just like OLS!\nThe gam() function in the mgcv package will allow you to fit a ridge regression as follows.\n\nlibrary(mgcv)\n\n\nmodel &lt;- gam(\n  salary ~ s(record, bs = \"re\"),\n  data = sample\n)\n\nPredict the Dodger mean salary just as before,\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt; &lt;dbl[1d]&gt;\n1 L.A. Dodgers  0.685  6252449.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Statistical Learning"
+    ]
   },
   {
     "objectID": "topics/statistical_learning.html#splines",
     "href": "topics/statistical_learning.html#splines",
     "title": "Statistical Learning",
     "section": "Splines",
-    "text": "Splines\nWe may want to allow a nonlinear relationship between the predictor and the outcome. One way to do that is with splines, which estimate part of the model locally within regions of the predictor space separated by knots. The code below uses a linear spline with knots at 0.4 and 0.6.\n\nlibrary(splines)\nmodel &lt;- lm(\n  salary ~ bs(record, degree = 1, knots = c(.4,.6)),\n  data = sample\n)\n\n\n\n\n\n\n\n\n\n\nWe can predict the Dodger mean salary just as before!\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;\n1 L.A. Dodgers  0.685  3269869."
+    "text": "Splines\nWe may want to allow a nonlinear relationship between the predictor and the outcome. One way to do that is with splines, which estimate part of the model locally within regions of the predictor space separated by knots. The code below uses a linear spline with knots at 0.4 and 0.6.\n\nlibrary(splines)\nmodel &lt;- lm(\n  salary ~ bs(record, degree = 1, knots = c(.4,.6)),\n  data = sample\n)\n\n\n\n\n\n\n\n\n\n\nWe can predict the Dodger mean salary just as before!\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;\n1 L.A. Dodgers  0.685  3269869.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Statistical Learning"
+    ]
   },
   {
     "objectID": "topics/statistical_learning.html#trees",
     "href": "topics/statistical_learning.html#trees",
     "title": "Statistical Learning",
     "section": "Trees",
-    "text": "Trees\nPerhaps our response surface is bumpy, and poorly approximated by a smooth function. Decision trees search the predictor space for discrete places where the outcome changes, and assume that the response is flat within those regions.\n\nlibrary(rpart)\nmodel &lt;- rpart(salary ~ record, data = sample)\n\n\n\n\n\n\n\n\n\n\nPredict as in the other strategies.\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;\n1 L.A. Dodgers  0.685  4253845."
+    "text": "Trees\nPerhaps our response surface is bumpy, and poorly approximated by a smooth function. Decision trees search the predictor space for discrete places where the outcome changes, and assume that the response is flat within those regions.\n\nlibrary(rpart)\nmodel &lt;- rpart(salary ~ record, data = sample)\n\n\n\n\n\n\n\n\n\n\nPredict as in the other strategies.\n\nto_predict |&gt;\n  mutate(predicted = predict(model, newdata = to_predict))\n\n# A tibble: 1 × 3\n  team         record predicted\n  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;\n1 L.A. Dodgers  0.685  4253845.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Statistical Learning"
+    ]
   },
   {
     "objectID": "topics/statistical_learning.html#conclusion",
     "href": "topics/statistical_learning.html#conclusion",
     "title": "Statistical Learning",
     "section": "Conclusion",
-    "text": "Conclusion\nStatistical learning in this framing is all about\n\nwe have a subgroup with few sampled units (the Dodgers)\nwe want to use other units to help us learn\nour goal is to predict the population mean in the subgroup"
+    "text": "Conclusion\nStatistical learning in this framing is all about\n\nwe have a subgroup with few sampled units (the Dodgers)\nwe want to use other units to help us learn\nour goal is to predict the population mean in the subgroup",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Statistical Learning"
+    ]
   },
   {
     "objectID": "topics/race.html",
