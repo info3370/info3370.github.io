@@ -23,7 +23,7 @@ For transparency, here is the [code](../code/synthetic_parents.R) with which we 
 
 
 ```{r, eval = F}
-parents <- read_csv("https://info3370.github.io/data/parents.csv")
+parents <- read_csv("https://raw.githubusercontent.com/info3370/info3370.github.io/main/data/parents.csv")
 ```
 ```{r, echo = F, message = F, warning = F}
 parents <- read_csv("../data/parents.csv")
