@@ -53,4 +53,6 @@ Your task is to answer the question: what proportion are employed among female r
 - you can use strategies from the [statistical learning](statistical_learning.qmd) page
 - you can use the male respondents if you think they are helpful
 
-Near the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closeset!
+Near the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closest!
+
+{{< video https://www.youtube.com/embed/PL5V5HtuW1c >}}
