@@ -19,11 +19,10 @@ Synthetic data is good in our setting for two reasons
 1) we know the answer
 2) you can download the synthetic data right from this website
 
-For transparency, here is the [code](../code/synthetic_parents.R) with which we created the synthetic data. The line below will load the synthetic data.
-
+For transparency, here is the [code](../code/synthetic_parents.R) with which we created the synthetic data. The line below will load the [synthetic data](../data/parents.csv).
 
 ```{r, eval = F}
-parents <- read_csv("https://raw.githubusercontent.com/info3370/info3370.github.io/main/data/parents.csv")
+parents <- read_csv("https://info3370.github.io/data/parents.csv")
 ```
 ```{r, echo = F, message = F, warning = F}
 parents <- read_csv("../data/parents.csv")
