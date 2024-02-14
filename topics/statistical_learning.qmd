@@ -8,6 +8,22 @@ title: "Statistical Learning"
 
 Statistical learning is a term that captures a broad set of ideas in statistics and machine learning. This page focuses on one sense of statistical learning: using data on a sample to learn a subgroup mean in the population.
 
+::: columns
+
+::: {.column width="30%"}
+{{< video https://www.youtube.com/embed/srf9eZ5lq68 >}}
+:::
+
+::: {.column width="30%"}
+{{< video https://www.youtube.com/embed/3sHWUN-3pZE >}}
+:::
+
+::: {.column width="30%"}
+{{< video https://www.youtube.com/embed/Pk6uNM74cKE >}}
+:::
+
+:::
+
 As an example, we continue to use the data on baseball salaries, with a small twist. The file [`baseball_with_record.csv`](../data/baseball_with_record.csv) contains the following variables
 
 ```{r, echo = F, message = F, warning = F}
