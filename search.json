@@ -671,7 +671,7 @@
     "href": "topics/learning_exercise.html#your-task-predict-at-child-age-1",
     "title": "Learning Exercise",
     "section": "Your task: Predict at child age 1",
-    "text": "Your task: Predict at child age 1\nYour task is to answer the question: what proportion are employed among female respondents whose youngest child is 1 year old?\n\nyou can use a model with the other ages\nyou can use strategies from the statistical learning page\nyou can use the male respondents if you think they are helpful\n\nNear the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closeset!",
+    "text": "Your task: Predict at child age 1\nYour task is to answer the question: what proportion are employed among female respondents whose youngest child is 1 year old?\n\nyou can use a model with the other ages\nyou can use strategies from the statistical learning page\nyou can use the male respondents if you think they are helpful\n\nNear the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closest!",
     "crumbs": [
       " ",
       "Topics",
