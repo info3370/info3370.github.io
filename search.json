@@ -189,286 +189,159 @@
     ]
   },
   {
-    "objectID": "topics/race.html",
-    "href": "topics/race.html",
-    "title": "Race",
+    "objectID": "topics/sample_splitting.html",
+    "href": "topics/sample_splitting.html",
+    "title": "Sample Splitting",
     "section": "",
-    "text": "TODO\n\n\n\n Back to top",
+    "text": "A predictive model is an input-output function:\nThe performance of a model can be measured by how well the output \\(\\hat{y}\\) corresponds to the true outcome \\(y\\). This page considers three ways to assess the performance of a model.\nOften, the purpose a predictive model is to accomplish out-of-sample prediction (2). But when learning the model, often only one sample is available. Therefore, evaluation by split-sample prediction (3) is often desirable because it most closely mimics this task.",
     "crumbs": [
       " ",
       "Topics",
-      "Describing Inequality",
-      "Race"
+      "Working with Data",
+      "Sample Splitting"
     ]
   },
   {
-    "objectID": "topics/prediction.html",
-    "href": "topics/prediction.html",
-    "title": "Predicting life outcomes",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top",
+    "objectID": "topics/sample_splitting.html#simulated-setting",
+    "href": "topics/sample_splitting.html#simulated-setting",
+    "title": "Sample Splitting",
+    "section": "Simulated setting",
+    "text": "Simulated setting\nWhen a model is evaluated by in-sample prediction, there is a danger: even if the features have no predictive value in the population, a model might discover patterns that exist in the training sample due to random variation.\nTo illustrate this, we generate a simulation with 100 features x1,…,x100 and one outcome y, all of which are independent normal variables. We know from the beginning that x* should be useless predictors: they contain no information about y.\nWe first load tidyverse\nand write a function to generate the data\n\ngenerate_data &lt;- function(sample_size = 1000, num_features = 100) {\n  # Predictors are independent Normal\n  X &lt;- replicate(num_features, rnorm(sample_size))\n  colnames(X) &lt;- paste0(\"x\",1:num_features)\n  \n  as_tibble(X) |&gt;\n    # Outcome is an independent Normal\n    mutate(y = rnorm(n()))\n}\n\nbefore applying that function to generate one sample.\n\ndata &lt;- generate_data(sample_size = 1000, num_features = 100)",
     "crumbs": [
       " ",
       "Topics",
-      "Describing Inequality",
-      "Predicting life outcomes"
+      "Working with Data",
+      "Sample Splitting"
     ]
   },
   {
-    "objectID": "topics/gender.html",
-    "href": "topics/gender.html",
-    "title": "Gender",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top",
+    "objectID": "topics/sample_splitting.html#in-sample-prediction",
+    "href": "topics/sample_splitting.html#in-sample-prediction",
+    "title": "Sample Splitting",
+    "section": "In-sample prediction",
+    "text": "In-sample prediction\nWe then estimate a linear regression model, where . includes all the x1,…,x100 features other than y as predictors.\n\nmodel &lt;- lm(y ~ ., data = data)\n\nand a benchmark of no model, which only includes an intercept.\n\nno_model &lt;- lm(y ~ 1, data = data)\n\nWe know from the simulation that the model is useless: the x-variables contain no information about y. But if we make predictions in-sample, we will see that the mean squared error of the model is surprisingly lower (better) than no model.\n\ndata |&gt;\n  mutate(\n    predicted_model = predict(model),\n    predicted_no_model = predict(no_model),\n    squared_error_model = (y - predicted_model) ^ 2,\n    squared_error_no_model = (y - predicted_no_model) ^ 2,\n  ) |&gt;\n  select(starts_with(\"squared\")) |&gt;\n  summarize_all(.funs = mean)\n\n# A tibble: 1 × 2\n  squared_error_model squared_error_no_model\n                &lt;dbl&gt;                  &lt;dbl&gt;\n1               0.902                   1.00",
     "crumbs": [
       " ",
       "Topics",
-      "Describing Inequality",
-      "Gender"
+      "Working with Data",
+      "Sample Splitting"
     ]
   },
   {
-    "objectID": "topics/class.html",
-    "href": "topics/class.html",
-    "title": "Class",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top",
+    "objectID": "topics/sample_splitting.html#out-of-sample-prediction",
+    "href": "topics/sample_splitting.html#out-of-sample-prediction",
+    "title": "Sample Splitting",
+    "section": "Out-of-sample prediction",
+    "text": "Out-of-sample prediction\nThe problem is that the model fit to the noise in the data. We can see this with the out-of-sample performance assessment. First, we generate a new dataset of out-of-sample data.\n\nout_of_sample &lt;- generate_data()\n\nThen, we use the model learned in data and predict in out_of_sample. By this evaluation, predictions are now worse (higher mean squared error) than no model.\n\nout_of_sample |&gt;\n  mutate(\n    predicted_model = predict(model, newdata = out_of_sample),\n    predicted_no_model = predict(no_model, newdata = out_of_sample),\n    squared_error_model = (y - predicted_model) ^ 2,\n    squared_error_no_model = (y - predicted_no_model) ^ 2,\n  ) |&gt;\n  select(starts_with(\"squared\")) |&gt;\n  summarize_all(.funs = mean)\n\n# A tibble: 1 × 2\n  squared_error_model squared_error_no_model\n                &lt;dbl&gt;                  &lt;dbl&gt;\n1                1.05                  0.981",
     "crumbs": [
       " ",
       "Topics",
-      "Describing Inequality",
-      "Class"
+      "Working with Data",
+      "Sample Splitting"
     ]
   },
   {
-    "objectID": "topics/about.html",
-    "href": "topics/about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "office_hours.html",
-    "href": "office_hours.html",
-    "title": "Office Hours",
-    "section": "",
-    "text": "Check the post pinned on Ed Discussion to see any week-specific changes to the schedule.\n\n\n\nPerson\nTime\nLocation\n\n\n\n\nStacy\nM 12–1pm\nRhodes 402\n\n\nJoanne\nM 1–2pm (canceled 2/19)\nRhodes 408\n\n\nChang\nM 3–4pm\nRhodes 408\n\n\nIan\nT 10–11am\nGates 223\n\n\nLiz\nW 12:30–1:30pm\nRhodes 402\n\n\nDaniel\nW 1–2pm\nRhodes 406\n\n\nFede\nW 2–3pm\nRhodes 406\n\n\nOlaf\nW 3–4pm\nRhodes 406\n\n\nJonathan\nTh 1–2pm\nUris G44\n\n\nAkira\nTh 3:30–4:30pm\nZoom\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "forms.html",
-    "href": "forms.html",
-    "title": "Forms",
-    "section": "",
-    "text": "If you are missing class, here is a form where you can tell us!\n\nAssignment extension form to request an assignment extension that does not count against flex days under exceptional circumstances\nRegrade request form to be submitted within 72 hours of grade post if you think we have graded something wrong\nExcused absence form. To request an excused absence from lecture or discussion\nLecture make-up form. For lectures that are missed which we haven’t excused\nFor non-excused absences from discussion, you should do the discussion activity on your own and submit in the Canvas assignment associated with that discussion\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "assignments/pset1.html",
-    "href": "assignments/pset1.html",
-    "title": "Problem Set 1: Visualization",
-    "section": "",
-    "text": "Due: 5pm on Wednesday, January 31.\n\n\n\n\n\n\nBefore you start\n\n\n\nCreate an anonymous identifier for yourself here! Want to see how you’ll be evaluated? Check out the rubric\n\n\nStudent identifer: [type your anonymous identifier here]\n\nUse this .qmd template to complete the problem set\nIn Canvas, you will upload the PDF produced by your .qmd file\nPut your identifier above, not your name! We want anonymous grading to be possible\n\nThis problem set involves both data analysis and reading.\n\nData analysis\nThis problem set uses the data lifeCourse.csv.\n\nlibrary(tidyverse)\nlibrary(scales)\nlifeCourse &lt;- read_csv(\"https://info3370.github.io/data/lifeCourse.csv\")\n\nThe data contain life course earnings profiles for four cohorts of American workers: those born in 1940, 1950, 1960, and 1970. Each row contains a summary of the annual earnings distribution for a particular birth cohort at a particular age, among the subgroup with a particular level of education. To prepare these data, we aggregated microdata from the Current Population Survey, provided through the Integrated Public Use Microdata Series.\nThe data contain five variables.\n\nquantity is the metric by which the earnings distribution is summarized: 10th, 50th, or 90th percentile\neducation is the educational subgroup being summarized: College Degree, Less than College\ncohort is the cohort (people with a given birth year) to which these data apply: 1940, 1950, 1960, 1970\nage is the age at which earnings were measured: 30–45\nincome is the value for the given earnings percentile in the given subgroup. Income values are provided in 2022 dollars\n\n\n\n1. Visualize (25 points)\nUse ggplot to visualize these data. To denote the different trajectories,\n\nmake your plot using geom_point() or geom_line()\nuse the x-axis for age\nuse the y-axis for income\nuse color for quantity\nuse facet_grid to make a panel of facets where each row is an education value and each column is a cohort value\n\nYou should prepare the graph as though you were going to publish it. Modify the axis titles so that a reader would know what is on the axis. Use appropriate capitalization in all labels. Try using the label_dollar() function from the scales package so that the y-axis uses dollar values.\nYour code should be well-formatted as defined by R4DS. In your produced PDF, no lines of code should run off the page.\nMany different graphs can be equally correct. You will be evaluated by\n\nhaving publication-ready graph aesthetics\ncode that follows style conventions\n\n\n# your code goes here\n\n\n\n2. Interpret (10 points)\nWrite 2-3 sentences summarizing the trends that you see in the data.\n2.1 (3 points). Focus on those born in 1970. For those with a college degree, how do the top and bottom of the income distribution change over the life course?\n\nType your answer here.\n\n2.2 (3 points). Focus on those born in 1970. How does the pattern differ for those without college degres differ from your answer in 2.1?\n\nType your answer here.\n\n2.3 (4 points). How do the patterns you identified in 2.1 and 2.2 change from the 1940 to the 1970 cohort?\n\nType your answer here.\n\n\n\n3. Connect to reading (15 points)\nRead p. 1–7 of following paper. Stop before the section “Analytic Framework for Decomposing Inequality.”\n\nCheng, Siwei. 2021. The shifting life course patterns of wage inequality.. Social Forces 100(1):1–28.\n\nOur data are not the same as Cheng’s. But our analysis is able to reproduce many of her findings. Answer each question in two sentences or less.\nCheng discusses period trends, cohort trends, and age trends.\n3.1 (3 points) Which dimension of your graph shows a cohort trend?\n\nType your answer here.\n\n3.2 (3 points) Which dimension of your graph shows an age trend?\n\nType your answer here.\n\n3.3 (3 points) Cheng discusses education-based cumulative advantage. Describe how you see this in your graph.\n\nType your answer here.\n\n3.4 (3 points) Cheng discusses within-education trajectory heterogeneity. Describe how your graph shows heterogeneity of outcomes within educational categories.\n\nType your answer here.\n\n3.5 (3 points) Cheng discusses wage volatility: how wages rise and fall over time for a given person. Why is our data (the Current Population Survey) the wrong dataset to study wage volatility?\n\nType your answer here.\n\n\n\nGrad question: Model-based estimates\nThis question assumes familiarity with Ordinary Least Squares.\n\nFor graduate students, this question is worth 20 points.\nFor undergraduate students, this question is optional and worth 0 points.\n\nThe data contain nonparametric estimates that contain some noise: the data points provided partly reflect random variation because they are estimatd in a sample.\nModel-based estimates reduce noise by pooling information across observations, at the cost of introducing assumptions. Fit an OLS model to the data using age as a numeric variable and education, cohort, and quantity as factor variables. Interact all of these predictors with each other.\n\nfit &lt;- lm(\n  income ~ age * factor(cohort) * education * quantity,\n  data = lifeCourse\n)\n\nEffectively, this estimates a best-fit line through each set of points depicted in your original figure. For each observation, store a prediction from this model (see predict()).\nRe-create your plot from (1) using\n\ngeom_point() for the nonparametric estimates (as above)\ngeom_line() for your model-based predicted values\n\n\n\nComputing environment\nLeave this at the bottom of your file, and it will record information such as your operating system, R version, and package versions. This is helpful for resolving any differences in results across people.\n\nsessionInfo()\n\nR version 4.3.2 (2023-10-31)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Sonoma 14.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/New_York\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n [1] scales_1.2.1    lubridate_1.9.3 forcats_1.0.0   stringr_1.5.0  \n [5] dplyr_1.1.3     purrr_1.0.2     readr_2.1.4     tidyr_1.3.0    \n [9] tibble_3.2.1    ggplot2_3.4.4   tidyverse_2.0.0\n\nloaded via a namespace (and not attached):\n [1] bit_4.0.5         gtable_0.3.4      jsonlite_1.8.7    crayon_1.5.2     \n [5] compiler_4.3.2    tidyselect_1.2.0  parallel_4.3.2    yaml_2.3.7       \n [9] fastmap_1.1.1     R6_2.5.1          generics_0.1.3    knitr_1.44       \n[13] htmlwidgets_1.6.2 munsell_0.5.0     pillar_1.9.0      tzdb_0.4.0       \n[17] rlang_1.1.1       utf8_1.2.3        stringi_1.7.12    xfun_0.40        \n[21] bit64_4.0.5       timechange_0.2.0  cli_3.6.1         withr_2.5.1      \n[25] magrittr_2.0.3    digest_0.6.33     grid_4.3.2        vroom_1.6.4      \n[29] rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.3   vctrs_0.6.4      \n[33] evaluate_0.22     glue_1.6.2        fansi_1.0.5       colorspace_2.1-0 \n[37] rmarkdown_2.25    tools_4.3.2       pkgconfig_2.0.3   htmltools_0.5.6.1\n\n\n\n\n\n\n Back to top",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 1"
-    ]
-  },
-  {
-    "objectID": "assignments/project.html",
-    "href": "assignments/project.html",
-    "title": "Final Project",
-    "section": "",
-    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Project"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html",
-    "href": "assignments/pset0.html",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "",
-    "text": "Due: 5pm on Wednesday, January 24.\nIn this exercise, you will install R, RStudio and Quarto. The exercise will ensure that they are set up correctly so that everybody is ready to dive into coursework.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#install-software-requirements",
-    "href": "assignments/pset0.html#install-software-requirements",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Install Software Requirements",
-    "text": "Install Software Requirements\nYou should follow the instructions in R4DS to:\n\nInstall R\nInstall RStudio\n\nOnce R and RStudio are successfully installed, this also means that Quarto is successfully installed because it comes bundled with RStudio.\nFinally, you will need to open RStudio, select the Terminal tab, and execute the following command: quarto install tinytex as demonstrated in the image below.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#download-problem-set",
-    "href": "assignments/pset0.html#download-problem-set",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Download Problem Set",
-    "text": "Download Problem Set\nNext, download this problem set which is a Quarto Markdown Document.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#render-the-problem-set",
-    "href": "assignments/pset0.html#render-the-problem-set",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Render the Problem Set",
-    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the same directory that you saved pset0.qmd in. You will then submit the PDF on Canvas.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset0.html#issues",
-    "href": "assignments/pset0.html#issues",
-    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
-    "section": "Issues",
-    "text": "Issues\nIf you run into issues while attempting to render the Problem Set, be sure to open a question on the Ed Discussion!",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 0"
-    ]
-  },
-  {
-    "objectID": "assignments/pset2.html",
-    "href": "assignments/pset2.html",
-    "title": "Problem Set 2: Data Transformation",
-    "section": "",
-    "text": "Due: 5pm on Wednesday, February 14.\nStudent identifer: [type your anonymous identifier here]\nThis problem set draws on the following paper.\nA note about sex and gender. As we have discussed in class, sex typically refers to categories assigned at birth (e.g., female, male). Gender is a performed construct with many possible values: man, woman, nonbinary, etc. The measure in the CPS-ASEC is “sex,” coded male or female. We will use these data to study sex disparities between those identifying as male and female. The paper at times uses “gender” to refer to this construct.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 2"
-    ]
-  },
-  {
-    "objectID": "assignments/pset2.html#data-analysis-existing-question",
-    "href": "assignments/pset2.html#data-analysis-existing-question",
-    "title": "Problem Set 2: Data Transformation",
-    "section": "1. Data analysis: Existing question",
-    "text": "1. Data analysis: Existing question\n20 points. Reproduce Figure 1 from the paper.\nVisit cps.ipums.org to download data from the 1962–2023 March Annual Social and Economic Supplement. When choosing samples, you want all samples in the “ASEC” tab and none of the samples in the “Basic Monthly” tab. Include these variables in your cart: sex, age, asecwt, empstat.\nTo reduce extract size, select cases to those ages 25–54. Before submitting your extract, we recommend changing the data format to “Stata (.dta)” so that you get value labels.\n\n\n\n\n\n\nTip\n\n\n\nLook ahead: you will later study a new outcome of your own choosing. You could add it to your cart now if you want.\n\n\nOn your computer, analyze these data.\n\nfilter to asecwt &gt; 0 (see paper footnote on p. 6995 about negative weights)\nmutate to create an employed variable indicating that empstat == 10 | empstat == 12\nmutate to convert sex to a factor variable using as_factor\ngroup by sex and year\nsummarize the proportion employed: use weighted.mean to take the mean of employed using the weight asecwt\n\nYour figure will be close but not identical to the original. Yours will include some years that the original did not. Feel free to change aesthetics of the plot, such as the words used in labels. For example, it would be more accurate to the data to label the legend “Sex” with values “Male” and “Female.”\n\nlibrary(tidyverse)\nlibrary(scales)\nlibrary(haven)",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 2"
-    ]
-  },
-  {
-    "objectID": "assignments/pset2.html#reading-questions",
-    "href": "assignments/pset2.html#reading-questions",
-    "title": "Problem Set 2: Data Transformation",
-    "section": "2. Reading questions",
-    "text": "2. Reading questions\n2.1 (3 points) The authors write that “change in the gender system has been deeply asymmetric.” Explain this in a sentence or two to someone who hasn’t read the article.\n2.2 (3 points) The authors discuss cultural changes that could lead to greater equality. Propose a question that could (hypothetically) be included in the CPS-ASEC questionnaire to help answer questions about cultural changes.\n\n\n\n\n\n\nTip\n\n\n\nIf you are not sure how to word a survey question, here are some examples from the American Time Use Survey, Current Population Survey, and General Social Survey.\n\n\n2.3 (3 points) The authors discuss institutional changes that could lead to greater equality. Propose a question that could (hypothetically) be included in the CPS-ASEC questionnaire to help answer questions about institutional changes.\n2.4 (1 point) What was one fact presented in this paper that most surprised you?",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 2"
-    ]
-  },
-  {
-    "objectID": "assignments/pset2.html#a-new-outcome",
-    "href": "assignments/pset2.html#a-new-outcome",
-    "title": "Problem Set 2: Data Transformation",
-    "section": "3. A new outcome",
-    "text": "3. A new outcome\n20 points. The CPS-ASEC has numerous variables. Pick another variable of your choosing. Add it to your cart in IPUMS, and visualize how that variable has changed over time for those identifying as male and female.\nAs in the previous plot, year should be on the x-axis and color should represent sex. The y-axis is up to you. You can examine something like median income, proportion holding college degrees, or the 90th percentile of usual weekly work hours. You can restrict to some subset if you want, such as those who are employed.\nYour answer should include\n\na written statement of what you estimated: the variable you chose, any sample restrictions you made, and how you summarized that variable\na written interpretation of what you found\ncode following style conventions\nyour publication-quality visualization",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 2"
-    ]
-  },
-  {
-    "objectID": "assignments/pset2.html#grad-question-ratio-and-difference",
-    "href": "assignments/pset2.html#grad-question-ratio-and-difference",
-    "title": "Problem Set 2: Data Transformation",
-    "section": "Grad question: Ratio and difference",
-    "text": "Grad question: Ratio and difference\n\nThis question is required for grad students. It is optional for undergrads, and worth no extra credit.\n\n20 points. The figures above visualize a summary statistic for each subgroup: male and female. Another way to visualize this is with the ratio (female statistic / male statistic) or difference of the two (female statistic - male statistic).\nFor your own question, produce two new visualizations:\n\none showing the female / male ratio over time\none showing the female - male difference over time\n\nWhich do you find easier to interpret, and why?\n\n\n\n\n\n\nTip\n\n\n\nIt is likely that your code for the previous parts produced one column with estimates and another column sex containing the values male and female. One way to calculate a ratio and difference is to reshape the data so that there is one row for each year, containing both the male and female estimates. You can do this with pivot_wider where the names come from sex and the values come from the column containing your estimates. Then you can mutate() to create the ratio and difference.",
-    "crumbs": [
-      " ",
-      "Assignments",
-      "Problem Sets",
-      "Problem Set 2"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "",
-    "text": "Together, we will generate new knowledge about social inequality using the tools of data science",
-    "crumbs": [
-      " ",
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#learning-goals",
-    "href": "index.html#learning-goals",
-    "title": "Studying Social Inequality with Data Science",
-    "section": "Learning goals",
-    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language",
-    "crumbs": [
-      " ",
-      "Home"
-    ]
-  },
-  {
-    "objectID": "schedule.html",
-    "href": "schedule.html",
-    "title": "Schedule",
-    "section": "",
-    "text": "Some assignments have associated readings, which are listed in the reading column. Due dates are tentative for assignments that are not yet released.\n\n\n\nDue date\nAssignment\nReading\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\nWed Jan 31 at 5pm\nProblem Set 1\nCheng 2021\n\n\nWed Feb 7 at 5pm\nPeer Review 1\n\n\n\nWed Feb 14 at 5pm\nProblem Set 2\nEngland et al. 2020\n\n\nWed Feb 21 at 5pm\nPeer Review 2\n\n\n\nFebruary break\n\n\n\n\nWed Mar 6 at 5pm\nProblem Set 3\n\n\n\nWed Mar 13 at 5pm\nPeer Review 3\n\n\n\nWed Mar 20 at 5pm\nProblem Set 4\n\n\n\nWed Mar 27 at 5pm\nPeer Review 4\n\n\n\nSpring break\n\n\n\n\nWed Apr 17 at 5pm\nProblem Set 5\n\n\n\nWed Apr 24 at 5pm\nProject writeup + presentation slides due\n\n\n\nTh Apr 25 8:40–9:55am\nProject presentations in discussion\n\n\n\nWed May 1 at 5pm\nPeer Review 5\n\n\n\nTh May 2 8:40–9:55am\nProject presentations in discussion"
-  },
-  {
-    "objectID": "schedule.html#assignments",
-    "href": "schedule.html#assignments",
-    "title": "Schedule",
-    "section": "",
-    "text": "Some assignments have associated readings, which are listed in the reading column. Due dates are tentative for assignments that are not yet released.\n\n\n\nDue date\nAssignment\nReading\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\nWed Jan 31 at 5pm\nProblem Set 1\nCheng 2021\n\n\nWed Feb 7 at 5pm\nPeer Review 1\n\n\n\nWed Feb 14 at 5pm\nProblem Set 2\nEngland et al. 2020\n\n\nWed Feb 21 at 5pm\nPeer Review 2\n\n\n\nFebruary break\n\n\n\n\nWed Mar 6 at 5pm\nProblem Set 3\n\n\n\nWed Mar 13 at 5pm\nPeer Review 3\n\n\n\nWed Mar 20 at 5pm\nProblem Set 4\n\n\n\nWed Mar 27 at 5pm\nPeer Review 4\n\n\n\nSpring break\n\n\n\n\nWed Apr 17 at 5pm\nProblem Set 5\n\n\n\nWed Apr 24 at 5pm\nProject writeup + presentation slides due\n\n\n\nTh Apr 25 8:40–9:55am\nProject presentations in discussion\n\n\n\nWed May 1 at 5pm\nPeer Review 5\n\n\n\nTh May 2 8:40–9:55am\nProject presentations in discussion"
-  },
-  {
-    "objectID": "schedule.html#meetings",
-    "href": "schedule.html#meetings",
-    "title": "Schedule",
-    "section": "Meetings",
-    "text": "Meetings\nReadings are to be read after class, unless otherwise specified. Readings from R for Data Science (R4DS, Wickham et al. 2023) are intended as references that do not need to be read line-by-line but are a useful reference to support ideas.\n\n\n\nDate\nType\nTopic\nReading\n\n\n\n\nJan 23\nLecture\nWelcome\nJencks 2002 p. 49–53\n\n\nJan 25\nDiscussion\nVisualization\nR4DS Ch 1\n\n\nJan 30\nLecture\nSampling: Simple random and unequal probability\nProbability sampling\n\n\nFeb 1\nDiscussion\nData transformation (day 1 / 2)\nR4DS Ch 3\n\n\nFeb 6\nLecture\nSampling: Stratified, clustered, and the future\nGroves 2011\n\n\nFeb 8\nDiscussion\nData transformation (day 2 / 2)\nR4DS Ch 3\n\n\nFeb 13\nLecture\nStatistical learning\nBerk 2020 Ch 1 p. 1–5, stopping at paragraph ending “…is nonlinear.” Then p. 14–17 “Model misspecification…” through “…will always be in play.”\n\n\nFeb 15\nDiscussion\nStatistical learning activity\n\n\n\nFeb 20\nLecture\nPredicting life outcomes\nOptional: Salganik et al. 2020\n\n\nFeb 22\nDiscussion\nPSID Income Prediction Challenge (day 1 / 2)\n\n\n\nFebruary break\n\n\n\n\n\nFeb 29\nDiscussion\nPSID Income Prediction Challenge (day 2 / 2)\n\n\n\nMar 5\nLecture\nPSID Income Prediction: Awards and takeaways\nOptional: Lundberg et al. 2024\n\n\nMar 7\nDiscussion\nRacial wealth gap\n\n\n\nMar 12\nLecture\nPolitical origins of racial inequality\n\n\n\nMar 14\nDiscussion\nClass inequality exercise\n\n\n\nMar 19\nLecture\nClass + gender inequality\n\n\n\nMar 21\nDiscussion\nProject work\n\n\n\nMar 26\nLecture\nAsking research questions\n\n\n\nMar 28\nDiscussion\nProject work\n\n\n\nSpring break\n\n\n\n\n\nApr 9\nLecture\nMoral arguments\nBefore class, watch intro to Rawls and 3:49–5:05 on Nozick\n\n\nApr 11\nDiscussion\nProject work\n\n\n\nApr 16\nLecture\nReducing inequality: Educational expansion\nBrand 2023 Ch 1\n\n\nApr 18\nDiscussion\nProject work\n\n\n\nApr 23\nLecture\nReducing inequality: Reparations\nBefore class, watch Ta-Nehisi Coates\n\n\nApr 25\nDiscussion\nProject presentations\n\n\n\nApr 30\nLecture\nReducing inequality: Sentencing reform\nBefore class, explore A Matter of Time\n\n\nMay 2\nDiscussion\nProject presentations\n\n\n\nMay 7\nCourse summary"
-  },
-  {
-    "objectID": "topics/asking_questions.html",
-    "href": "topics/asking_questions.html",
-    "title": "Asking Questions",
-    "section": "",
-    "text": "TODO\n\n\n\n Back to top",
+    "objectID": "topics/sample_splitting.html#split-sample-prediction",
+    "href": "topics/sample_splitting.html#split-sample-prediction",
+    "title": "Sample Splitting",
+    "section": "Split-sample prediction",
+    "text": "Split-sample prediction\nIn practice, we often do not have a second sample. We can therefore mimic the out-of-sample task by a sample split, which we can create using the initial_split function in the rsample package,\n\nlibrary(rsample)\nsplit &lt;- initial_split(data, prop = .5)\n\nwhich randomly assigns the data into training and testing sets of equal size. We can extract those data by typing training(split) and testing(split).\nThe strategy is to learn on training(split)\n\nmodel &lt;- lm(y ~ ., data = training(split))\nno_model &lt;- lm(y ~ 1, data = training(split))\n\nand evaluate performance on testing(split).\n\ntesting(split) |&gt;\n  mutate(\n    predicted_model = predict(model, newdata = testing(split)),\n    predicted_no_model = predict(no_model, newdata = testing(split)),\n    squared_error_model = (y - predicted_model) ^ 2,\n    squared_error_no_model = (y - predicted_no_model) ^ 2,\n  ) |&gt;\n  select(starts_with(\"squared\")) |&gt;\n  summarize_all(.funs = mean)\n\n# A tibble: 1 × 2\n  squared_error_model squared_error_no_model\n                &lt;dbl&gt;                  &lt;dbl&gt;\n1                1.29                   1.01\n\n\nJust like the out-of-sample prediction, this shows that the model is worse than no model at all. By sample splitting, we can learn this even when we have only one sample.\nAn important caveat is that sample splitting has a cost: the number of cases available for training is smaller once we split the sample. This can mean that the sample-split predictions will have worse performance than predictions trained on the full sample and evaluated out-of-sample.",
     "crumbs": [
       " ",
       "Topics",
-      "Asking Questions"
+      "Working with Data",
+      "Sample Splitting"
+    ]
+  },
+  {
+    "objectID": "topics/sample_splitting.html#repeating-this-many-times",
+    "href": "topics/sample_splitting.html#repeating-this-many-times",
+    "title": "Sample Splitting",
+    "section": "Repeating this many times",
+    "text": "Repeating this many times\nIf we repeat the above many times, we can see the distribution of these performance evaluation strategies across repeated samples.\n\n\n\nAttaching package: 'foreach'\n\n\nThe following objects are masked from 'package:purrr':\n\n    accumulate, when\n\n\n\n\n\n\n\n\n\nBy the gold standard of out-of-sample prediction, no model is better than a model. In-sample prediction yields the misleading appearance that a model is better than no model. Split-sample prediction successfully mimics the out-of-sample behavior when only one sample is available.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Sample Splitting"
+    ]
+  },
+  {
+    "objectID": "topics/sample_splitting.html#closing-thoughts",
+    "href": "topics/sample_splitting.html#closing-thoughts",
+    "title": "Sample Splitting",
+    "section": "Closing thoughts",
+    "text": "Closing thoughts\nSample splitting is an art as much as a science. In particular applications, the gain from sample splitting is not always clear and must be balanced against the reduction in cases available for training. It is important to remember that out-of-sample prediction remains the gold standard, and sample splitting is one way to approximate that when only one sample is available.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Sample Splitting"
+    ]
+  },
+  {
+    "objectID": "topics/r_basics.html",
+    "href": "topics/r_basics.html",
+    "title": "R and RStudio",
+    "section": "",
+    "text": "This course uses R, RStudio, and Quarto\n\nR is statistical software\nRStudio is a user interface\nQuarto is an authoring framework for reproducible documents\n\nAll are free and open source. To set the software up on your computer, follow the steps in the Prerequisites section of R4DS. To learn about RStudio, visit the User Guide.\n\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "R and RStudio"
+    ]
+  },
+  {
+    "objectID": "topics/learning_exercise.html",
+    "href": "topics/learning_exercise.html",
+    "title": "Learning Exercise",
+    "section": "",
+    "text": "Gender inequality in employment is much greater among new parents than among non-parents. This exercise seeks to estimate the proportion employed among married men and women1 with a 1-year-old child at home. Our data include those with at least one child age 0–18.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Learning Exercise"
+    ]
+  },
+  {
+    "objectID": "topics/learning_exercise.html#synthetic-data",
+    "href": "topics/learning_exercise.html#synthetic-data",
+    "title": "Learning Exercise",
+    "section": "Synthetic data",
+    "text": "Synthetic data\nTo speed data access, we downloaded data from the basic monthly Current Population Survey for all months from 2010–2019. We processed these data, grouped by sex and age of the youngest child, and estimated the proportion employed. We then generated synthetic data: we created a new dataset for you to use with simulated people using these known probabilities.\nSynthetic data is good in our setting for two reasons\n\nwe know the answer\nyou can download the synthetic data right from this website\n\nFor transparency, here is the code with which we created the synthetic data. The line below will load the synthetic data.\n\nparents &lt;- read_csv(\"https://info3370.github.io/data/parents.csv\")\n\nYour synthetic data intentionally omits any parents with child age 1! Here is a graph showing the averages in your data, grouped by child age and sex.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Learning Exercise"
+    ]
+  },
+  {
+    "objectID": "topics/learning_exercise.html#your-task-predict-at-child-age-1",
+    "href": "topics/learning_exercise.html#your-task-predict-at-child-age-1",
+    "title": "Learning Exercise",
+    "section": "Your task: Predict at child age 1",
+    "text": "Your task: Predict at child age 1\nYour task is to answer the question: what proportion are employed among female respondents whose youngest child is 1 year old?\n\nyou can use a model with the other ages\nyou can use strategies from the statistical learning page\nyou can use the male respondents if you think they are helpful\n\nNear the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closest!",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Learning Exercise"
+    ]
+  },
+  {
+    "objectID": "topics/learning_exercise.html#footnotes",
+    "href": "topics/learning_exercise.html#footnotes",
+    "title": "Learning Exercise",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nEach married pair need not be of different sex. The data include same-sex couples.↩︎",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Learning Exercise"
     ]
   },
   {
@@ -641,68 +514,364 @@
     ]
   },
   {
-    "objectID": "topics/learning_exercise.html",
-    "href": "topics/learning_exercise.html",
-    "title": "Learning Exercise",
+    "objectID": "topics/asking_questions.html",
+    "href": "topics/asking_questions.html",
+    "title": "Asking Questions",
     "section": "",
-    "text": "Gender inequality in employment is much greater among new parents than among non-parents. This exercise seeks to estimate the proportion employed among married men and women1 with a 1-year-old child at home. Our data include those with at least one child age 0–18.",
+    "text": "TODO\n\n\n\n Back to top",
     "crumbs": [
       " ",
       "Topics",
-      "Working with Data",
-      "Learning Exercise"
+      "Asking Questions"
     ]
   },
   {
-    "objectID": "topics/learning_exercise.html#synthetic-data",
-    "href": "topics/learning_exercise.html#synthetic-data",
-    "title": "Learning Exercise",
-    "section": "Synthetic data",
-    "text": "Synthetic data\nTo speed data access, we downloaded data from the basic monthly Current Population Survey for all months from 2010–2019. We processed these data, grouped by sex and age of the youngest child, and estimated the proportion employed. We then generated synthetic data: we created a new dataset for you to use with simulated people using these known probabilities.\nSynthetic data is good in our setting for two reasons\n\nwe know the answer\nyou can download the synthetic data right from this website\n\nFor transparency, here is the code with which we created the synthetic data. The line below will load the synthetic data.\n\nparents &lt;- read_csv(\"https://info3370.github.io/data/parents.csv\")\n\nYour synthetic data intentionally omits any parents with child age 1! Here is a graph showing the averages in your data, grouped by child age and sex.",
-    "crumbs": [
-      " ",
-      "Topics",
-      "Working with Data",
-      "Learning Exercise"
-    ]
-  },
-  {
-    "objectID": "topics/learning_exercise.html#your-task-predict-at-child-age-1",
-    "href": "topics/learning_exercise.html#your-task-predict-at-child-age-1",
-    "title": "Learning Exercise",
-    "section": "Your task: Predict at child age 1",
-    "text": "Your task: Predict at child age 1\nYour task is to answer the question: what proportion are employed among female respondents whose youngest child is 1 year old?\n\nyou can use a model with the other ages\nyou can use strategies from the statistical learning page\nyou can use the male respondents if you think they are helpful\n\nNear the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closest!",
-    "crumbs": [
-      " ",
-      "Topics",
-      "Working with Data",
-      "Learning Exercise"
-    ]
-  },
-  {
-    "objectID": "topics/learning_exercise.html#footnotes",
-    "href": "topics/learning_exercise.html#footnotes",
-    "title": "Learning Exercise",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nEach married pair need not be of different sex. The data include same-sex couples.↩︎",
-    "crumbs": [
-      " ",
-      "Topics",
-      "Working with Data",
-      "Learning Exercise"
-    ]
-  },
-  {
-    "objectID": "topics/r_basics.html",
-    "href": "topics/r_basics.html",
-    "title": "R and RStudio",
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
     "section": "",
-    "text": "This course uses R, RStudio, and Quarto\n\nR is statistical software\nRStudio is a user interface\nQuarto is an authoring framework for reproducible documents\n\nAll are free and open source. To set the software up on your computer, follow the steps in the Prerequisites section of R4DS. To learn about RStudio, visit the User Guide.\n\n\n\n\n Back to top",
+    "text": "Some assignments have associated readings, which are listed in the reading column. Due dates are tentative for assignments that are not yet released.\n\n\n\nDue date\nAssignment\nReading\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\nWed Jan 31 at 5pm\nProblem Set 1\nCheng 2021\n\n\nWed Feb 7 at 5pm\nPeer Review 1\n\n\n\nWed Feb 14 at 5pm\nProblem Set 2\nEngland et al. 2020\n\n\nWed Feb 21 at 5pm\nPeer Review 2\n\n\n\nFebruary break\n\n\n\n\nWed Mar 6 at 5pm\nProblem Set 3\n\n\n\nWed Mar 13 at 5pm\nPeer Review 3\n\n\n\nWed Mar 20 at 5pm\nProblem Set 4\n\n\n\nWed Mar 27 at 5pm\nPeer Review 4\n\n\n\nSpring break\n\n\n\n\nWed Apr 17 at 5pm\nProblem Set 5\n\n\n\nWed Apr 24 at 5pm\nProject writeup + presentation slides due\n\n\n\nTh Apr 25 8:40–9:55am\nProject presentations in discussion\n\n\n\nWed May 1 at 5pm\nPeer Review 5\n\n\n\nTh May 2 8:40–9:55am\nProject presentations in discussion"
+  },
+  {
+    "objectID": "schedule.html#assignments",
+    "href": "schedule.html#assignments",
+    "title": "Schedule",
+    "section": "",
+    "text": "Some assignments have associated readings, which are listed in the reading column. Due dates are tentative for assignments that are not yet released.\n\n\n\nDue date\nAssignment\nReading\n\n\n\n\nWed Jan 24 at 5pm\nProblem Set 0\n\n\n\nWed Jan 31 at 5pm\nProblem Set 1\nCheng 2021\n\n\nWed Feb 7 at 5pm\nPeer Review 1\n\n\n\nWed Feb 14 at 5pm\nProblem Set 2\nEngland et al. 2020\n\n\nWed Feb 21 at 5pm\nPeer Review 2\n\n\n\nFebruary break\n\n\n\n\nWed Mar 6 at 5pm\nProblem Set 3\n\n\n\nWed Mar 13 at 5pm\nPeer Review 3\n\n\n\nWed Mar 20 at 5pm\nProblem Set 4\n\n\n\nWed Mar 27 at 5pm\nPeer Review 4\n\n\n\nSpring break\n\n\n\n\nWed Apr 17 at 5pm\nProblem Set 5\n\n\n\nWed Apr 24 at 5pm\nProject writeup + presentation slides due\n\n\n\nTh Apr 25 8:40–9:55am\nProject presentations in discussion\n\n\n\nWed May 1 at 5pm\nPeer Review 5\n\n\n\nTh May 2 8:40–9:55am\nProject presentations in discussion"
+  },
+  {
+    "objectID": "schedule.html#meetings",
+    "href": "schedule.html#meetings",
+    "title": "Schedule",
+    "section": "Meetings",
+    "text": "Meetings\nReadings are to be read after class, unless otherwise specified. Readings from R for Data Science (R4DS, Wickham et al. 2023) are intended as references that do not need to be read line-by-line but are a useful reference to support ideas.\n\n\n\nDate\nType\nTopic\nReading\n\n\n\n\nJan 23\nLecture\nWelcome\nJencks 2002 p. 49–53\n\n\nJan 25\nDiscussion\nVisualization\nR4DS Ch 1\n\n\nJan 30\nLecture\nSampling: Simple random and unequal probability\nProbability sampling\n\n\nFeb 1\nDiscussion\nData transformation (day 1 / 2)\nR4DS Ch 3\n\n\nFeb 6\nLecture\nSampling: Stratified, clustered, and the future\nGroves 2011\n\n\nFeb 8\nDiscussion\nData transformation (day 2 / 2)\nR4DS Ch 3\n\n\nFeb 13\nLecture\nStatistical learning\nBerk 2020 Ch 1 p. 1–5, stopping at paragraph ending “…is nonlinear.” Then p. 14–17 “Model misspecification…” through “…will always be in play.”\n\n\nFeb 15\nDiscussion\nStatistical learning activity\n\n\n\nFeb 20\nLecture\nPredicting life outcomes\nOptional: Salganik et al. 2020\n\n\nFeb 22\nDiscussion\nPSID Income Prediction Challenge (day 1 / 2)\n\n\n\nFebruary break\n\n\n\n\n\nFeb 29\nDiscussion\nPSID Income Prediction Challenge (day 2 / 2)\n\n\n\nMar 5\nLecture\nPSID Income Prediction: Awards and takeaways\nOptional: Lundberg et al. 2024\n\n\nMar 7\nDiscussion\nRacial wealth gap\n\n\n\nMar 12\nLecture\nPolitical origins of racial inequality\n\n\n\nMar 14\nDiscussion\nClass inequality exercise\n\n\n\nMar 19\nLecture\nClass + gender inequality\n\n\n\nMar 21\nDiscussion\nProject work\n\n\n\nMar 26\nLecture\nAsking research questions\n\n\n\nMar 28\nDiscussion\nProject work\n\n\n\nSpring break\n\n\n\n\n\nApr 9\nLecture\nMoral arguments\nBefore class, watch intro to Rawls and 3:49–5:05 on Nozick\n\n\nApr 11\nDiscussion\nProject work\n\n\n\nApr 16\nLecture\nReducing inequality: Educational expansion\nBrand 2023 Ch 1\n\n\nApr 18\nDiscussion\nProject work\n\n\n\nApr 23\nLecture\nReducing inequality: Reparations\nBefore class, watch Ta-Nehisi Coates\n\n\nApr 25\nDiscussion\nProject presentations\n\n\n\nApr 30\nLecture\nReducing inequality: Sentencing reform\nBefore class, explore A Matter of Time\n\n\nMay 2\nDiscussion\nProject presentations\n\n\n\nMay 7\nCourse summary"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Studying Social Inequality with Data Science",
+    "section": "",
+    "text": "Together, we will generate new knowledge about social inequality using the tools of data science",
+    "crumbs": [
+      " ",
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#learning-goals",
+    "href": "index.html#learning-goals",
+    "title": "Studying Social Inequality with Data Science",
+    "section": "Learning goals",
+    "text": "Learning goals\nAs a result of participating in this course, students will be able to\n\nvisualize economic inequality with graphs that summarize survey data\nconnect theories about inequality to quantitative empirical evidence\nevaluate the effects of hypothetical interventions to reduce inequality\nconduct data analysis using the R programming language",
+    "crumbs": [
+      " ",
+      "Home"
+    ]
+  },
+  {
+    "objectID": "assignments/pset2.html",
+    "href": "assignments/pset2.html",
+    "title": "Problem Set 2: Data Transformation",
+    "section": "",
+    "text": "Due: 5pm on Wednesday, February 14.\nStudent identifer: [type your anonymous identifier here]\nThis problem set draws on the following paper.\nA note about sex and gender. As we have discussed in class, sex typically refers to categories assigned at birth (e.g., female, male). Gender is a performed construct with many possible values: man, woman, nonbinary, etc. The measure in the CPS-ASEC is “sex,” coded male or female. We will use these data to study sex disparities between those identifying as male and female. The paper at times uses “gender” to refer to this construct.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 2"
+    ]
+  },
+  {
+    "objectID": "assignments/pset2.html#data-analysis-existing-question",
+    "href": "assignments/pset2.html#data-analysis-existing-question",
+    "title": "Problem Set 2: Data Transformation",
+    "section": "1. Data analysis: Existing question",
+    "text": "1. Data analysis: Existing question\n20 points. Reproduce Figure 1 from the paper.\nVisit cps.ipums.org to download data from the 1962–2023 March Annual Social and Economic Supplement. When choosing samples, you want all samples in the “ASEC” tab and none of the samples in the “Basic Monthly” tab. Include these variables in your cart: sex, age, asecwt, empstat.\nTo reduce extract size, select cases to those ages 25–54. Before submitting your extract, we recommend changing the data format to “Stata (.dta)” so that you get value labels.\n\n\n\n\n\n\nTip\n\n\n\nLook ahead: you will later study a new outcome of your own choosing. You could add it to your cart now if you want.\n\n\nOn your computer, analyze these data.\n\nfilter to asecwt &gt; 0 (see paper footnote on p. 6995 about negative weights)\nmutate to create an employed variable indicating that empstat == 10 | empstat == 12\nmutate to convert sex to a factor variable using as_factor\ngroup by sex and year\nsummarize the proportion employed: use weighted.mean to take the mean of employed using the weight asecwt\n\nYour figure will be close but not identical to the original. Yours will include some years that the original did not. Feel free to change aesthetics of the plot, such as the words used in labels. For example, it would be more accurate to the data to label the legend “Sex” with values “Male” and “Female.”\n\nlibrary(tidyverse)\nlibrary(scales)\nlibrary(haven)",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 2"
+    ]
+  },
+  {
+    "objectID": "assignments/pset2.html#reading-questions",
+    "href": "assignments/pset2.html#reading-questions",
+    "title": "Problem Set 2: Data Transformation",
+    "section": "2. Reading questions",
+    "text": "2. Reading questions\n2.1 (3 points) The authors write that “change in the gender system has been deeply asymmetric.” Explain this in a sentence or two to someone who hasn’t read the article.\n2.2 (3 points) The authors discuss cultural changes that could lead to greater equality. Propose a question that could (hypothetically) be included in the CPS-ASEC questionnaire to help answer questions about cultural changes.\n\n\n\n\n\n\nTip\n\n\n\nIf you are not sure how to word a survey question, here are some examples from the American Time Use Survey, Current Population Survey, and General Social Survey.\n\n\n2.3 (3 points) The authors discuss institutional changes that could lead to greater equality. Propose a question that could (hypothetically) be included in the CPS-ASEC questionnaire to help answer questions about institutional changes.\n2.4 (1 point) What was one fact presented in this paper that most surprised you?",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 2"
+    ]
+  },
+  {
+    "objectID": "assignments/pset2.html#a-new-outcome",
+    "href": "assignments/pset2.html#a-new-outcome",
+    "title": "Problem Set 2: Data Transformation",
+    "section": "3. A new outcome",
+    "text": "3. A new outcome\n20 points. The CPS-ASEC has numerous variables. Pick another variable of your choosing. Add it to your cart in IPUMS, and visualize how that variable has changed over time for those identifying as male and female.\nAs in the previous plot, year should be on the x-axis and color should represent sex. The y-axis is up to you. You can examine something like median income, proportion holding college degrees, or the 90th percentile of usual weekly work hours. You can restrict to some subset if you want, such as those who are employed.\nYour answer should include\n\na written statement of what you estimated: the variable you chose, any sample restrictions you made, and how you summarized that variable\na written interpretation of what you found\ncode following style conventions\nyour publication-quality visualization",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 2"
+    ]
+  },
+  {
+    "objectID": "assignments/pset2.html#grad-question-ratio-and-difference",
+    "href": "assignments/pset2.html#grad-question-ratio-and-difference",
+    "title": "Problem Set 2: Data Transformation",
+    "section": "Grad question: Ratio and difference",
+    "text": "Grad question: Ratio and difference\n\nThis question is required for grad students. It is optional for undergrads, and worth no extra credit.\n\n20 points. The figures above visualize a summary statistic for each subgroup: male and female. Another way to visualize this is with the ratio (female statistic / male statistic) or difference of the two (female statistic - male statistic).\nFor your own question, produce two new visualizations:\n\none showing the female / male ratio over time\none showing the female - male difference over time\n\nWhich do you find easier to interpret, and why?\n\n\n\n\n\n\nTip\n\n\n\nIt is likely that your code for the previous parts produced one column with estimates and another column sex containing the values male and female. One way to calculate a ratio and difference is to reshape the data so that there is one row for each year, containing both the male and female estimates. You can do this with pivot_wider where the names come from sex and the values come from the column containing your estimates. Then you can mutate() to create the ratio and difference.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 2"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html",
+    "href": "assignments/pset0.html",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "",
+    "text": "Due: 5pm on Wednesday, January 24.\nIn this exercise, you will install R, RStudio and Quarto. The exercise will ensure that they are set up correctly so that everybody is ready to dive into coursework.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#install-software-requirements",
+    "href": "assignments/pset0.html#install-software-requirements",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Install Software Requirements",
+    "text": "Install Software Requirements\nYou should follow the instructions in R4DS to:\n\nInstall R\nInstall RStudio\n\nOnce R and RStudio are successfully installed, this also means that Quarto is successfully installed because it comes bundled with RStudio.\nFinally, you will need to open RStudio, select the Terminal tab, and execute the following command: quarto install tinytex as demonstrated in the image below.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#download-problem-set",
+    "href": "assignments/pset0.html#download-problem-set",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Download Problem Set",
+    "text": "Download Problem Set\nNext, download this problem set which is a Quarto Markdown Document.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#render-the-problem-set",
+    "href": "assignments/pset0.html#render-the-problem-set",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Render the Problem Set",
+    "text": "Render the Problem Set\nFinally, open the downloaded problem set in RStudio. You should then click the “Render” button as shown in the image below.\n This will run the R code and combine the output with the text in the document into a PDF. By default, this PDF will be output in the same directory that you saved pset0.qmd in. You will then submit the PDF on Canvas.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/pset0.html#issues",
+    "href": "assignments/pset0.html#issues",
+    "title": "Problem Set 0: Setting up R, RStudio, and Quarto",
+    "section": "Issues",
+    "text": "Issues\nIf you run into issues while attempting to render the Problem Set, be sure to open a question on the Ed Discussion!",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 0"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html",
+    "href": "assignments/project.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/pset1.html",
+    "href": "assignments/pset1.html",
+    "title": "Problem Set 1: Visualization",
+    "section": "",
+    "text": "Due: 5pm on Wednesday, January 31.\n\n\n\n\n\n\nBefore you start\n\n\n\nCreate an anonymous identifier for yourself here! Want to see how you’ll be evaluated? Check out the rubric\n\n\nStudent identifer: [type your anonymous identifier here]\n\nUse this .qmd template to complete the problem set\nIn Canvas, you will upload the PDF produced by your .qmd file\nPut your identifier above, not your name! We want anonymous grading to be possible\n\nThis problem set involves both data analysis and reading.\n\nData analysis\nThis problem set uses the data lifeCourse.csv.\n\nlibrary(tidyverse)\nlibrary(scales)\nlifeCourse &lt;- read_csv(\"https://info3370.github.io/data/lifeCourse.csv\")\n\nThe data contain life course earnings profiles for four cohorts of American workers: those born in 1940, 1950, 1960, and 1970. Each row contains a summary of the annual earnings distribution for a particular birth cohort at a particular age, among the subgroup with a particular level of education. To prepare these data, we aggregated microdata from the Current Population Survey, provided through the Integrated Public Use Microdata Series.\nThe data contain five variables.\n\nquantity is the metric by which the earnings distribution is summarized: 10th, 50th, or 90th percentile\neducation is the educational subgroup being summarized: College Degree, Less than College\ncohort is the cohort (people with a given birth year) to which these data apply: 1940, 1950, 1960, 1970\nage is the age at which earnings were measured: 30–45\nincome is the value for the given earnings percentile in the given subgroup. Income values are provided in 2022 dollars\n\n\n\n1. Visualize (25 points)\nUse ggplot to visualize these data. To denote the different trajectories,\n\nmake your plot using geom_point() or geom_line()\nuse the x-axis for age\nuse the y-axis for income\nuse color for quantity\nuse facet_grid to make a panel of facets where each row is an education value and each column is a cohort value\n\nYou should prepare the graph as though you were going to publish it. Modify the axis titles so that a reader would know what is on the axis. Use appropriate capitalization in all labels. Try using the label_dollar() function from the scales package so that the y-axis uses dollar values.\nYour code should be well-formatted as defined by R4DS. In your produced PDF, no lines of code should run off the page.\nMany different graphs can be equally correct. You will be evaluated by\n\nhaving publication-ready graph aesthetics\ncode that follows style conventions\n\n\n# your code goes here\n\n\n\n2. Interpret (10 points)\nWrite 2-3 sentences summarizing the trends that you see in the data.\n2.1 (3 points). Focus on those born in 1970. For those with a college degree, how do the top and bottom of the income distribution change over the life course?\n\nType your answer here.\n\n2.2 (3 points). Focus on those born in 1970. How does the pattern differ for those without college degres differ from your answer in 2.1?\n\nType your answer here.\n\n2.3 (4 points). How do the patterns you identified in 2.1 and 2.2 change from the 1940 to the 1970 cohort?\n\nType your answer here.\n\n\n\n3. Connect to reading (15 points)\nRead p. 1–7 of following paper. Stop before the section “Analytic Framework for Decomposing Inequality.”\n\nCheng, Siwei. 2021. The shifting life course patterns of wage inequality.. Social Forces 100(1):1–28.\n\nOur data are not the same as Cheng’s. But our analysis is able to reproduce many of her findings. Answer each question in two sentences or less.\nCheng discusses period trends, cohort trends, and age trends.\n3.1 (3 points) Which dimension of your graph shows a cohort trend?\n\nType your answer here.\n\n3.2 (3 points) Which dimension of your graph shows an age trend?\n\nType your answer here.\n\n3.3 (3 points) Cheng discusses education-based cumulative advantage. Describe how you see this in your graph.\n\nType your answer here.\n\n3.4 (3 points) Cheng discusses within-education trajectory heterogeneity. Describe how your graph shows heterogeneity of outcomes within educational categories.\n\nType your answer here.\n\n3.5 (3 points) Cheng discusses wage volatility: how wages rise and fall over time for a given person. Why is our data (the Current Population Survey) the wrong dataset to study wage volatility?\n\nType your answer here.\n\n\n\nGrad question: Model-based estimates\nThis question assumes familiarity with Ordinary Least Squares.\n\nFor graduate students, this question is worth 20 points.\nFor undergraduate students, this question is optional and worth 0 points.\n\nThe data contain nonparametric estimates that contain some noise: the data points provided partly reflect random variation because they are estimatd in a sample.\nModel-based estimates reduce noise by pooling information across observations, at the cost of introducing assumptions. Fit an OLS model to the data using age as a numeric variable and education, cohort, and quantity as factor variables. Interact all of these predictors with each other.\n\nfit &lt;- lm(\n  income ~ age * factor(cohort) * education * quantity,\n  data = lifeCourse\n)\n\nEffectively, this estimates a best-fit line through each set of points depicted in your original figure. For each observation, store a prediction from this model (see predict()).\nRe-create your plot from (1) using\n\ngeom_point() for the nonparametric estimates (as above)\ngeom_line() for your model-based predicted values\n\n\n\nComputing environment\nLeave this at the bottom of your file, and it will record information such as your operating system, R version, and package versions. This is helpful for resolving any differences in results across people.\n\nsessionInfo()\n\nR version 4.3.2 (2023-10-31)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Sonoma 14.2.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/New_York\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n [1] scales_1.2.1    lubridate_1.9.3 forcats_1.0.0   stringr_1.5.0  \n [5] dplyr_1.1.3     purrr_1.0.2     readr_2.1.4     tidyr_1.3.0    \n [9] tibble_3.2.1    ggplot2_3.4.4   tidyverse_2.0.0\n\nloaded via a namespace (and not attached):\n [1] bit_4.0.5         gtable_0.3.4      jsonlite_1.8.7    crayon_1.5.2     \n [5] compiler_4.3.2    tidyselect_1.2.0  parallel_4.3.2    yaml_2.3.7       \n [9] fastmap_1.1.1     R6_2.5.1          generics_0.1.3    knitr_1.44       \n[13] htmlwidgets_1.6.2 munsell_0.5.0     pillar_1.9.0      tzdb_0.4.0       \n[17] rlang_1.1.1       utf8_1.2.3        stringi_1.7.12    xfun_0.40        \n[21] bit64_4.0.5       timechange_0.2.0  cli_3.6.1         withr_2.5.1      \n[25] magrittr_2.0.3    digest_0.6.33     grid_4.3.2        vroom_1.6.4      \n[29] rstudioapi_0.15.0 hms_1.1.3         lifecycle_1.0.3   vctrs_0.6.4      \n[33] evaluate_0.22     glue_1.6.2        fansi_1.0.5       colorspace_2.1-0 \n[37] rmarkdown_2.25    tools_4.3.2       pkgconfig_2.0.3   htmltools_0.5.6.1\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Problem Sets",
+      "Problem Set 1"
+    ]
+  },
+  {
+    "objectID": "forms.html",
+    "href": "forms.html",
+    "title": "Forms",
+    "section": "",
+    "text": "If you are missing class, here is a form where you can tell us!\n\nAssignment extension form to request an assignment extension that does not count against flex days under exceptional circumstances\nRegrade request form to be submitted within 72 hours of grade post if you think we have graded something wrong\nExcused absence form. To request an excused absence from lecture or discussion\nLecture make-up form. For lectures that are missed which we haven’t excused\nFor non-excused absences from discussion, you should do the discussion activity on your own and submit in the Canvas assignment associated with that discussion\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "office_hours.html",
+    "href": "office_hours.html",
+    "title": "Office Hours",
+    "section": "",
+    "text": "Check the post pinned on Ed Discussion to see any week-specific changes to the schedule.\n\n\n\nPerson\nTime\nLocation\n\n\n\n\nStacy\nM 12–1pm\nRhodes 402\n\n\nJoanne\nM 1–2pm (canceled 2/19)\nRhodes 408\n\n\nChang\nM 3–4pm\nRhodes 408\n\n\nIan\nT 10–11am\nGates 223\n\n\nLiz\nW 12:30–1:30pm\nRhodes 402\n\n\nDaniel\nW 1–2pm\nRhodes 406\n\n\nFede\nW 2–3pm\nRhodes 406\n\n\nOlaf\nW 3–4pm\nRhodes 406\n\n\nJonathan\nTh 1–2pm\nUris G44\n\n\nAkira\nTh 3:30–4:30pm\nZoom\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "topics/about.html",
+    "href": "topics/about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "topics/class.html",
+    "href": "topics/class.html",
+    "title": "Class",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top",
     "crumbs": [
       " ",
       "Topics",
-      "Working with Data",
-      "R and RStudio"
+      "Describing Inequality",
+      "Class"
+    ]
+  },
+  {
+    "objectID": "topics/gender.html",
+    "href": "topics/gender.html",
+    "title": "Gender",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Gender"
+    ]
+  },
+  {
+    "objectID": "topics/prediction.html",
+    "href": "topics/prediction.html",
+    "title": "Economic opportunity",
+    "section": "",
+    "text": "Slides\nEquality of economic opportunity is an ideal that is widely shared.\nTo study economic opportunity with the tools of data science, we will translate this abstract concept into statistical quantities.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Economic opportunity"
+    ]
+  },
+  {
+    "objectID": "topics/prediction.html#opportunity-income-mobility",
+    "href": "topics/prediction.html#opportunity-income-mobility",
+    "title": "Economic opportunity",
+    "section": "Opportunity: Income mobility",
+    "text": "Opportunity: Income mobility\nIn a world of equal opportunity, children from all families would have the same chances of realizing a high income as adults. In a dystopian world of unequal opportunity, a child’s future income might be perfectly determined by the income of their parents. The world as it exists is somewhere between these extremes.\n Research on income mobility in the United States shows that opportunity is unequal: about 10% of children born in the bottom fifth of the distribution make it to the top, whereas about 30% of those born in the top fifth of the distribution stay at the top.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Economic opportunity"
+    ]
+  },
+  {
+    "objectID": "topics/prediction.html#generalizing-to-many-inputs",
+    "href": "topics/prediction.html#generalizing-to-many-inputs",
+    "title": "Economic opportunity",
+    "section": "Generalizing to many inputs",
+    "text": "Generalizing to many inputs\nParent income is not the only variable that determines a child’s life chances. For instance, one’s grandparents and other extended kin may also provide resources not captured by parent income. Other aspects of family background that may matter include race, education, family structure, and outcomes in previous generations. How can we measure opportunity as a function of many inputs?\nOne approach is to define economic opportunity as a prediction problem.\n\nCases are divided into the learning set and holdout set.\n\nthe learning set is where we will learn functions to predict a child’s income given features in their family background\nthe holdout set is where we will evaluate predictions, at the end of this exercise\n\nThe features are the columns. Most features correspond to family background. The data include one feature that occurs within the respondent’s life course: own education. We suggest that you\n\nfirst attempt the prediction task without own education, to see how well you can predict given family background\nthen add own education and see how performance changes\n\nBroadly speaking, predictive performance will tell us something about equality of opportunity.\n\nperfect prediction = perfect inequality of opportunity. Family background determines one’s outcome\ncompletely imperfect prediction = full equality of opportunity. Family background tells us nothing about one’s income\n\nReality will be somewhere in the middle!",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Economic opportunity"
+    ]
+  },
+  {
+    "objectID": "topics/prediction.html#accessing-data",
+    "href": "topics/prediction.html#accessing-data",
+    "title": "Economic opportunity",
+    "section": "Accessing data",
+    "text": "Accessing data\nVisit the exercise page on OpenICPSR. You will need to register for an account and agree to terms. Download for_students.zip.\nAbout these data: The Panel Study of Income Dynamics (PSID) began in 1968 with a representative sample of U.S. households. Since then, the study has repeatedly interviewed these individuals and their descendants. The PSID is uniquely positioned to help us answer questions about income mobility over 3 generations: grandparents, parents, and respondents. We will refer to these as generations g1, g2, and g3.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Economic opportunity"
+    ]
+  },
+  {
+    "objectID": "topics/prediction.html#your-task",
+    "href": "topics/prediction.html#your-task",
+    "title": "Economic opportunity",
+    "section": "Your task",
+    "text": "Your task\nYour task is to predict respondent’s incomes.\n\nto build your model, using learning.csv\nmake predictions for the cases in holdout_public.csv\n\nYou can use any statistical or machine learning approach you want. For ideas, see the page on statistical learning.\nYou can also use any or all of the predictors provided in learning.csv:\n\nrespondent sex\nrespondent education\nparent and grandparent education\nparent and grandparent log income\ngrandparent’s race\n\nFor the purpose of this exercise, we have constructed each log income variable to be the log of mean income across all surveys conducted with the person at age 30–45.\nThe data also contain identifiers:\n\ng1_id identifies grandparents (multiple rows have the same grandparent)\ng2_id identifies parents (multiple rows have the same parent)\ng3_id identifies respondents (each row is a unique respondent)",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Economic opportunity"
+    ]
+  },
+  {
+    "objectID": "topics/prediction.html#how-to-submit",
+    "href": "topics/prediction.html#how-to-submit",
+    "title": "Economic opportunity",
+    "section": "How to submit",
+    "text": "How to submit\nYou will submit\n\nyour predictions in a .csv file with two columns\n\ng3_id for each case in holdout_public\ng3_log_income with your prediction for each case\n\nyour .R code file\n\nSubmit predictions in this Google form",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Economic opportunity"
+    ]
+  },
+  {
+    "objectID": "topics/prediction.html#summary-video-what-we-covered-today",
+    "href": "topics/prediction.html#summary-video-what-we-covered-today",
+    "title": "Economic opportunity",
+    "section": "Summary video: What we covered today",
+    "text": "Summary video: What we covered today",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Economic opportunity"
+    ]
+  },
+  {
+    "objectID": "topics/race.html",
+    "href": "topics/race.html",
+    "title": "Race",
+    "section": "",
+    "text": "TODO\n\n\n\n Back to top",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Race"
     ]
   },
   {

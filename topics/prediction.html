@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Studying Social Inequality with Data Science - Predicting life outcomes</title>
+<title>Studying Social Inequality with Data Science - Economic opportunity</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Describing Inequality</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Predicting life outcomes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Describing Inequality</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Economic opportunity</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -221,6 +221,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Learning Exercise</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../topics/sample_splitting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample Splitting</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -235,7 +241,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../topics/prediction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Predicting life outcomes</span></a>
+ <span class="menu-text">Economic opportunity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,14 +328,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#opportunity-income-mobility" id="toc-opportunity-income-mobility" class="nav-link active" data-scroll-target="#opportunity-income-mobility">Opportunity: Income mobility</a></li>
+  <li><a href="#generalizing-to-many-inputs" id="toc-generalizing-to-many-inputs" class="nav-link" data-scroll-target="#generalizing-to-many-inputs">Generalizing to many inputs</a></li>
+  <li><a href="#accessing-data" id="toc-accessing-data" class="nav-link" data-scroll-target="#accessing-data">Accessing data</a></li>
+  <li><a href="#your-task" id="toc-your-task" class="nav-link" data-scroll-target="#your-task">Your task</a></li>
+  <li><a href="#how-to-submit" id="toc-how-to-submit" class="nav-link" data-scroll-target="#how-to-submit">How to submit</a></li>
+  <li><a href="#summary-video-what-we-covered-today" id="toc-summary-video-what-we-covered-today" class="nav-link" data-scroll-target="#summary-video-what-we-covered-today">Summary video: What we covered today</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Describing Inequality</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Predicting life outcomes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Describing Inequality</a></li><li class="breadcrumb-item"><a href="../topics/prediction.html">Economic opportunity</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Predicting life outcomes</h1>
+<h1 class="title">Economic opportunity</h1>
 </div>
 
 
@@ -346,9 +363,92 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>TODO</p>
+<p><a href="../../assets/slides/lec5/lec5.pdf">Slides</a></p>
+<p>Equality of economic opportunity is an ideal that is widely shared.</p>
+<blockquote class="blockquote">
+<p>Now, the premise that we’re all created equal is the opening line in the American story. And while we don’t promise equal outcomes, we’ve strived to deliver equal opportunity: the idea that success doesn’t depend on being born into wealth or privilege, it depends on effort and merit.</p>
+<p>— President Obama, <a href="https://youtu.be/bXjksBH9QZE?t=266">Remarks on the Economy</a>, December 2013</p>
+</blockquote>
+<p>To study economic opportunity with the tools of data science, we will translate this abstract concept into statistical quantities. <!-- We will begin by considering the incomes of parents and children and then will generalize this concept to many input variables. --></p>
+<section id="opportunity-income-mobility" class="level2">
+<h2 class="anchored" data-anchor-id="opportunity-income-mobility">Opportunity: Income mobility</h2>
+<p>In a world of equal opportunity, children from all families would have the same chances of realizing a high income as adults. In a dystopian world of unequal opportunity, a child’s future income might be perfectly determined by the income of their parents. The world as it exists is somewhere between these extremes.</p>
+<p><img src="../slides/lec5/income_opportunity.png" class="img-fluid"> Research on income mobility in the United States shows that <a href="https://eml.berkeley.edu/~saez/chettyetalAERPP2014.pdf">opportunity is unequal</a>: about 10% of children born in the bottom fifth of the distribution make it to the top, whereas about 30% of those born in the top fifth of the distribution stay at the top.</p>
+<!-- In a world of high economic opportunity, many children might go on to have higher incomes as adults than their parents did. U.S. cohorts born in the 1940s had this experience, but absolute income mobility [has fallen](https://www.science.org/doi/10.1126/science.aal4617) in more recent cohorts. -->
+<!-- Another way of thinking about opportunity is relative: if we rank all parent incomes in the parent generation and all child incomes in the child generation, what are the chances of moving up the ranking? Relative upward mobility has stayed [fairly flat](https://eml.berkeley.edu/~saez/chettyetalAERPP2014.pdf) in recent decades. -->
+<!-- The two facts above are consistent with each other because Americans born in the mid-20th century rode an upward wave of broad-based economic growth. The same is not true of more recent cohorts, where only about half of children go on to have higher incomes than their parents. -->
+<!-- If there were **equal opportunity**, then we might expect all children to have the same chance of landing in the top fifth of the income distribution. But [opportunity is unequal](https://eml.berkeley.edu/~saez/chettyetalAERPP2014.pdf): about 10\% of children born in the bottom fifth of the distribution make it to the top, whereas about 30\% of those born in the top fifth of the distribution stay at the top. -->
+</section>
+<section id="generalizing-to-many-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="generalizing-to-many-inputs">Generalizing to many inputs</h2>
+<p>Parent income is not the only variable that determines a child’s life chances. For instance, one’s <a href="https://link.springer.com/article/10.1007/s13524-011-0014-7">grandparents and other extended kin</a> may also provide resources not captured by parent income. Other aspects of family background that may matter include race, education, family structure, and outcomes in previous generations. How can we measure opportunity as a function of many inputs?</p>
+<p>One approach is to define economic opportunity as a prediction problem.</p>
+<p><img src="../slides/lec5/prediction_matrix.png" class="img-fluid"></p>
+<p>Cases are divided into the <strong>learning set</strong> and <strong>holdout set</strong>.</p>
+<ul>
+<li>the learning set is where we will learn functions to predict a child’s income given features in their family background</li>
+<li>the holdout set is where we will evaluate predictions, at the end of this exercise</li>
+</ul>
+<p>The <strong>features</strong> are the columns. Most features correspond to family background. The data include one feature that occurs within the respondent’s life course: own education. We suggest that you</p>
+<ul>
+<li>first attempt the prediction task without own education, to see how well you can predict given family background</li>
+<li>then add own education and see how performance changes</li>
+</ul>
+<p>Broadly speaking, predictive performance will tell us something about equality of opportunity.</p>
+<ul>
+<li>perfect prediction = perfect inequality of opportunity. Family background determines one’s outcome</li>
+<li>completely imperfect prediction = full equality of opportunity. Family background tells us nothing about one’s income</li>
+</ul>
+<p>Reality will be somewhere in the middle!</p>
+</section>
+<section id="accessing-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-data">Accessing data</h2>
+<p>Visit the <a href="https://www.openicpsr.org/openicpsr/project/185941/version/V2/view">exercise page</a> on OpenICPSR. You will need to register for an account and agree to terms. Download <a href="https://www.openicpsr.org/openicpsr/project/185941/version/V2/view?path=/openicpsr/185941/fcr:versions/V2/for_students.zip&amp;type=file">for_students.zip</a>.</p>
+<p>About these data: The <a href="https://psidonline.isr.umich.edu/">Panel Study of Income Dynamics</a> (PSID) began in 1968 with a representative sample of U.S. households. Since then, the study has repeatedly interviewed these individuals and their descendants. The PSID is uniquely positioned to help us answer questions about income mobility over 3 generations: grandparents, parents, and respondents. We will refer to these as generations g1, g2, and g3.</p>
+</section>
+<section id="your-task" class="level2">
+<h2 class="anchored" data-anchor-id="your-task">Your task</h2>
+<p>Your task is to predict respondent’s incomes.</p>
+<ul>
+<li>to build your model, using <code>learning.csv</code></li>
+<li>make predictions for the cases in <code>holdout_public.csv</code></li>
+</ul>
+<p>You can use any statistical or machine learning approach you want. For ideas, see the page on <a href="../topics/statistical_learning.html">statistical learning</a>.</p>
+<p>You can also use any or all of the predictors provided in <code>learning.csv</code>:</p>
+<ul>
+<li>respondent sex</li>
+<li>respondent education</li>
+<li>parent and grandparent education</li>
+<li>parent and grandparent log income</li>
+<li>grandparent’s race</li>
+</ul>
+<p>For the purpose of this exercise, we have constructed each log income variable to be the log of mean income across all surveys conducted with the person at age 30–45.</p>
+<p>The data also contain identifiers:</p>
+<ul>
+<li>g1_id identifies grandparents (multiple rows have the same grandparent)</li>
+<li>g2_id identifies parents (multiple rows have the same parent)</li>
+<li>g3_id identifies respondents (each row is a unique respondent)</li>
+</ul>
+</section>
+<section id="how-to-submit" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-submit">How to submit</h2>
+<p>You will submit</p>
+<ul>
+<li>your predictions in a .csv file with two columns
+<ul>
+<li><code>g3_id</code> for each case in <code>holdout_public</code></li>
+<li><code>g3_log_income</code> with your prediction for each case</li>
+</ul></li>
+<li>your .R code file</li>
+</ul>
+<p>Submit predictions in this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeCXspOpSiM5ScYHhbVx9TIbtHjtMbNUbm9T076NZsIP8ng4A/viewform?usp=sf_link">Google form</a></p>
+</section>
+<section id="summary-video-what-we-covered-today" class="level2">
+<h2 class="anchored" data-anchor-id="summary-video-what-we-covered-today">Summary video: What we covered today</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/7QkLwJZOcZ8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

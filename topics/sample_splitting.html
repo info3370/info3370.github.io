@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Studying Social Inequality with Data Science - Forms</title>
+<title>Studying Social Inequality with Data Science - Sample Splitting</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,8 +102,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -79,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Studying Social Inequality with Data Science</span>
     </a>
   </div>
@@ -90,23 +153,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text"> </span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assets/syllabus.pdf"> 
+    <a class="nav-link" href="../assets/syllabus.pdf"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./who_we_are.html"> 
+    <a class="nav-link" href="../who_we_are.html"> 
 <span class="menu-text">Team</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./schedule.html"> 
+    <a class="nav-link" href="../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./office_hours.html"> 
+    <a class="nav-link" href="../office_hours.html"> 
 <span class="menu-text">Office Hours</span></a>
   </li>  
   <li class="nav-item">
@@ -114,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Ed Discussion</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./forms.html"> 
+    <a class="nav-link" href="../forms.html"> 
 <span class="menu-text">Forms</span></a>
   </li>  
 </ul>
@@ -129,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Forms</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/r_basics.html">Working with Data</a></li><li class="breadcrumb-item"><a href="../topics/sample_splitting.html">Sample Splitting</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -139,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -151,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -166,64 +229,64 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/welcome.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/welcome.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population Sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Working with Data</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/r_basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/r_basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R and RStudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/visualization.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/visualization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Visualization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/data_transformation.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/data_transformation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data transformation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/weights.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/weights.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Weights</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/statistical_learning.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/statistical_learning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical Learning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/learning_exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/learning_exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Learning Exercise</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/sample_splitting.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/sample_splitting.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Sample Splitting</span></a>
   </div>
 </li>
@@ -240,25 +303,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/prediction.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/prediction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Economic opportunity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/race.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/race.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Race</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/gender.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/gender.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Gender</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/class.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/class.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Class</span></a>
   </div>
 </li>
@@ -266,7 +329,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topics/asking_questions.html" class="sidebar-item-text sidebar-link">
+  <a href="../topics/asking_questions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asking Questions</span></a>
   </div>
 </li>
@@ -296,19 +359,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/pset0.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/pset0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 0</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/pset1.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/pset1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/pset2.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/pset2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 2</span></a>
   </div>
 </li>
@@ -316,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/project.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Project</span></a>
   </div>
 </li>
@@ -327,18 +390,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#simulated-setting" id="toc-simulated-setting" class="nav-link active" data-scroll-target="#simulated-setting">Simulated setting</a></li>
+  <li><a href="#in-sample-prediction" id="toc-in-sample-prediction" class="nav-link" data-scroll-target="#in-sample-prediction">In-sample prediction</a></li>
+  <li><a href="#out-of-sample-prediction" id="toc-out-of-sample-prediction" class="nav-link" data-scroll-target="#out-of-sample-prediction">Out-of-sample prediction</a></li>
+  <li><a href="#split-sample-prediction" id="toc-split-sample-prediction" class="nav-link" data-scroll-target="#split-sample-prediction">Split-sample prediction</a></li>
+  <li><a href="#repeating-this-many-times" id="toc-repeating-this-many-times" class="nav-link" data-scroll-target="#repeating-this-many-times">Repeating this many times</a></li>
+  <li><a href="#closing-thoughts" id="toc-closing-thoughts" class="nav-link" data-scroll-target="#closing-thoughts">Closing thoughts</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/r_basics.html">Working with Data</a></li><li class="breadcrumb-item"><a href="../topics/sample_splitting.html">Sample Splitting</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Forms</h1>
+<h1 class="title">Sample Splitting</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta">
 
     
   
@@ -350,16 +426,173 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>If you are missing class, here is a form where you can tell us!</p>
+<p>A predictive model is an input-output function:</p>
 <ul>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScQQ2m1aO_QY8SjjIB0mdiNHOEvl29t84jLMQzMXc3mnBAH4A/viewform?usp=sf_link">Assignment extension form</a> to request an assignment extension that does not count against flex days under exceptional circumstances</li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSczv-ThreXgjcBJP3kedlX8bJW_OHpDCEsyfJG87-E5N8NCVg/viewform?usp=sf_link">Regrade request form</a> to be submitted within 72 hours of grade post if you think we have graded something wrong</li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc0-bu6tZjii3VAzJdL9JiayywoWC14U4xXrWgwjIqwA7Maxg/viewform">Excused absence form</a>. To request an excused absence from lecture or discussion</li>
-<li><a href="https://forms.gle/1gh7irUBoDRgmTNW9">Lecture make-up form</a>. For lectures that are missed which we haven’t excused</li>
-<li>For non-excused absences from discussion, you should do the discussion activity on your own and submit in the Canvas assignment associated with that discussion</li>
+<li>the input is a set of features <span class="math inline">\(\vec{x}\)</span></li>
+<li>the output is a predicted outcome <span class="math inline">\(\hat{y}\)</span></li>
 </ul>
+<p>The performance of a model can be measured by how well the output <span class="math inline">\(\hat{y}\)</span> corresponds to the true outcome <span class="math inline">\(y\)</span>. This page considers three ways to assess the performance of a model.</p>
+<ol type="1">
+<li>In-sample prediction
+<ul>
+<li>learn a model using our sample</li>
+<li>predict in that same sample</li>
+<li>evaluate mean squared error</li>
+</ul></li>
+<li>Out-of-sample prediction
+<ul>
+<li>learn a model in one sample</li>
+<li>predict in a new sample from the same data generating process</li>
+<li>evaluate mean squared error in the new sample</li>
+</ul></li>
+<li>Split-sample prediction
+<ul>
+<li>split our sampled cases randomly into training and testing sets</li>
+<li>learn a model in the training set</li>
+<li>predict in the testing set</li>
+<li>evaluate mean squared error in the testing set</li>
+</ul></li>
+</ol>
+<p>Often, the purpose a predictive model is to accomplish out-of-sample prediction (2). But when learning the model, often only one sample is available. Therefore, evaluation by split-sample prediction (3) is often desirable because it most closely mimics this task.</p>
+<section id="simulated-setting" class="level2">
+<h2 class="anchored" data-anchor-id="simulated-setting">Simulated setting</h2>
+<p>When a model is evaluated by in-sample prediction, there is a danger: even if the features have no predictive value in the population, a model might discover patterns that exist in the training sample due to random variation.</p>
+<p>To illustrate this, we generate a simulation with 100 features <code>x1</code>,…,<code>x100</code> and one outcome <code>y</code>, all of which are independent normal variables. We know from the beginning that <code>x*</code> should be useless predictors: they contain no information about <code>y</code>.</p>
+<p>We first load <code>tidyverse</code></p>
+<p>and write a function to generate the data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>generate_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">sample_size =</span> <span class="dv">1000</span>, <span class="at">num_features =</span> <span class="dv">100</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Predictors are independent Normal</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">replicate</span>(num_features, <span class="fu">rnorm</span>(sample_size))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,<span class="dv">1</span><span class="sc">:</span>num_features)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>(X) <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Outcome is an independent Normal</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">y =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>()))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>before applying that function to generate one sample.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">generate_data</span>(<span class="at">sample_size =</span> <span class="dv">1000</span>, <span class="at">num_features =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="in-sample-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="in-sample-prediction">In-sample prediction</h2>
+<p>We then estimate a linear regression model, where <code>.</code> includes all the <code>x1</code>,…,<code>x100</code> features other than <code>y</code> as predictors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and a benchmark of no model, which only includes an intercept.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>no_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We know from the simulation that the model is useless: the <code>x</code>-variables contain no information about <code>y</code>. But if we make predictions in-sample, we will see that the mean squared error of the model is surprisingly lower (better) than no model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">predicted_model =</span> <span class="fu">predict</span>(model),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">predicted_no_model =</span> <span class="fu">predict</span>(no_model),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">squared_error_model =</span> (y <span class="sc">-</span> predicted_model) <span class="sc">^</span> <span class="dv">2</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">squared_error_no_model =</span> (y <span class="sc">-</span> predicted_no_model) <span class="sc">^</span> <span class="dv">2</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"squared"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_all</span>(<span class="at">.funs =</span> mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  squared_error_model squared_error_no_model
+                &lt;dbl&gt;                  &lt;dbl&gt;
+1               0.902                   1.00</code></pre>
+</div>
+</div>
+</section>
+<section id="out-of-sample-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="out-of-sample-prediction">Out-of-sample prediction</h2>
+<p>The problem is that the model fit to the noise in the data. We can see this with the out-of-sample performance assessment. First, we generate a new dataset of out-of-sample data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>out_of_sample <span class="ot">&lt;-</span> <span class="fu">generate_data</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we use the model learned in <code>data</code> and predict in <code>out_of_sample</code>. By this evaluation, predictions are now worse (higher mean squared error) than no model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>out_of_sample <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">predicted_model =</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> out_of_sample),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">predicted_no_model =</span> <span class="fu">predict</span>(no_model, <span class="at">newdata =</span> out_of_sample),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">squared_error_model =</span> (y <span class="sc">-</span> predicted_model) <span class="sc">^</span> <span class="dv">2</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">squared_error_no_model =</span> (y <span class="sc">-</span> predicted_no_model) <span class="sc">^</span> <span class="dv">2</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"squared"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_all</span>(<span class="at">.funs =</span> mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  squared_error_model squared_error_no_model
+                &lt;dbl&gt;                  &lt;dbl&gt;
+1                1.05                  0.981</code></pre>
+</div>
+</div>
+</section>
+<section id="split-sample-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="split-sample-prediction">Split-sample prediction</h2>
+<p>In practice, we often do not have a second sample. We can therefore mimic the out-of-sample task by a sample split, which we can create using the <code>initial_split</code> function in the <code>rsample</code> package,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(data, <span class="at">prop =</span> .<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>which randomly assigns the data into training and testing sets of equal size. We can extract those data by typing <code>training(split)</code> and <code>testing(split)</code>.</p>
+<p>The strategy is to learn on <code>training(split)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> <span class="fu">training</span>(split))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>no_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> <span class="fu">training</span>(split))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and evaluate performance on <code>testing(split)</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">testing</span>(split) <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">predicted_model =</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> <span class="fu">testing</span>(split)),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">predicted_no_model =</span> <span class="fu">predict</span>(no_model, <span class="at">newdata =</span> <span class="fu">testing</span>(split)),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">squared_error_model =</span> (y <span class="sc">-</span> predicted_model) <span class="sc">^</span> <span class="dv">2</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">squared_error_no_model =</span> (y <span class="sc">-</span> predicted_no_model) <span class="sc">^</span> <span class="dv">2</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"squared"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_all</span>(<span class="at">.funs =</span> mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  squared_error_model squared_error_no_model
+                &lt;dbl&gt;                  &lt;dbl&gt;
+1                1.29                   1.01</code></pre>
+</div>
+</div>
+<p>Just like the out-of-sample prediction, this shows that the model is worse than no model at all. By sample splitting, we can learn this even when we have only one sample.</p>
+<p>An important caveat is that sample splitting has a cost: the number of cases available for training is smaller once we split the sample. This can mean that the sample-split predictions will have worse performance than predictions trained on the full sample and evaluated out-of-sample.</p>
+</section>
+<section id="repeating-this-many-times" class="level2">
+<h2 class="anchored" data-anchor-id="repeating-this-many-times">Repeating this many times</h2>
+<p>If we repeat the above many times, we can see the distribution of these performance evaluation strategies across repeated samples.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'foreach'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:purrr':
+
+    accumulate, when</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sample_splitting_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>By the gold standard of out-of-sample prediction, no model is better than a model. In-sample prediction yields the misleading appearance that a model is better than no model. Split-sample prediction successfully mimics the out-of-sample behavior when only one sample is available.</p>
+</section>
+<section id="closing-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="closing-thoughts">Closing thoughts</h2>
+<p>Sample splitting is an art as much as a science. In particular applications, the gain from sample splitting is not always clear and must be balanced against the reduction in cases available for training. It is important to remember that out-of-sample prediction remains the gold standard, and sample splitting is one way to approximate that when only one sample is available.</p>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
