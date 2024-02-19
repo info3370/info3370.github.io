@@ -47,6 +47,7 @@ website:
               - topics/weights.qmd
               - topics/statistical_learning.qmd
               - topics/learning_exercise.qmd
+              - topics/sample_splitting.qmd
           - section: "Describing Inequality"
             contents:
               - topics/prediction.qmd
