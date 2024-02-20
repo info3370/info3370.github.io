@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Studying Social Inequality with Data Science - Statistical Learning</title>
+<title>Studying Social Inequality with Data Science - Problem Set 3: Income Prediction Challenge</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -192,7 +158,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/r_basics.html">Working with Data</a></li><li class="breadcrumb-item"><a href="../topics/statistical_learning.html">Statistical Learning</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignments</li><li class="breadcrumb-item"><a href="../assignments/pset0.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../assignments/pset3.html">Problem Set 3</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -241,13 +207,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
  <span class="menu-text">Working with Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../topics/r_basics.html" class="sidebar-item-text sidebar-link">
@@ -274,7 +240,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../topics/statistical_learning.html" class="sidebar-item-text sidebar-link active">
+  <a href="../topics/statistical_learning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical Learning</span></a>
   </div>
 </li>
@@ -350,13 +316,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignments/pset0.html" class="sidebar-item-text sidebar-link">
@@ -377,7 +343,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/pset3.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/pset3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 3</span></a>
   </div>
 </li>
@@ -401,21 +367,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prepare-our-data-environment" id="toc-prepare-our-data-environment" class="nav-link active" data-scroll-target="#prepare-our-data-environment">Prepare our data environment</a></li>
-  <li><a href="#ordinary-least-squares" id="toc-ordinary-least-squares" class="nav-link" data-scroll-target="#ordinary-least-squares">Ordinary least squares</a></li>
-  <li><a href="#penalized-regression" id="toc-penalized-regression" class="nav-link" data-scroll-target="#penalized-regression">Penalized regression</a></li>
-  <li><a href="#splines" id="toc-splines" class="nav-link" data-scroll-target="#splines">Splines</a></li>
-  <li><a href="#trees" id="toc-trees" class="nav-link" data-scroll-target="#trees">Trees</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#income-prediction-challenge" id="toc-income-prediction-challenge" class="nav-link active" data-scroll-target="#income-prediction-challenge">Income Prediction Challenge</a></li>
+  <li><a href="#create-a-new-task" id="toc-create-a-new-task" class="nav-link" data-scroll-target="#create-a-new-task">Create a new task</a></li>
+  <li><a href="#grad.-machine-learning-versus-statistics" id="toc-grad.-machine-learning-versus-statistics" class="nav-link" data-scroll-target="#grad.-machine-learning-versus-statistics">Grad. Machine learning versus statistics</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/r_basics.html">Working with Data</a></li><li class="breadcrumb-item"><a href="../topics/statistical_learning.html">Statistical Learning</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignments</li><li class="breadcrumb-item"><a href="../assignments/pset0.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../assignments/pset3.html">Problem Set 3</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Statistical Learning</h1>
+<h1 class="title">Problem Set 3: Income Prediction Challenge</h1>
 </div>
 
 
@@ -432,173 +395,56 @@ window.Quarto = {
 </header>
 
 
-<p><a href="../slides/lec4/lec4.pdf">Slides</a></p>
+<p><strong>Due: 5pm on Wednesday, March 6.</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Want to see how you’ll be evaluated? Check out the <a href="../assets/pset3/rubric3.pdf">rubric</a></p>
+</div>
+</div>
+<p>Student identifer: [type your anonymous identifier here]</p>
+<ul>
+<li>Use this <a href="../assets/pset3/pset3.qmd">.qmd template</a> to complete the problem set</li>
+<li>In Canvas, you will upload the PDF produced by your .qmd file</li>
+<li>Put your identifier above, not your name! We want anonymous grading to be possible</li>
+</ul>
+<p>This problem set is connected to the <a href="../topics/prediction.html">PSID Income Prediction Challenge</a> from discussion.</p>
+<section id="income-prediction-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="income-prediction-challenge">Income Prediction Challenge</h2>
+<p><strong>Collaboration note.</strong> This question is an individual write-up connected to your group work from discussion. We expect that the approach you tell us might be the same as that of your other group members, but your answers to these questions should be in your own words.</p>
+<p><strong>1.1 (5 points)</strong> How did you choose the predictor variables you used? Correct answers might be entirely conceptual, entirely data-driven, or a mixture of both.</p>
+<p><strong>1.2 (5 points)</strong> What learning algorithms or models did you consider, and how did you choose one? Correct answers might be entirely conceptual, entirely data-driven, or a mixture of both.</p>
+<p><strong>1.3 (20 points)</strong> Split the <code>learning</code> data randomly into <code>train</code> and <code>test</code>. Your split can be 50-50 or another ratio. Learn in the <code>train</code> set and make predictions in the <code>test</code> set. What do you estimate for your out-of-sample mean squared error? There is no written answer here; the answer is the code and result.</p>
+</section>
+<section id="create-a-new-task" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-new-task">Create a new task</h2>
+<p>The predictability of life outcomes is not likely to be the same in every setting. Imagine you were designing a challenge like this one in a new setting, to study how outcomes change over the life course or across generations.</p>
+<p><strong>2.1 (5 points)</strong> From what population would you draw your sample?</p>
+<p><strong>2.2 (5 points)</strong> What outcome would you study?</p>
+<p><strong>2.3 (5 points)</strong> What predictors would you include?</p>
+<p><strong>2.4 (5 points)</strong> Why would it be interesting in your setting if predictions were accurate? Why would it be interesting if predictions were inaccurate?</p>
+</section>
+<section id="grad.-machine-learning-versus-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="grad.-machine-learning-versus-statistics">Grad. Machine learning versus statistics</h2>
 <blockquote class="blockquote">
-<p>The reading with this class is <a href="https://link.springer.com/book/10.1007/978-3-030-40189-4">Berk 2020 Ch 1</a> p.&nbsp;1–5, stopping at paragraph ending “…is nonlinear.” Then p.&nbsp;14–17 “Model misspecification…” through “…will always be in play.”</p>
+<p>This question is required for grad students. It is optional for undergrads, and worth no extra credit.</p>
 </blockquote>
-<p>Statistical learning is a term that captures a broad set of ideas in statistics and machine learning. This page focuses on one sense of statistical learning: using data on a sample to learn a subgroup mean in the population.</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/srf9eZ5lq68" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/3sHWUN-3pZE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Pk6uNM74cKE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</div>
-</div>
-<p>As an example, we continue to use the data on baseball salaries, with a small twist. The file <a href="../data/baseball_with_record.csv"><code>baseball_with_record.csv</code></a> contains the following variables</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://info3370.github.io/data/baseball_with_record.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>player</code> is the player name</li>
-<li><code>team</code> is the team name</li>
-<li><code>salary</code> is the 2023 salary</li>
-<li><code>record</code> is the 2022 proportion of games won by that team</li>
-<li><code>target_subgroup</code> is coded <code>TRUE</code> for the L.A. Dodgers and <code>FALSE</code> for all others</li>
-</ul>
-<p>Our goal: using a sample, estimate the mean salary of all Dodger players in 2023. Because we have the population, we know the true mean is $6.23m.</p>
-<p>A sparse sample will hinder our ability to accomplish the goal. We will work with samples containing many MLB players, but only a few Dodgers. We will use statistical learning strategies to pool information from those other teams’ players to help us make a better estimate of the Dodger mean salary.</p>
-<p>Our predictor will be the <code>record</code> from the previous year. We assume that teams with similar win percentages in 2022 might have similar salaries in 2023.</p>
-<section id="prepare-our-data-environment" class="level2">
-<h2 class="anchored" data-anchor-id="prepare-our-data-environment">Prepare our data environment</h2>
-<p>For illustration, draw a sample of 5 players per team</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> population <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Construct a tibble with the observation to be predicted: the Dodgers.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>to_predict <span class="ot">&lt;-</span> population <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target_subgroup) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(team, record)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="ordinary-least-squares" class="level2">
-<h2 class="anchored" data-anchor-id="ordinary-least-squares">Ordinary least squares</h2>
-<p>We could model salary next year as a linear function of team record by Ordinary Least Squares. In math, OLS produces a prediction <span class="math display">\[\hat{Y}_i = \hat\alpha + \hat\beta X_i\]</span> with <span class="math inline">\(\hat\alpha\)</span> and <span class="math inline">\(\hat\beta\)</span> chosen to minimize the sum of squared errors, <span class="math inline">\(\sum_{i=1}^n \left(Y_i - \hat{Y}_i\right)^2\)</span>. Visually, it minimizes all the line segments below.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="statistical_learning_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Here is how to estimate an OLS model using R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> record, <span class="at">data =</span> sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then we could predict the mean salary for the Dodgers.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>to_predict <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> to_predict))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  team         record predicted
-  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-1 L.A. Dodgers  0.685  6668053.</code></pre>
-</div>
-</div>
-<p>Our model-based estimate compares to the true population mean of $6.23m.</p>
-</section>
-<section id="penalized-regression" class="level2">
-<h2 class="anchored" data-anchor-id="penalized-regression">Penalized regression</h2>
-<p>Penalized regression is just like OLS, except that it prefers coefficient estimates that are closer to 0. This can reduce sampling variability. One penalized regression is ridge regression, which penalizes the sum of squared coefficients. In our example, it estimates the parameters to minimize</p>
-<p><span class="math display">\[\underbrace{\sum_{i=1}^n \left(Y_i - \hat{Y}_i\right)^2}_\text{Squared Error} + \underbrace{\lambda\beta^2}_\text{Penalty}\]</span></p>
-<p>where the positive scalar penalty <span class="math inline">\(\lambda\)</span> encodes our preference for coefficients to be near zero. Otherwise, penalized regression is just like OLS!</p>
-<p>The <code>gam()</code> function in the <code>mgcv</code> package will allow you to fit a ridge regression as follows.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  salary <span class="sc">~</span> <span class="fu">s</span>(record, <span class="at">bs =</span> <span class="st">"re"</span>),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> sample</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Predict the Dodger mean salary just as before,</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>to_predict <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> to_predict))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  team         record predicted
-  &lt;chr&gt;         &lt;dbl&gt; &lt;dbl[1d]&gt;
-1 L.A. Dodgers  0.685  6252449.</code></pre>
-</div>
-</div>
-</section>
-<section id="splines" class="level2">
-<h2 class="anchored" data-anchor-id="splines">Splines</h2>
-<p>We may want to allow a nonlinear relationship between the predictor and the outcome. One way to do that is with splines, which estimate part of the model locally within regions of the predictor space separated by <strong>knots</strong>. The code below uses a linear spline with knots at 0.4 and 0.6.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  salary <span class="sc">~</span> <span class="fu">bs</span>(record, <span class="at">degree =</span> <span class="dv">1</span>, <span class="at">knots =</span> <span class="fu">c</span>(.<span class="dv">4</span>,.<span class="dv">6</span>)),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> sample</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="statistical_learning_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can predict the Dodger mean salary just as before!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>to_predict <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> to_predict))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  team         record predicted
-  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-1 L.A. Dodgers  0.685  3269869.</code></pre>
-</div>
-</div>
-</section>
-<section id="trees" class="level2">
-<h2 class="anchored" data-anchor-id="trees">Trees</h2>
-<p>Perhaps our response surface is bumpy, and poorly approximated by a smooth function. Decision trees search the predictor space for discrete places where the outcome changes, and assume that the response is flat within those regions.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(salary <span class="sc">~</span> record, <span class="at">data =</span> sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="statistical_learning_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Predict as in the other strategies.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>to_predict <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> to_predict))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  team         record predicted
-  &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
-1 L.A. Dodgers  0.685  4253845.</code></pre>
-</div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Statistical learning in this framing is all about</p>
-<ul>
-<li>we have a subgroup with few sampled units (the Dodgers)</li>
-<li>we want to use other units to help us learn</li>
-<li>our goal is to predict the population mean in the subgroup</li>
-</ul>
+<p><strong>20 points.</strong> This question is about the relative gain in this problem as we move from no model to a statistical model to a machine learning model.</p>
+<p>First, use your <code>train</code> set to estimate 3 learners and predict in your <code>test</code> set.</p>
+<ol type="a">
+<li>No model. For every <code>test</code> observation, predict the mean of the <code>train</code> outcomes</li>
+<li>Ordinary Least Squares. Choose a set of predictors <span class="math inline">\(\vec{X}\)</span>. For every <code>test</code> observation, predict using a linear model <code>lm()</code> fit to the <code>train</code> set with the predictors <span class="math inline">\(\vec{X}\)</span>.</li>
+<li>Machine learning. Use the same set of predictors <span class="math inline">\(\vec{X}\)</span>. For every <code>test</code> observation, predict using a machine learning model fit to the <code>train</code> set with the predictors <span class="math inline">\(\vec{X}\)</span>. Your machine learning model could be a Generalized Additive Model (<code>gam()</code>), a decision tree (<code>rpart()</code>), or some other machine learning approach.</li>
+</ol>
+<p>Report your out-of-sample mean squared error estimates for each approach. How did mean squared error change from (a) to (b)? From (b) to (c)?</p>
+<p>Interpret what you found. To what degree does machine learning improve predictability, beyond what can be achieved by Ordinary Least Squares?</p>
 
 
 </section>
