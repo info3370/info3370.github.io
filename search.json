@@ -918,7 +918,33 @@
     "href": "topics/race.html",
     "title": "Race",
     "section": "",
-    "text": "TODO\n\n\n\n Back to top",
+    "text": "This section of the course discusses racial residential segregation, its political origins, and the implications for racial wealth inequality today.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Race"
+    ]
+  },
+  {
+    "objectID": "topics/race.html#mapping-racial-segregation",
+    "href": "topics/race.html#mapping-racial-segregation",
+    "title": "Race",
+    "section": "Mapping racial segregation",
+    "text": "Mapping racial segregation\nIn discussion, we will use Social Explorer to map racial residential segregation across neighborhoods.\n\nwork in sets of 2 or 3 students\ncreate one or more maps that tell a story\npresent to another group at the end of discussion\n\nLogistically, here are some guidelines\n\nVisit Social Explorer\nClick “Explore” under United States\nClick “Change Data” in the top left\nChoose “Race” -&gt; “Black or African American Alone”\nZoom in on a place of your choosing. What do you see about segregation?\n\nYou may have to the geography level from “by County” to “by Tract”\n\nIf you finish, look at other time periods, places, or data categories. Try to tell a story using your map\nAt the end of discussion, you will present what you found",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Describing Inequality",
+      "Race"
+    ]
+  },
+  {
+    "objectID": "topics/race.html#political-origins-of-segregation",
+    "href": "topics/race.html#political-origins-of-segregation",
+    "title": "Race",
+    "section": "Political origins of segregation",
+    "text": "Political origins of segregation\nIn lecture on 3/12, we will cover the political origins of racial residential segregation. We will see how explicit policies at both the federal and local level created the segregation that you observed in discussion.",
     "crumbs": [
       " ",
       "Topics",

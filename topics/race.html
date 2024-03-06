@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -334,7 +334,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mapping-racial-segregation" id="toc-mapping-racial-segregation" class="nav-link active" data-scroll-target="#mapping-racial-segregation">Mapping racial segregation</a></li>
+  <li><a href="#political-origins-of-segregation" id="toc-political-origins-of-segregation" class="nav-link" data-scroll-target="#political-origins-of-segregation">Political origins of segregation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -358,9 +365,49 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>TODO</p>
+<p>This section of the course discusses racial residential segregation, its political origins, and the implications for racial wealth inequality today.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Talking about race
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Race is a social construct, with a meaning that differs across time and place. It may feel personal. The labels we use (e.g., “Black”) are themselves the result of contentious political processes that created government surveys. As we use survey data, it is often helpful to refer to the categories with phrases such as “people who identify as Black” to recognize that these are categories that people chose among a set of options. Our class brings many identities and experiences to this task, all of which are valuable and can help us learn.</p>
+</div>
+</div>
+<section id="mapping-racial-segregation" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-racial-segregation">Mapping racial segregation</h2>
+<p>In discussion, we will use <a href="http://resolver.library.cornell.edu/misc/6268440">Social Explorer</a> to map racial residential segregation across neighborhoods.</p>
+<ul>
+<li>work in sets of 2 or 3 students</li>
+<li>create one or more maps that tell a story</li>
+<li>present to another group at the end of discussion</li>
+</ul>
+<p>Logistically, here are some guidelines</p>
+<ul>
+<li>Visit <a href="http://resolver.library.cornell.edu/misc/6268440">Social Explorer</a></li>
+<li>Click “Explore” under United States</li>
+<li>Click “Change Data” in the top left</li>
+<li>Choose “Race” -&gt; “Black or African American Alone”</li>
+<li>Zoom in on a place of your choosing. What do you see about segregation?
+<ul>
+<li>You may have to the geography level from “by County” to “by Tract”</li>
+</ul></li>
+<li>If you finish, look at other time periods, places, or data categories. Try to tell a story using your map</li>
+<li>At the end of discussion, you will present what you found</li>
+</ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/NRGLFRLFCOQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="political-origins-of-segregation" class="level2">
+<h2 class="anchored" data-anchor-id="political-origins-of-segregation">Political origins of segregation</h2>
+<p>In lecture on 3/12, we will cover the political origins of racial residential segregation. We will see how explicit policies at both the federal and local level created the segregation that you observed in discussion.</p>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -586,6 +633,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/info3370\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -620,7 +685,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
