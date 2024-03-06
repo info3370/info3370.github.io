@@ -2,4 +2,35 @@
 title: "Race"
 ---
 
-TODO
+This section of the course discusses racial residential segregation, its political origins, and the implications for racial wealth inequality today.
+
+::: {.callout-tip}
+# Talking about race
+Race is a social construct, with a meaning that differs across time and place. It may feel personal. The labels we use (e.g., "Black") are themselves the result of contentious political processes that created government surveys. As we use survey data, it is often helpful to refer to the categories with phrases such as "people who identify as Black" to recognize that these are categories that people chose among a set of options. Our class brings many identities and experiences to this task, all of which are valuable and can help us learn.
+:::
+
+## Mapping racial segregation
+
+In discussion, we will use [Social Explorer](http://resolver.library.cornell.edu/misc/6268440) to map racial residential segregation across neighborhoods.
+
+- work in sets of 2 or 3 students
+- create one or more maps that tell a story
+- present to another group at the end of discussion
+
+Logistically, here are some guidelines
+
+- Visit [Social Explorer](http://resolver.library.cornell.edu/misc/6268440)
+- Click "Explore" under United States
+- Click "Change Data" in the top left
+- Choose "Race" -> "Black or African American Alone"
+- Zoom in on a place of your choosing. What do you see about segregation?
+     - You may have to the geography level from "by County" to "by Tract"
+- If you finish, look at other time periods, places, or data categories. Try to tell a story using your map
+- At the end of discussion, you will present what you found 
+
+{{< video https://www.youtube.com/embed/NRGLFRLFCOQ >}}
+
+## Political origins of segregation
+
+In lecture on 3/12, we will cover the political origins of racial residential segregation. We will see how explicit policies at both the federal and local level created the segregation that you observed in discussion.
+
