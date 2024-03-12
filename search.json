@@ -638,7 +638,79 @@
     "href": "assignments/project.html",
     "title": "Final Project",
     "section": "",
-    "text": "The culmination of the course is a group research project. You will\n\ncreate your own research question\ndownload your own data\nvisualize the data\ninterpret your findings\n\nMore details on the project will come later in the semester.\n\n\n\n Back to top",
+    "text": "The culmination of the course is a group research project. You will\nYou can answer any question about inequality (broadly defined) using the ideas we learned in this course.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html#what-you-will-submit",
+    "href": "assignments/project.html#what-you-will-submit",
+    "title": "Final Project",
+    "section": "What you will submit",
+    "text": "What you will submit\nThere are two submitted items, both due 5pm on Wednesday April 24\nWriteup. This should be a .qmd document compiled into a PDF. It should include all code that produces your results. For undergraduate groups, this must be no more than 1,000 words and will contain 1 or more visualizations. For graduate groups, this must be no more than 2,000 words and contain 3 or more visualizations.\nSlides. Upload slides in PDF format for your presentation in discussion. We encourage you to keep text to a minimum in the slides. You should plan to have all group members speak during the presentation. You should plan to address the key points 1–6 above. We realize that 10 minutes is short; being concise is a virtue!",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html#group-structure",
+    "href": "assignments/project.html#group-structure",
+    "title": "Final Project",
+    "section": "Group structure",
+    "text": "Group structure\nWe will share a Google form in which you can either\n\ntell us your group. We anticipate 4–6 students, but we can be flexible\ntell us your interests, and we will team you up with others!\n\nIf you want a smaller group or to work individually, come talk to us",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html#key-components-of-the-project",
+    "href": "assignments/project.html#key-components-of-the-project",
+    "title": "Final Project",
+    "section": "Key components of the project",
+    "text": "Key components of the project\n\nDefine your target population. Motivate this choice: why is this population interesting to study?\nDescribe how your sample was chosen from that population\n\nthis may be a probability sample, such as those available via IPUMS. If so, tell us a little bit about the sampling design\nthis may be a convenience sample. If so, why does it speak to the population and what are the limitations?\nthis may be data on the entire population, as in our baseball example\n\nChoose an outcome variable, which is defined for each unit in the population\n\nexample: annual wage and salary income\n\nChoose one or more variables on which to create population subgroups\n\nexample: subgroups defined by sex (male and female)\n\nChoose a summary statistic, which aggregates the outcome distribution to one summary per subgroup\n\nexamples: proportion, mean, median, 90th percentile\n\nVisualize your findings in a ggplot\n\nYour goal should be to tell us a story using the data. What do we learn by studying this outcome, aggregated this way, in these subgroups from this population?",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html#considerations-to-bear-in-mind",
+    "href": "assignments/project.html#considerations-to-bear-in-mind",
+    "title": "Final Project",
+    "section": "Considerations to bear in mind",
+    "text": "Considerations to bear in mind\n\nWeights. If your sample is drawn from the population with unequal probabilities, you should use sampling weights\nModels. If your question involves many subgroups (e.g., ages) with few observations in each subgroup, you can (but are not required to) use a statistical model to estimate your summary statistic in the subgroup by a predicted value. For example, you could use OLS to predict the proportion mean income at each age. If you do this, you should report the predicted value of the summary statistic, not the coefficients of the model.\nAggregation. Your data must begin with units (e.g., people) who you aggregate into subgroups (e.g., age groups). Your data might come pre-aggregated, such as data where each row contains data for all students in a particular college or university. Then you would need to aggregate further, such as to produce summaries for private versus public universities.\nDropped cases. As you move from raw data to the data that produce your graph, you might drop cases on the way. For example, some cases may have missing values on key predictors. Report how many are dropped, and why. Our goal here is transparent, open science.\nAvoiding causal language. Beware of saying that one variable causes, shapes, influences, or determines another. These causal claims are important, but hard to support! You should take STSCI 3900 first. A heuristic to recognize causal claims is the sentence structure “X [verb] Y”, such as “going to college increases earnings.” This claim suggests a college graduate would have earned less if they had not gone to college—a counterfactual outcome we did not see. For our class, we suggest you focus on non-causal claim, such as “There is a difference in earnings among those who did and did not go to college.” A heuristic to recognize a non-causal claim is that it can be phrased it in an “among” statement: “Among subgroup A, we find ___. Among subgroup B, we find ___.” Or “There is a disparity in Y across subgroups defined by X.”\nBut I wanted to ask a causal question! While we encourage descriptive claims, we will allow causal claims if they are supported by transparent mathematical assumptions, using potential outcomes or Directed Acyclic Graphs. This might be an appropriate choice for students who previously took STSCI 3900, or who have other background in causal inference. If you take this road, come talk to us in office hours to make sure we are on the same page about the assumptions required.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html#support-from-an-assigned-ta",
+    "href": "assignments/project.html#support-from-an-assigned-ta",
+    "title": "Final Project",
+    "section": "Support from an assigned TA",
+    "text": "Support from an assigned TA\nEach group will be assigned one TA. That TA will be your first point of contact for support, and we expect they will get to know the project along the way. While your assigned TA will be specifically aware of your project, you are also welcome at all of our office hours.",
+    "crumbs": [
+      " ",
+      "Assignments",
+      "Project"
+    ]
+  },
+  {
+    "objectID": "assignments/project.html#have-fun",
+    "href": "assignments/project.html#have-fun",
+    "title": "Final Project",
+    "section": "Have fun",
+    "text": "Have fun\nAs a teaching team, the project is our favorite part of the course. Preparing you to succeed in the project has been (in some sense) the entire goal of all that precedes the project in the course. We hope you will find joy in answering questions with data, as we do.",
     "crumbs": [
       " ",
       "Assignments",
