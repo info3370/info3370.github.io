@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -334,7 +368,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercise-subjective-class-identifications" id="toc-exercise-subjective-class-identifications" class="nav-link active" data-scroll-target="#exercise-subjective-class-identifications">Exercise: Subjective class identifications</a>
+  <ul class="collapse">
+  <li><a href="#restrict-the-sample" id="toc-restrict-the-sample" class="nav-link" data-scroll-target="#restrict-the-sample">Restrict the sample</a></li>
+  <li><a href="#prepare-the-variables" id="toc-prepare-the-variables" class="nav-link" data-scroll-target="#prepare-the-variables">Prepare the variables</a></li>
+  <li><a href="#produce-visualizations" id="toc-produce-visualizations" class="nav-link" data-scroll-target="#produce-visualizations">Produce visualizations</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -358,9 +403,97 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>TODO</p>
+<p>Social class is a concept with many definitions: ownership of capital, position within the power relations of economic production, ways of being that are tied to one’s upbringing, etc. We will not cover class in depth. With a few examples, we will discuss some ways to study class using data science.</p>
+<section id="exercise-subjective-class-identifications" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-subjective-class-identifications">Exercise: Subjective class identifications</h2>
+<p>How do people think about social class? In repeated surveys back to 1972, the <a href="https://gssdataexplorer.norc.org/MyGSS">General Social Survey</a> has asked respondents:</p>
+<blockquote class="blockquote">
+<p>If you were asked to use one of four names for your social class, which would you say you belong in: the lower class, the working class, the middle class, or the upper class?</p>
+</blockquote>
+<p>How would you answer this question? How do you think most Americans would answer it?</p>
+<p>In discussion, we will work with a prepared dataset that contains the answers to this question and a few others. You can see the documentation to see what the values mean in the <a href="https://gssdataexplorer.norc.org">GSS Data Explorer</a>. You also might find other variables there to use in your final project! See the video below for an intro to the GSS.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-sOcDPrytkY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>To jump straight into our prepared data file, run this line of code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gss <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://info3370.github.io/data/gss.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The data contain a series of variables. Our exercise will focus on the following, each of which links to the documentation.</p>
+<ul>
+<li><a href="https://gssdataexplorer.norc.org/variables/5595/vshow"><code>wtssall</code></a> is the survey weight</li>
+<li><a href="https://gssdataexplorer.norc.org/variables/568/vshow"><code>class</code></a> is the answer to the survey question above</li>
+<li><a href="https://gssdataexplorer.norc.org/variables/60/vshow"><code>padeg</code></a> and <a href="https://gssdataexplorer.norc.org/variables/61/vshow"><code>madeg</code></a> are the highest degree attained by the respondent’s father and mother, respectively</li>
+<li><a href="https://gssdataexplorer.norc.org/variables/59/vshow"><code>degree</code></a> is the respondent’s highest degree attained</li>
+<li><a href="https://gssdataexplorer.norc.org/variables/53/vshow"><code>age</code></a> is the respondent’s age at the time of the survey</li>
+</ul>
+<p>We will use these data to estimate:</p>
+<ul>
+<li>the distribution of subjective social class among Americans age 25+</li>
+<li>how that varies across those with and without a college degree</li>
+<li>and across the four subgroups defined by the respondent’s degree and whether at least one of the respondent’s parents had a college degree</li>
+</ul>
+<p>The code below helps with some data preparation steps to get you started.</p>
+<section id="restrict-the-sample" class="level3">
+<h3 class="anchored" data-anchor-id="restrict-the-sample">Restrict the sample</h3>
+<p>We want to restrict to our target population, and to those with valid responses on the relevant variables. We want to report the number of cases remaining after each restriction, in the interest of transparency. Here is a custom function that can be included in your piped sequence to report the sample size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>print_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(.data, <span class="at">comment =</span> <span class="st">"cases remain"</span>) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="fu">prettyNum</span>(<span class="fu">nrow</span>(.data), <span class="at">big.mark =</span> <span class="st">","</span>), comment))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(.data)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As with all canned functions like <code>mutate</code> and <code>summarize</code>, the first argument is the dataset. The second argument is a comment to say why a restriction occurred. The function prints the comment and the number of cases that remain. Then, it returns the dataset unchanged.</p>
+<p>There are many ways to track sample restrictions—this is just one custom way! Below is code that restricts our data and reports sample sizes using this function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gss_restricted <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wtssall <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print_rows</span>(<span class="at">comment =</span> <span class="st">"have positive weights"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(padeg <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> madeg <span class="sc">&gt;=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print_rows</span>(<span class="at">comment =</span> <span class="st">"are age 25+"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print_rows</span>(<span class="at">comment =</span> <span class="st">"have valid parents' degree"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(degree <span class="sc">&gt;=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print_rows</span>(<span class="at">comment =</span> <span class="st">"have valid own degree"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print_rows</span>(<span class="at">comment =</span> <span class="st">"have valid own subjective class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "64,814 have positive weights"
+[1] "45,815 are age 25+"
+[1] "41,141 have valid parents' degree"
+[1] "41,076 have valid own degree"
+[1] "39,878 have valid own subjective class"</code></pre>
+</div>
+</div>
+</section>
+<section id="prepare-the-variables" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-the-variables">Prepare the variables</h3>
+<p>The variables as downloaded are coded in numbers. The code below converts them to intuitive labels.</p>
+<ul>
+<li><code>parent_college</code> will be a logical variable coded <code>TRUE</code> if at least one parent finished a four-year degree and <code>FALSE</code> otherwise</li>
+<li><code>respondent_college</code> will be a logical variable coded <code>TRUE</code> if the respondent finished a four-year degree and <code>FALSE</code> otherwise</li>
+<li><code>class</code> will be recoded to be a factor variable with character labels</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gss_prepared <span class="ot">&lt;-</span> gss_restricted <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent_college =</span> padeg <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">|</span> madeg <span class="sc">&gt;=</span> <span class="dv">3</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">respondent_college =</span> degree <span class="sc">&gt;=</span> <span class="dv">3</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">class =</span> <span class="fu">factor</span>(class, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Lower class"</span>,<span class="st">"Working class"</span>,<span class="st">"Middle class"</span>,<span class="st">"Upper class"</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(parent_college, respondent_college, class, wtssall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="produce-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="produce-visualizations">Produce visualizations</h3>
+<p>Now answer the questions that motivated this data analysis:</p>
+<ol type="1">
+<li>what is the distribution of self-identified social class?</li>
+<li>what is the distribution among those with and without a degree?</li>
+<li>what is the distribution in (2) further subdivided by whether at least one parent held a degree?</li>
+</ol>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
