@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Studying Social Inequality with Data Science - Visualization</title>
+<title>Studying Social Inequality with Data Science - Problem Set 4: Social Class</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/r_basics.html">Working with Data</a></li><li class="breadcrumb-item"><a href="../topics/visualization.html">Visualization</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignments</li><li class="breadcrumb-item"><a href="../assignments/pset0.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../assignments/pset4.html">Problem Set 4</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -212,13 +212,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
  <span class="menu-text">Working with Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../topics/r_basics.html" class="sidebar-item-text sidebar-link">
@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../topics/visualization.html" class="sidebar-item-text sidebar-link active">
+  <a href="../topics/visualization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Visualization</span></a>
   </div>
 </li>
@@ -321,13 +321,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignments/pset0.html" class="sidebar-item-text sidebar-link">
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/pset4.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/pset4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 4</span></a>
   </div>
 </li>
@@ -378,24 +378,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a>
-  <ul class="collapse">
-  <li><a href="#prepare-the-environment" id="toc-prepare-the-environment" class="nav-link" data-scroll-target="#prepare-the-environment">Prepare the environment</a></li>
-  <li><a href="#explore-the-data" id="toc-explore-the-data" class="nav-link" data-scroll-target="#explore-the-data">Explore the data</a></li>
-  <li><a href="#produce-a-graph" id="toc-produce-a-graph" class="nav-link" data-scroll-target="#produce-a-graph">Produce a graph</a></li>
-  <li><a href="#customizing-your-graph" id="toc-customizing-your-graph" class="nav-link" data-scroll-target="#customizing-your-graph">Customizing your graph</a></li>
-  <li><a href="#interpret-your-graph" id="toc-interpret-your-graph" class="nav-link" data-scroll-target="#interpret-your-graph">Interpret your graph</a></li>
-  <li><a href="#prepare-a-quarto-report" id="toc-prepare-a-quarto-report" class="nav-link" data-scroll-target="#prepare-a-quarto-report">Prepare a Quarto report</a></li>
-  </ul></li>
+  <li><a href="#reading-questions" id="toc-reading-questions" class="nav-link active" data-scroll-target="#reading-questions">Reading questions</a></li>
+  <li><a href="#data-analysis-questions" id="toc-data-analysis-questions" class="nav-link" data-scroll-target="#data-analysis-questions">Data analysis questions</a></li>
+  <li><a href="#grad-question" id="toc-grad-question" class="nav-link" data-scroll-target="#grad-question">Grad question</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../topics/welcome.html">Topics</a></li><li class="breadcrumb-item"><a href="../topics/r_basics.html">Working with Data</a></li><li class="breadcrumb-item"><a href="../topics/visualization.html">Visualization</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assignments</li><li class="breadcrumb-item"><a href="../assignments/pset0.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../assignments/pset4.html">Problem Set 4</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Visualization</h1>
+<h1 class="title">Problem Set 4: Social Class</h1>
 </div>
 
 
@@ -412,105 +406,99 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><strong>Due: 5pm on Wednesday, March 20.</strong></p>
+<!-- ::: {.callout-note} -->
+<!-- Want to see how you'll be evaluated? Check out the [rubric](https://docs.google.com/forms/d/e/1FAIpQLSfE9cKW1TdZvmNH7AUTdzL2Fd3vnQicKVECc7qW2_S4civJpg/viewform?usp=sharing) -->
+<!-- ::: -->
+<p>Student identifer: [type your anonymous identifier here]</p>
+<ul>
+<li>Use this <a href="../assets/pset4/pset4.qmd">.qmd template</a> to complete the problem set</li>
+<li>In Canvas, you will upload the PDF produced by your .qmd file</li>
+<li>Put your identifier above, not your name! We want anonymous grading to be possible</li>
+</ul>
+<section id="reading-questions" class="level2">
+<h2 class="anchored" data-anchor-id="reading-questions">Reading questions</h2>
+<p>The reading studies pay disparities across categories of class origin, defined by the occupations of one’s parents.</p>
 <blockquote class="blockquote">
-<p>Prerequisites. You should first install R and RStudio as described in the <a href="https://r4ds.hadley.nz/intro#prerequisites">R4DS Prerequisites</a>. If you are unfamiliar with the layout of RStudio, see the <a href="https://docs.posit.co/ide/user">User Guide</a>.</p>
+<p>Laurison, D., &amp; Friedman, S. (2024). <a href="https://academic.oup.com/sf/advance-article-abstract/doi/10.1093/sf/soae025/7616417">The Class Ceiling in the United States: Class-Origin Pay Penalties in Higher Professional and Managerial Occupations.</a> Social Forces.</p>
 </blockquote>
-<p>In this discussion section, we will</p>
-<ul>
-<li>load the data from <a href="https://www.jstor.org/stable/20027737">Jencks 2002</a> Table 1</li>
-<li>visualize the data using <code>ggplot</code></li>
-</ul>
-<section id="getting-started" class="level1">
-<h1>Getting started</h1>
-<p>In your table groups, introduce yourselves</p>
-<ul>
-<li>what made you interested in this class</li>
-<li>how much experience do you have with R and <code>ggplot</code>?</li>
-</ul>
-<p>Whoever has the least experience—you are the coder! Arrange yourselves so that everyone can see the coder’s screen.</p>
-<section id="prepare-the-environment" class="level2">
-<h2 class="anchored" data-anchor-id="prepare-the-environment">Prepare the environment</h2>
-<p>Open a new R Script by clicking the button at the top left of RStudio. Save your R Script in a folder you will use for this exercise.</p>
-<p>Paste the code below into your R Script. Place your cursor within the line and hit <code>CMD + Enter</code> or <code>CTRL + Enter</code> to run the code and load the <code>tidyverse</code> package.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This paper appeared online very recently (Feb 29), which makes access more tricky. We included a PDF in the Canvas assignment. To access it through the Cornell Library, search the library website for “Social Forces” (the journal in which this is published) and click to find an online resource, making sure to choose one that has all publications through the present. This article is not yet in an issue, but is in the advanced articles section of the Social Forces page.</p>
+</div>
+</div>
+<p>The first part of the paper argues for why class origin may or may not be consequential for pay in the U.S.</p>
+<p><strong>1.1. (2 points)</strong> Give a hypothetical example of a hiring or advancement practice at an imaginary company in which other factors such as race and education determine a person’s outcome, but class origin per se is not relevant.</p>
+<p><strong>1.2. (2 points)</strong> Give a hypothetical example of a hiring or advancement practice at an imaginary company that might create pay disparities by class origin. In a couple sentences, explain.</p>
+<p><strong>1.3. (3 points)</strong> This paper has many excellent, descriptive figures, much like those you will produce in the final project. Which figure is your favorite, and why?</p>
+<p><strong>1.4. (3 points)</strong> Suggest one way to make your favorite figure even better.</p>
+<p><strong>1.5. (4 points)</strong> What is an open question the authors haven’t answered, that you might be able to answer using survey data?</p>
+</section>
+<section id="data-analysis-questions" class="level2">
+<h2 class="anchored" data-anchor-id="data-analysis-questions">Data analysis questions</h2>
+<p>The paper uses the <a href="https://psidonline.isr.umich.edu/">Panel Study of Income Dynamics</a>, which is a difficult dataset to use. We will explore a similar question using the <a href="https://gssdataexplorer.norc.org/">General Social Survey</a>. It is also good for science when findings can be reproduced in a different dataset. To simplify your analysis, we wrote <a href="../code/pset4.R">code</a> that prepares the GSS data into the file <a href="../data/pset4.RDS">pset4.RDS</a> which you can load to complete this problem set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pset4 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"https://info3370.github.io/data/pset4.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You will see action in the console. You have added some functionality to R for this session!</p>
-<p>The <a href="../data/jencks_table1.csv">data</a> can be loaded from the course website with the line below.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"https://info3370.github.io/data/jencks_table1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>When you run this code, the object <code>data</code> will appear in your environment pane.</p>
-</section>
-<section id="explore-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="explore-the-data">Explore the data</h2>
-<p>Type <code>data</code> in your console. You can see the data!</p>
+<p><strong>2.1. (8 points)</strong> Group by parent class. Visualize the distribution of respondent classes within each parent class.</p>
 <ul>
-<li><code>country</code> country name</li>
-<li><code>ratio</code> ratio of 90th to 10th percentile of household income. You can think of this as how many dollars a high-income household receives for each dollar that a low-income household receives</li>
-<li><code>gdp</code> Gross Domestic Product Per Capita, expressed as a proportion of U.S. GDP</li>
-<li><code>life_expectancy</code> life expectancy at birth</li>
+<li>we suggest a bar graph</li>
+<li>we suggest using the x-axis for respondent class</li>
+<li>we suggest using the y-axis for the proportion in that respondent class</li>
+<li>we suggest using facets for parent class</li>
+<li>remember to weight by <code>wtssall</code></li>
 </ul>
-<p>For details on the data, see Jencks (2002) Table 1.</p>
-</section>
-<section id="produce-a-graph" class="level2">
-<h2 class="anchored" data-anchor-id="produce-a-graph">Produce a graph</h2>
-<p>We are ready to produce a graph! The code below will produce a simple graph.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ratio, <span class="at">y =</span> gdp)) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="visualization_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>One way to do this: group by parent and respondent class, summarize to sum the weight within each group, group by only parent class, then mutate to estimate the proportion in each respondent class as the weight divided by the sum of the weight on all respondents within that parent class.</p>
 </div>
-<p>Let’s break this code down into pieces</p>
+</div>
+<p><strong>2.2. (4 points)</strong> Interpret your graph from (2.1) in up to three sentences. Comment particularly on how the facet for respondents who are in the higher professional class looks different from the others.</p>
+<p><strong>2.3. (8 points)</strong> Group by <code>parent_class</code>. Visualize the median value of respondent income (<code>realrinc</code>).</p>
 <ul>
-<li><code>data</code> tells R to start with the object <code>data</code></li>
-<li><code>|&gt;</code> is called the pipe operator. It passes the <code>data</code> object down to the function in the next line</li>
-<li><code>ggplot()</code> is a function that creates a plot environment</li>
-<li>the argument <code>mapping = aes(x = ratio, y = gdp)</code> tells <code>ggplot()</code> how variables in the data will correspond to elements of the plot. We will visualize <code>ratio</code> on the x-axis and <code>gdp</code> on the y-axis</li>
-<li><code>+</code> tells <code>ggplot()</code> we will add a new layer on the next line</li>
-<li><code>geom_point()</code> tells <code>ggplot()</code> to add a layer of points to the graph</li>
+<li>we suggest using the x-axis for parent class</li>
+<li>we suggest using the y-axis for median respondent income</li>
+<li>remember to weight by <code>wtssall</code></li>
 </ul>
-</section>
-<section id="customizing-your-graph" class="level2">
-<h2 class="anchored" data-anchor-id="customizing-your-graph">Customizing your graph</h2>
-<p>In your group, create additional layers with additional lines connected by <code>+</code>. Be creative! Here are some ideas:</p>
+<p><strong>2.4. (4 points)</strong> Interpret your graph from (2.3) in up to three sentences.</p>
+<p><strong>2.5. (8 points)</strong> Group by <code>parent_class</code> and <code>respondent_class</code>. Visualize the median value of respondent income (<code>realrinc</code>).</p>
 <ul>
-<li>label the axes with <code>scale_x_continuous(name = "your text here")</code> and <code>scale_y_continuous(name = "your text here")</code></li>
-<li>label countries using <code>geom_text</code> or <code>geom_text_repel</code>, with the aesthetic <code>label = country</code></li>
+<li>we suggest using the x-axis for parent class</li>
+<li>we suggest using facets for respondent class</li>
+<li>we suggest using the y-axis for median respondent income</li>
+<li>remember to weight by <code>wtssall</code></li>
 </ul>
-<p>There are many possible graphs to make. An example is below.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="visualization_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><strong>2.6. (4 points)</strong> Interpret your graph from (2.5) in up to three sentences.</p>
 </section>
-<section id="interpret-your-graph" class="level2">
-<h2 class="anchored" data-anchor-id="interpret-your-graph">Interpret your graph</h2>
-<p>Once you are happy with your graph,</p>
+<section id="grad-question" class="level2">
+<h2 class="anchored" data-anchor-id="grad-question">Grad question</h2>
+<p><strong>G.1 (5 points)</strong> Estimate the proportion of respondents with college degrees (<code>respondent_college == TRUE</code>) among those within each parent class. Visualize in a bar graph.</p>
+<p><strong>G.2 (5 points)</strong> Interpret the result from G.1. Explain how higher education might help parents from advantaged class positions to transmit that advantage on to their children.</p>
+<p><strong>G.3 (5 points)</strong> Estimate the weighted proportion of respondents in each <code>respondent_class</code>, within groups defined by <code>respondent_college</code> and <code>parent_class</code>. Visualize in a bar graph.</p>
 <ul>
-<li>write a few sentences explaining your graph</li>
-<li>discuss what questions you would like to ask next</li>
+<li>we suggest respondent class on the x-axis</li>
+<li>we suggest parent class and respondent college on facets</li>
 </ul>
-</section>
-<section id="prepare-a-quarto-report" class="level2">
-<h2 class="anchored" data-anchor-id="prepare-a-quarto-report">Prepare a Quarto report</h2>
-<p>Create a new Quarto document. Put your R code and interpretation into that document. Upload to Canvas!</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/YWTZ6xxRiP8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>G.4 (5 points)</strong> Interpret the result from G.3. Is the pattern of respondent classes more consistent across parent classes within respondent education, or across respondent education within parent classes?</p>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
