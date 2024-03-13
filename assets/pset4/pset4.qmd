@@ -54,7 +54,7 @@ pset4 <- readRDS("https://info3370.github.io/data/pset4.RDS")
 One way to do this: group by parent and respondent class, summarize to sum the weight within each group, group by only parent class, then mutate to estimate the proportion in each respondent class as the weight divided by the sum of the weight on all respondents within that parent class.
 :::
 
-**2.2. (4 points)** Interpret your graph from (2.1) in up to three sentences. Comment particularly on how the facet for respondents who are in the higher professional class looks different from the others.
+**2.2. (4 points)** Interpret your graph from (2.1) in up to three sentences.
 
 **2.3. (8 points)** Group by `parent_class`. Visualize the median value of respondent income (`realrinc`).
 
@@ -71,7 +71,7 @@ One way to do this: group by parent and respondent class, summarize to sum the w
 - we suggest using the y-axis for median respondent income
 - remember to weight by `wtssall`
 
-**2.6. (4 points)** Interpret your graph from (2.5) in up to three sentences.
+**2.6. (4 points)** Interpret your graph from (2.5) in up to three sentences. Comment particularly on how the facet for respondents who are in the higher professional class looks different from the others.
 
 ## Grad question
 
