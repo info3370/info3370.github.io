@@ -42,7 +42,7 @@ The paper uses the [Panel Study of Income Dynamics](https://psidonline.isr.umich
 
 ```{r, comment = F, warning = F, message = F, eval = F}
 library(tidyverse)
-pset4 <- readRDS("https://info3370.github.io/data/pset4.RDS")
+pset4 <- readRDS(url("https://info3370.github.io/data/pset4.RDS"))
 ```
 ```{r, comment = F, warning = F, message = F, echo = F}
 library(tidyverse)
