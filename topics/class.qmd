@@ -19,7 +19,7 @@ In discussion, we will work with a prepared dataset that contains the answers to
 {{< video https://www.youtube.com/embed/-sOcDPrytkY
  >}}
  
- To jump straight into our prepared data file, run this line of code.
+ To jump straight into our [prepared data file](../data/gss.csv), run this line of code.
  
 ```{r, echo = F, message = F, comment = F, warning = F}
 library(tidyverse)
