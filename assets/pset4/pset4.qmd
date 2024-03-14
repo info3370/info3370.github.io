@@ -39,7 +39,7 @@ The paper uses the [Panel Study of Income Dynamics](https://psidonline.isr.umich
 
 ```{r, comment = F, warning = F, message = F}
 library(tidyverse)
-pset4 <- readRDS("https://info3370.github.io/data/pset4.RDS")
+pset4 <- readRDS(url("https://info3370.github.io/data/pset4.RDS"))
 ```
 
 **2.1. (8 points)** Group by parent class. Visualize the distribution of respondent classes within each parent class.

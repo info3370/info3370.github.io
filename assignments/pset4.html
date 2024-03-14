@@ -447,7 +447,7 @@ Note
 <p>The paper uses the <a href="https://psidonline.isr.umich.edu/">Panel Study of Income Dynamics</a>, which is a difficult dataset to use. We will explore a similar question using the <a href="https://gssdataexplorer.norc.org/">General Social Survey</a>. It is also good for science when findings can be reproduced in a different dataset. To simplify your analysis, we wrote <a href="../code/pset4.R">code</a> that prepares the GSS data into the file <a href="../data/pset4.RDS">pset4.RDS</a> which you can load to complete this problem set.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pset4 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"https://info3370.github.io/data/pset4.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pset4 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">url</span>(<span class="st">"https://info3370.github.io/data/pset4.RDS"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>2.1. (8 points)</strong> Group by parent class. Visualize the distribution of respondent classes within each parent class.</p>
 <ul>
