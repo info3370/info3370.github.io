@@ -4,9 +4,9 @@ title: "Problem Set 4: Social Class"
 
 **Due: 5pm on Wednesday, March 20.**
 
-<!-- ::: {.callout-note} -->
-<!-- Want to see how you'll be evaluated? Check out the [rubric](https://docs.google.com/forms/d/e/1FAIpQLSfE9cKW1TdZvmNH7AUTdzL2Fd3vnQicKVECc7qW2_S4civJpg/viewform?usp=sharing) -->
-<!-- ::: -->
+::: {.callout-note}
+Want to see how you'll be evaluated? Check out the [rubric](https://docs.google.com/forms/d/e/1FAIpQLSfQKK55fNVojf8573h5rz_STWpcjoml27FAthNUG_FXsg5AeA/viewform?usp=sf_link)
+:::
 
 Student identifer: [type your anonymous identifier here]
 
