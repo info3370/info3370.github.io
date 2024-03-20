@@ -404,6 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#synthetic-data" id="toc-synthetic-data" class="nav-link active" data-scroll-target="#synthetic-data">Synthetic data</a></li>
   <li><a href="#your-task-predict-at-child-age-1" id="toc-your-task-predict-at-child-age-1" class="nav-link" data-scroll-target="#your-task-predict-at-child-age-1">Your task: Predict at child age 1</a></li>
+  <li><a href="#one-approach-to-the-task" id="toc-one-approach-to-the-task" class="nav-link" data-scroll-target="#one-approach-to-the-task">One approach to the task</a></li>
   </ul>
 </nav>
     </div>
@@ -462,6 +463,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>you can use the male respondents if you think they are helpful</li>
 </ul>
 <p>Near the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closest!</p>
+</section>
+<section id="one-approach-to-the-task" class="level2">
+<h2 class="anchored" data-anchor-id="one-approach-to-the-task">One approach to the task</h2>
+<p>One approach is to estimate a linear regression model with <code>child_age</code> interacted with <code>sex</code>. We would first create a fitted model object,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(at_work <span class="sc">~</span> sex <span class="sc">*</span> child_age, <span class="at">data =</span> parents)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>then define the target population to predict</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>target_population <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">sex =</span> <span class="st">"female"</span>, <span class="at">child_age =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and report a predicted value for the employment rate of female respondents with a 1-year-old youngest child.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model, <span class="at">newdata =</span> target_population)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1 
+0.5468421 </code></pre>
+</div>
+</div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/PL5V5HtuW1c" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 

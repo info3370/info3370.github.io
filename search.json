@@ -1037,6 +1037,19 @@
     ]
   },
   {
+    "objectID": "topics/learning_exercise.html#one-approach-to-the-task",
+    "href": "topics/learning_exercise.html#one-approach-to-the-task",
+    "title": "Learning Exercise",
+    "section": "One approach to the task",
+    "text": "One approach to the task\nOne approach is to estimate a linear regression model with child_age interacted with sex. We would first create a fitted model object,\n\nmodel &lt;- lm(at_work ~ sex * child_age, data = parents)\n\nthen define the target population to predict\n\ntarget_population &lt;- tibble(sex = \"female\", child_age = 0)\n\nand report a predicted value for the employment rate of female respondents with a 1-year-old youngest child.\n\npredict(model, newdata = target_population)\n\n        1 \n0.5468421",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Working with Data",
+      "Learning Exercise"
+    ]
+  },
+  {
     "objectID": "topics/learning_exercise.html#footnotes",
     "href": "topics/learning_exercise.html#footnotes",
     "title": "Learning Exercise",
