@@ -74,6 +74,9 @@ website:
                 text: "Problem Set 4"
           - href: assignments/project.qmd
             text: "Project"
+            contents:
+              - href: assignments/project1.qmd
+                text: "Discussion 3-21"
               
   back-to-top-navigation: true
 
