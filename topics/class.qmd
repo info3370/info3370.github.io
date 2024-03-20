@@ -101,9 +101,13 @@ Now answer the questions that motivated this data analysis:
 2. what is the distribution among those with and without a degree?
 3. what is the distribution in (2) further subdivided by whether at least one parent held a degree?
 
-## Lecture: Definitions of class and status
+## Lecture: Social class
 
 [[slides]](../slides/lec8/lec8.pdf)
+
+Lecture extended these ideas to various definitions of social class and other hierarchies beyond income.
+
+{{< video https://www.youtube.com/embed/nLYpOCwjtVI >}}
 
 
 

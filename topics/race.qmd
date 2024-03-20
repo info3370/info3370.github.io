@@ -36,6 +36,8 @@ Logistically, here are some guidelines
 
 In lecture on 3/12, we will cover the political origins of racial residential segregation. We will see how explicit policies at both the federal and local level created the segregation that you observed in discussion.
 
+{{< video https://www.youtube.com/embed/PMhKhfhgaP4 >}}
+
 ## Wealth implications of residential segregation
 
 After discussing residential segregation, we will discuss its implications for the racial wealth gap. Below is the code used during lecture to estimate the gap using data from the Survey of Consumer Finances, which we accessed via the [Berkeley Survey Documentation and Analysis](https://sda.berkeley.edu/sdaweb/analysis/?dataset=scfcomb2022) website.

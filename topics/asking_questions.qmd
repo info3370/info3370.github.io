@@ -36,6 +36,8 @@ Questions where only one answer is plausible are often tedious. Questions that a
 
 The [slides](../slides/lec9/lec9.pdf) contain some examples of good research questions, and some examples of hypothetical questions that could be improved.
 
+{{< video https://www.youtube.com/embed/CRzAR0Wgsq8 >}}
+
 <!-- ## Examples -->
 
 <!-- For each example below, consider how you might encourage the researcher to ask a better question. -->
