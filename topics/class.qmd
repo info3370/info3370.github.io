@@ -4,6 +4,8 @@ title: "Class"
 
 Social class is a concept with many definitions: ownership of capital, position within the power relations of economic production, ways of being that are tied to one's upbringing, etc. We will not cover class in depth. With a few examples, we will discuss some ways to study class using data science.
 
+The structure of this page is first material for discussion, then material for the corresponding lecture which followed discussion.
+
 ## Exercise: Subjective class identifications
 
 How do people think about social class? In repeated surveys back to 1972, the [General Social Survey](https://gssdataexplorer.norc.org/MyGSS) has asked respondents:
@@ -100,6 +102,104 @@ Now answer the questions that motivated this data analysis:
 1. what is the distribution of self-identified social class?
 2. what is the distribution among those with and without a degree?
 3. what is the distribution in (2) further subdivided by whether at least one parent held a degree?
+
+### Worked answers to discussion activity
+
+The code below summarizes the distribution self-identified social class.
+
+```{r, fig.height = 4}
+gss |>
+  # drop cases with invalid outcome or negative weight
+  filter(class > 0 & class < 5 & wtssall > 0) |>
+  # calculate total weight within each class
+  group_by(class) |>
+  summarize(prop = sum(wtssall), .groups = "drop") |>
+  # convert to proportion of total across all classes
+  mutate(prop = prop / sum(prop)) |>
+  ggplot(aes(x = class, y = prop)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(y = .005, label = scales::label_percent(accuracy = 1)(prop)), color = "white",
+            vjust = 0) +
+  scale_x_continuous(
+    breaks = 1:4,
+    labels = c("Lower\nClass","Working\nClass","Middle\nClass","Upper\nClass")
+  ) +
+  ylab("Proportion Identifying with Each Class") +
+  xlab("Class")
+```
+
+The code below summarizes the distribution self-identified social class among those with and without a college degree.
+
+```{r, fig.height = 4}
+gss |>
+  # drop cases with invalid outcome, predictor, or negative weight
+  filter(class > 0 & class < 5) |>
+  filter(degree %in% 0:4) |>
+  filter(wtssall > 0) |>
+  # create indicator of collge degree
+  # see codes at https://gssdataexplorer.norc.org/variables/59/vshow
+  mutate(college = case_when(
+    degree %in% 3:4 ~ "Holds a Four-Year Degree",
+    degree %in% 0:2 ~ "No Four-Year Degree",
+  )) |>
+  # calculate total weight within each class
+  group_by(college, class) |>
+  summarize(prop = sum(wtssall), .groups = "drop_last") |>
+  # convert to proportion of total across all classes within college degrees
+  group_by(college) |>
+  mutate(prop = prop / sum(prop)) |>
+  ggplot(aes(x = class, y = prop)) +
+  facet_wrap(~college) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = scales::label_percent(accuracy = 1)(prop)),
+            vjust = -.2) +
+  scale_x_continuous(
+    breaks = 1:4,
+    labels = c("Lower\nClass","Working\nClass","Middle\nClass","Upper\nClass")
+  ) +
+  ylab("Proportion Identifying with Each Class") +
+  ylim(c(0,1)) +
+  xlab("Class")
+```
+
+The code below summarizes the class distribution by own and parents' degree attainment.
+
+```{r, fig.height = 6}
+gss |>
+  # drop cases with invalid outcome, predictor, or negative weight
+  filter(class > 0 & class < 5) |>
+  filter(degree %in% 0:4) |>
+  filter(padeg %in% 0:4 | madeg %in% 0:4) |>
+  filter(wtssall > 0) |>
+  # create indicator of collge degree
+  # see codes at https://gssdataexplorer.norc.org/variables/59/vshow
+  mutate(child_college = case_when(
+    degree %in% 3:4 ~ "Respondent Has a Four-Year Degree",
+    degree %in% 0:2 ~ "Respondent Has No Four-Year Degree",
+  )) |>
+  mutate(parent_college = case_when(
+    padeg %in% 3:4 | madeg %in% 3:4 ~ "Parent Has a Four-Year Degree",
+    T ~ "No Parent Has No Four-Year Degree",
+  )) |>
+  # calculate total weight within each class
+  group_by(parent_college, child_college, class) |>
+  summarize(prop = sum(wtssall), .groups = "drop_last") |>
+  # convert to proportion of total across all classes within college degrees
+  group_by(parent_college, child_college) |>
+  mutate(prop = prop / sum(prop)) |>
+  ggplot(aes(x = class, y = prop)) +
+  facet_grid(parent_college ~ child_college) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = scales::label_percent(accuracy = 1)(prop)),
+            vjust = -.2) +
+  scale_x_continuous(
+    breaks = 1:4,
+    labels = c("Lower\nClass","Working\nClass","Middle\nClass","Upper\nClass")
+  ) +
+  ylab("Proportion Identifying with Each Class") +
+  ylim(c(0,1)) +
+  xlab("Class")
+```
 
 ## Lecture: Social class
 
