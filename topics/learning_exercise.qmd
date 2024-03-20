@@ -54,4 +54,25 @@ Your task is to answer the question: what proportion are employed among female r
 
 Near the end of discussion, we will ask every table to make one estimate. Then we will reveal the truth and see who is closest!
 
+## One approach to the task
+
+One approach is to estimate a linear regression model with `child_age` interacted with `sex`. We would first create a fitted model object,
+
+```{r}
+model <- lm(at_work ~ sex * child_age, data = parents)
+```
+
+then define the target population to predict
+
+```{r}
+target_population <- tibble(sex = "female", child_age = 0)
+```
+
+and report a predicted value for the employment rate of female respondents with a 1-year-old youngest child.
+
+```{r}
+predict(model, newdata = target_population)
+```
+
+
 {{< video https://www.youtube.com/embed/PL5V5HtuW1c >}}
