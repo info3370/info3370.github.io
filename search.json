@@ -518,7 +518,19 @@
     "href": "topics/asking_questions.html",
     "title": "Asking Questions",
     "section": "",
-    "text": "TODO\n\n\n\n Back to top",
+    "text": "slides\nAsking your own research question is fun, and it is also daunting. There is no formula for asking a good question, and much research involves trial and error. In this lecture, we will discuss together what makes a good research question.",
+    "crumbs": [
+      " ",
+      "Topics",
+      "Asking Questions"
+    ]
+  },
+  {
+    "objectID": "topics/asking_questions.html#some-characteristics-of-a-good-question",
+    "href": "topics/asking_questions.html#some-characteristics-of-a-good-question",
+    "title": "Asking Questions",
+    "section": "Some characteristics of a good question",
+    "text": "Some characteristics of a good question\nWhile good questions come in many forms, good research questions often has a few characteristics.\n\nA unit of analysis\nThe unit of analysis is the bedrock of a good research question. What will a row of your dataset represent? While the answer may seem straightforward, many units of analysis are possible: a person, a school, a neighborhood, a country, etc. In settings with repeated observations, the unit of analysis might be a person observed at a particular age: Jose at age 29 may be one row of your dataset and Jose at age 30 may be another row. The unit of analysis is the unit at which the outcome is defined, so getting it right is important.\n\n\nA clear population\nA good research question addresses a population that is relevant to the author’s argument. A well-defined population could be a set of units, such as American residents in a certain age range. It could be the set of all students at Cornell. It could also be a set of aggregate entities, such as the population of all four-year colleges and universities in the U.S., where each unit in the population is a college or university.\nWhen the population is well-defined, a reader should be able to imagine making a list of all the units in that population. When presented with a new unit and asked whether that unit is part of the population, you should be able to confidently answer “yes” or “no” and not “maybe.”\nIt is rarely satisfying to answer the question “who is being studied?” with the answer “the people in my sample.” While full-count enumerations of interesting populations exist, usually your sample is a subset of a broader population of interest. Good research tells us who that population is.\n\n\nA precise outcome\nFor each unit in the population, there is an outcome. This might be the income of an individual person, or the graduation rate of an individual college. A good research question tells you what the outcome is, and why it matters.\n\n\nThe potential for surprising results\nThis may be the hardest to pin down. Before you work with data, try to tell a story about why the results might go one way or another way. Perhaps you study a particular population of employed people where there is one set of reasons to expect men to earn more and another set of reasons to expect women to earn more. Try to convince yourself that the results could go either way! This builds excitement about the empirical answer, because it shows that the answer is really unknown before data analysis. Write down your arguments because they will also help readers be excited about your questions.\nQuestions where only one answer is plausible are often tedious. Questions that are exciting are often the ones where results could surprise you by going several possible directions.\n\n\nExamples\nThe slides contain some examples of good research questions, and some examples of hypothetical questions that could be improved.",
     "crumbs": [
       " ",
       "Topics",
