@@ -2,7 +2,7 @@
 title: "Economic opportunity"
 ---
 
-[[Slides from 2/20]](../slides/lec5/lec5.pdf) [[Slides from 3/5]](../slides/lec6/lec6_redacted.pdf)
+[[Slides from 2/20]](../slides/lec5/lec5.pdf) [[Slides from 3/5]](../slides/lec6/lec6.pdf)
 
 Equality of economic opportunity is an ideal that is widely shared.
 

@@ -2,6 +2,7 @@
 /renv
 .Rproj.user
 .Rprofile
+.Rhistory
 _site
 .quarto
 /.quarto/
