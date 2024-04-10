@@ -72,6 +72,8 @@ website:
                 text: "Problem Set 3"
               - href: assignments/pset4.qmd
                 text: "Problem Set 4"
+              - href: assignments/pset5.qmd
+                text: "Problem Set 5"
           - href: assignments/project.qmd
             text: "Project"
             contents:
