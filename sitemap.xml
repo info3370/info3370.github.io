@@ -2,118 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://info3370.github.io/who_we_are.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/weights.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/statistical_learning.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/sample_splitting.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/r_basics.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/moral_arguments.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
-    <loc>https://info3370.github.io/topics/gender.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/topics/class.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/topics/about.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/office_hours.html</loc>
-    <lastmod>2024-04-10T20:46:38.357Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/forms.html</loc>
-    <lastmod>2024-04-10T20:46:38.357Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/pset4.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/pset2.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/pset0.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/project.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/project1.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/pset1.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/pset3.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/assignments/pset5.html</loc>
-    <lastmod>2024-04-10T20:46:38.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/index.html</loc>
-    <lastmod>2024-04-10T20:46:38.357Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/schedule.html</loc>
-    <lastmod>2024-04-10T20:46:38.357Z</lastmod>
-  </url>
-  <url>
-    <loc>https://info3370.github.io/topics/asking_questions.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <loc>https://info3370.github.io/topics/interventions.html</loc>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/data_transformation.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.618Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/topics/asking_questions.html</loc>
+    <lastmod>2024-05-07T02:39:32.618Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/schedule.html</loc>
+    <lastmod>2024-05-07T02:39:32.070Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/index.html</loc>
+    <lastmod>2024-05-07T02:39:32.070Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/pset5.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/pset3.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/pset1.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/project1.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/project.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/pset0.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/pset2.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/assignments/pset4.html</loc>
+    <lastmod>2024-05-07T02:39:32.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/forms.html</loc>
+    <lastmod>2024-05-07T02:39:32.070Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/office_hours.html</loc>
+    <lastmod>2024-05-07T02:39:32.070Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/topics/about.html</loc>
+    <lastmod>2024-05-07T02:39:32.618Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/topics/class.html</loc>
+    <lastmod>2024-05-07T02:39:32.618Z</lastmod>
+  </url>
+  <url>
+    <loc>https://info3370.github.io/topics/gender.html</loc>
+    <lastmod>2024-05-07T02:39:32.618Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/learning_exercise.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/prediction.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/race.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/sampling.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/visualization.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
   <url>
     <loc>https://info3370.github.io/topics/welcome.html</loc>
-    <lastmod>2024-04-10T20:46:38.681Z</lastmod>
+    <lastmod>2024-05-07T02:39:32.622Z</lastmod>
   </url>
 </urlset>
