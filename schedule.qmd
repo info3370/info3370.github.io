@@ -58,12 +58,15 @@ Readings are to be read after class, unless otherwise specified. Readings from [
 | Mar 26 | Lecture | [Asking research questions](topics/asking_questions.qmd) |
 | Mar 28 | Discussion | [Project work](assignments/project.qmd) |
 | **Spring break** | | |
-| Apr 9 | Lecture | Moral arguments | Before class, watch intro to [Rawls](https://www.youtube.com/watch?v=5-JQ17X6VNg) and 3:49--5:05 on [Nozick](https://youtu.be/H0CTHVCkm90?t=229)
+| Apr 9 | Lecture | Moral arguments: [Rawls](topics/moral_arguments.html#rawls-justice-as-fairness) | Recap of ideas is [here](https://www.youtube.com/watch?v=5-JQ17X6VNg)
 | Apr 11 | Discussion | [Project work](assignments/project.qmd) |
-| Apr 16 | Lecture | Reducing inequality: Educational expansion | Brand 2023 Ch 1 |
+| Apr 16 | Lecture | Moral arguments: [Nozick](topics/moral_arguments.html#nozick-justice-as-individual-rights) | Recap in 3:49--5:05 [here](https://youtu.be/H0CTHVCkm90?t=229)
 | Apr 18 | Discussion | [Project work](assignments/project.qmd) |
-| Apr 23 | Lecture | Reducing inequality: Reparations | Before class, watch [Ta-Nehisi Coates](https://www.youtube.com/watch?v=kcCnQ3iRkys)
+| Apr 23 | Lecture | Reducing inequality: Educational expansion | Brand 2023 Ch 1 |
 | Apr 25 | Discussion | Project presentations |
-| Apr 30 | Lecture | Reducing inequality: Sentencing reform | Before class, explore [A Matter of Time](https://apps.urban.org/features/long-prison-terms/demographics.html)
+| Apr 30 | Lecture | Reducing inequality: Reparations | Before class, watch [Ta-Nehisi Coates](https://www.youtube.com/watch?v=kcCnQ3iRkys)
 | May 2 | Discussion | Project presentations |
 | May 7 | Course summary |
+
+
+<!-- | Apr 30 | Lecture | Reducing inequality: Sentencing reform | Before class, explore [A Matter of Time](https://apps.urban.org/features/long-prison-terms/demographics.html) -->

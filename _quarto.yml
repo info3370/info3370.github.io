@@ -58,6 +58,7 @@ website:
           - section: "Reducing Inequality"
             contents:
               - topics/moral_arguments.qmd
+              - topics/interventions.qmd
       - section: "Assignments"
         contents:
           - section: "Problem Sets"

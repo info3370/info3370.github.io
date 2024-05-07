@@ -15,7 +15,7 @@ gss |>
     breaks = 1:4,
     labels = c("Lower\nClass","Working\nClass","Middle\nClass","Upper\nClass")
   ) +
-  ylab("Proportion Identifying with Each Class") +
+  ylab("Proportion Identifying\nwith Each Class") +
   xlab("Class")
 
-ggsave("../../slides/lec8/class.png", height = 3, width = 5)
+ggsave("../slides/lec8/class.png", height = 3, width = 5.5)

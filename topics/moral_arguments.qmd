@@ -43,6 +43,8 @@ We will discuss Nozick's argument for libertarian government. We will also discu
 
 {{< video https://www.youtube.com/embed/5U6qg8dcQVA >}}
 
-## Preview of next class
+## Application: Reparations
 
-Next class, we will begin discussing interventions to reduce inequality. We will start by discussing reparations to correct historical injustices that created wealth disparities. We will discuss how the frameworks of Rawls and Nozick can help us reason about when reparations are morally necessary.
+[[Slides on reparations]](../slides/lec11/reparations.pdf)
+
+Finally, we discussed reparations to correct past injustice as a case study to apply ideas from Rawls and Nozick.
